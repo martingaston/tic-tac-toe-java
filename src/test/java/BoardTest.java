@@ -28,23 +28,18 @@ public class BoardTest {
     }
 
     @Test
-    public void testBoardRenders() {
-        board.render();
+    public void testXBoardRenders() {
+        String[] boardState = {"X", "X", "X", "X", "X", "X", "X", "X", "X"};
+        board.render(boardState);
         String boardExpected = "+-----------+\n| X | X | X |\n+-----------+\n| X | X | X |\n+-----------+\n| X | X | X |\n+-----------+\n";
         assertEquals(outContent.toString(), boardExpected);
     }
 
     @Test
-    public void testPrintLn() {
-        String helloTextExpected = "Hello World!\n";
-        board.hello();
-        assertEquals(outContent.toString(), helloTextExpected);
-    }
-    
-    @Test
-    public void testBoardAdd() {
-        Integer boardSum = board.sum(40, 2);
-        Integer expectedSum = 42;
-        assertEquals(boardSum, expectedSum);
+    public void testOBoardRenders() {
+        String[] boardState = {"O", "O", "O", "O", "O", "O", "O", "O", "O"};
+        board.render(boardState);
+        String boardExpected = "+-----------+\n| O | O | O |\n+-----------+\n| O | O | O |\n+-----------+\n| O | O | O |\n+-----------+\n";
+        assertEquals(outContent.toString(), boardExpected);
     }
 }
