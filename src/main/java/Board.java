@@ -21,6 +21,13 @@ public class Board {
     }
 
     private void renderRow(String[] rowState) {
+
+        for (int i = 0; i < rowState.length; i++) {
+            if (rowState[i].equals("")) {
+                rowState[i] = " ";
+            }
+        }
+
         String left = rowState[0];
         String center = rowState[1];
         String right = rowState[2];

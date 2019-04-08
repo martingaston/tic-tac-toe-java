@@ -28,6 +28,14 @@ public class BoardTest {
     }
 
     @Test
+    public void testBlankBoardRenders() {
+        String[] boardState = {"", "", "", "", "", "", "", "", ""};
+        board.render(boardState);
+        String boardExpected = "+-----------+\n|   |   |   |\n+-----------+\n|   |   |   |\n+-----------+\n|   |   |   |\n+-----------+\n";
+        assertEquals(outContent.toString(), boardExpected);
+    }
+
+    @Test
     public void testXBoardRenders() {
         String[] boardState = {"X", "X", "X", "X", "X", "X", "X", "X", "X"};
         board.render(boardState);
