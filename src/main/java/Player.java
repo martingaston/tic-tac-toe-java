@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Player {
     private String symbol;
 
@@ -7,5 +9,10 @@ public class Player {
 
     public String getSymbol() {
         return symbol;
+    }
+
+    public int getNextMove() {
+        Scanner input = new Scanner(System.in);
+        return input.nextInt();
     }
 }
