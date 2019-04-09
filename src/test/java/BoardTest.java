@@ -12,8 +12,7 @@ public class BoardTest {
     private Board board;
 
     @Before
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
+    public void setUp() {
         board = new Board();
     }
 
@@ -30,24 +29,52 @@ public class BoardTest {
     @Test
     public void testBlankBoardRenders() {
         String[] boardState = {"", "", "", "", "", "", "", "", ""};
-        board.render(boardState);
-        String boardExpected = "+-----------+\n|   |   |   |\n+-----------+\n|   |   |   |\n+-----------+\n|   |   |   |\n+-----------+\n";
-        assertEquals(outContent.toString(), boardExpected);
+        String boardRendered = board.render(boardState);
+        String boardExpected =
+                "+-----------+\n" +
+                "|   |   |   |\n" +
+                "+-----------+\n" +
+                "|   |   |   |\n" +
+                "+-----------+\n" +
+                "|   |   |   |\n" +
+                "+-----------+\n";
+        assertEquals(boardExpected, boardRendered);
     }
 
     @Test
     public void testXBoardRenders() {
         String[] boardState = {"X", "X", "X", "X", "X", "X", "X", "X", "X"};
-        board.render(boardState);
-        String boardExpected = "+-----------+\n| X | X | X |\n+-----------+\n| X | X | X |\n+-----------+\n| X | X | X |\n+-----------+\n";
-        assertEquals(outContent.toString(), boardExpected);
+        String boardRendered = board.render(boardState);
+        String boardExpected =
+                "+-----------+\n" +
+                "| X | X | X |\n" +
+                "+-----------+\n" +
+                "| X | X | X |\n" +
+                "+-----------+\n" +
+                "| X | X | X |\n" +
+                "+-----------+\n";
+        assertEquals(boardExpected, boardRendered);
     }
 
     @Test
-    public void testOBoardRenders() {
-        String[] boardState = {"O", "O", "O", "O", "O", "O", "O", "O", "O"};
-        board.render(boardState);
-        String boardExpected = "+-----------+\n| O | O | O |\n+-----------+\n| O | O | O |\n+-----------+\n| O | O | O |\n+-----------+\n";
-        assertEquals(outContent.toString(), boardExpected);
+    public void testBoardPrints() {
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        String boardExpected =
+                "+-----------+\n" +
+                "| X | O | X |\n" +
+                "+-----------+\n" +
+                "| O | X | O |\n" +
+                "+-----------+\n" +
+                "| X | O | X |\n" +
+                "+-----------+\n";
+
+        String[] boardState = {"X", "O", "X", "O", "X", "O", "X", "O", "X"};
+        String boardRendered = board.render(boardState);
+        board.display(boardRendered);
+
+        assertEquals(boardExpected, outContent.toString());
+        System.setOut(System.out);
     }
 }
