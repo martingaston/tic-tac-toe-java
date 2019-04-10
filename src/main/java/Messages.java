@@ -28,4 +28,12 @@ public class Messages {
     public String get() {
         return "";
     }
+
+    public void display(String messageName) {
+        System.out.println(get(messageName));
+    }
+
+    public void display(String messageName, Player player) {
+        System.out.println(get(messageName, player));
+    }
 }

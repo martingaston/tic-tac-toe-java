@@ -1,5 +1,5 @@
 public class Game {
-    private Messages messages = new Messages();
+    private Messages messages;
     private Player playerCross = new Player("X");
     private Player playerNought = new Player("O");
     private Player currentPlayer = playerCross;
@@ -7,19 +7,23 @@ public class Game {
     private BoardState boardState = new BoardState();
     private BoardDisplay boardDisplay = new BoardDisplay();
     private boolean gameOver = false;
-    private String winner;
+    private String winner = "";
+
+    public Game() {
+        messages = new Messages();
+    }
 
     public void intro() {
-        messages.get("gameTitle");
-        messages.get("gameIntro");
-        messages.get("gameInstructions");
+        messages.display("gameTitle");
+        messages.display("gameIntro");
+        messages.display("gameInstructions");
     }
 
     public void gameEnd() {
         if (!winner.isEmpty()) {
-            messages.get("gameOverWin", currentPlayer);
+            messages.display("gameOverWin", currentPlayer);
         } else {
-            messages.get("gameOverDraw");
+            messages.display("gameOverDraw");
         }
     }
 
@@ -27,8 +31,9 @@ public class Game {
         String[] currentState = boardState.getCurrentBoard();
         String renderedBoard = boardDisplay.render(currentState);
         boardDisplay.display(renderedBoard);
-        messages.get("playerTurn", currentPlayer);
-        currentPlayer.getNextMove();
+        messages.display("playerTurn", currentPlayer);
+        int playerInput = currentPlayer.getNextMove();
+        boardState.updateBoard(playerInput, currentPlayer);
     }
 
     public void processTurn() {
@@ -49,5 +54,9 @@ public class Game {
         } else {
             currentPlayer = playerCross;
         }
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }
