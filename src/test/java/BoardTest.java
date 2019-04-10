@@ -28,7 +28,11 @@ public class BoardTest {
 
     @Test
     public void testBlankBoardRenders() {
-        String[] boardState = {"", "", "", "", "", "", "", "", ""};
+        String[] boardState = {
+                "", "", "",
+                "", "", "",
+                "", "", ""
+        };
         String boardRendered = board.render(boardState);
         String boardExpected =
                 "+-----------+\n" +
@@ -43,7 +47,11 @@ public class BoardTest {
 
     @Test
     public void testXBoardRenders() {
-        String[] boardState = {"X", "X", "X", "X", "X", "X", "X", "X", "X"};
+        String[] boardState = {
+                "X", "X", "X",
+                "X", "X", "X",
+                "X", "X", "X"
+        };
         String boardRendered = board.render(boardState);
         String boardExpected =
                 "+-----------+\n" +
@@ -70,7 +78,11 @@ public class BoardTest {
                 "| X | O | X |\n" +
                 "+-----------+\n";
 
-        String[] boardState = {"X", "O", "X", "O", "X", "O", "X", "O", "X"};
+        String[] boardState = {
+                "X", "O", "X",
+                "O", "X", "O",
+                "X", "O", "X"
+        };
         String boardRendered = board.render(boardState);
         board.display(boardRendered);
 
