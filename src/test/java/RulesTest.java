@@ -122,4 +122,34 @@ public class RulesTest {
         };
         assertFalse(rules.hasWinningMove(boardState, player));
     }
+
+    @Test
+    public void CheckThatBoardStateThatIsNotFullReturnsFalseOnGameIsOver() {
+        String[] boardState = {
+                " ", "X", " ",
+                "O", " ", " ",
+                " ", "X", " "
+        };
+        assertFalse(rules.gameIsOver(boardState));
+    }
+
+    @Test
+    public void CheckThatBoardStateThatIsFullReturnsTrueOnGameIsOver() {
+        String[] boardState = {
+                "X", "X", "O",
+                "O", "O", "X",
+                "X", "X", "O"
+        };
+        assertTrue(rules.gameIsOver(boardState));
+    }
+
+    @Test
+    public void CheckThatBoardOfSpacesReturnsFalseOnGameIsOver() {
+        String[] boardState = {
+                " ", " ", " ",
+                " ", " ", " ",
+                " ", " ", " "
+        };
+        assertFalse(rules.gameIsOver(boardState));
+    }
 }

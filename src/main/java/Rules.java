@@ -30,4 +30,25 @@ public class Rules {
 
         return matchFound;
     }
+
+    public boolean gameIsOver(String[] boardState) {
+        String[] boardStateWithoutSpaces = removeBoardStateSpaces(boardState);
+
+        for (String cell : boardStateWithoutSpaces) {
+            if (cell.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private String[] removeBoardStateSpaces(String[] boardState) {
+        for (int i = 0; i < boardState.length; i++) {
+            if (boardState[i].equals(" ")) {
+                boardState[i] = "";
+            }
+        }
+        return boardState;
+    }
 }
