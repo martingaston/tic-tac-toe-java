@@ -24,13 +24,6 @@ public class MessagesTest {
         }
 
         @Test
-        public void noArgumentReturnsEmptyString() {
-            String expectedResult = "";
-            String message = messages.get();
-            assertEquals(expectedResult, message);
-        }
-
-        @Test
         public void playerWinsIsFormattedBasedOnPlayerClass() {
             String expectedResult = "Player X wins!";
             String message = messages.get("gameOverWin", player);
@@ -47,6 +40,13 @@ public class MessagesTest {
 
     @RunWith(Parameterized.class)
     public static class CheckLookupTypes {
+
+        private boolean isString(String message) {
+            return message.getClass() == String.class;
+        }
+
+        private Messages messages = new Messages();
+
         @Parameters
         public static Iterable<?> data() {
             return Arrays.asList("gameTitle", "gameIntro", "gameInstructions", "gameOverDraw");
@@ -57,12 +57,14 @@ public class MessagesTest {
 
         @Test
         public void testMessageKeysReturnStrings() {
-            assertEquals(messageKey.getClass(), String.class);
+            String message = messages.get(messageKey);
+            assertTrue(isString(message));
         }
 
         @Test
         public void testMessageKeyStringsAreNotEmpty() {
-            assertFalse(messageKey.isEmpty());
+            String message = messages.get(messageKey);
+            assertFalse(message.isEmpty());
         }
     }
 }

@@ -24,8 +24,4 @@ public class Messages {
     public String get(String messageName) {
         return standardMessage.get(messageName);
     }
-
-    public String get() {
-        return "";
-    }
 }
