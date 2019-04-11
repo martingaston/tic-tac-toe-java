@@ -3,9 +3,9 @@ class Game {
     private Player playerCross = new Player("X");
     private Player playerNought = new Player("O");
     private Player currentPlayer = playerCross;
-    private Rules rules = new Rules();
-    private BoardState boardState = new BoardState();
-    private BoardDisplay boardDisplay = new BoardDisplay();
+    private Board board = new Board();
+    private Rules rules = new Rules(board);
+    private Display display = new Display(board);
     private boolean gameOver = false;
     private String winner = "";
 
@@ -16,9 +16,7 @@ class Game {
     }
 
     void gameEnd() {
-        String[] currentState = boardState.getCurrentBoard();
-        String renderedBoard = boardDisplay.render(currentState);
-        Display.outBoard(renderedBoard);
+        display.showBoard();
         if (!winner.isEmpty()) {
             Display.outMessage(messages.get("gameOverWin", currentPlayer));
         } else {
@@ -27,18 +25,15 @@ class Game {
     }
 
     void newTurn() {
-        String[] currentState = boardState.getCurrentBoard();
-        String renderedBoard = boardDisplay.render(currentState);
-        Display.outBoard(renderedBoard);
+        display.showBoard();
         Display.outMessage(messages.get("playerTurn", currentPlayer));
         int playerInput = currentPlayer.getNextMove();
-        boardState.updateBoard(playerInput, currentPlayer);
+        board.updateBoard(playerInput, currentPlayer);
     }
 
     void processTurn() {
-        String[] currentState = boardState.getCurrentBoard();
-        gameOver = rules.gameIsOver(currentState);
-        boolean hasWon = rules.hasWinningMove(currentState, currentPlayer);
+        gameOver = rules.gameIsOver();
+        boolean hasWon = rules.hasWinningMove(currentPlayer);
         if (hasWon) {
             winner = currentPlayer.getSymbol();
             gameOver = true;
