@@ -1,26 +1,31 @@
 import java.util.Arrays;
 
 public class Board {
-    public void render(String[] boardState) {
-        String[] topRow = Arrays.copyOfRange(boardState, 0, 3);
-        String[] middleRow = Arrays.copyOfRange(boardState, 3, 6);
-        String[] bottomRow = Arrays.copyOfRange(boardState, 6, 9);
+    public void display(String boardRender) {
+        System.out.print(boardRender);
+    }
+    private String newline = "\n";
+    private String divider = "+-----------+" + newline;
 
-        renderDivider();
-        renderRow(topRow);
-        renderDivider();
-        renderRow(middleRow);
-        renderDivider();
-        renderRow(bottomRow);
-        renderDivider();
+    public String render(String[] boardState) {
+
+        String[][] rows = new String[][] {
+            Arrays.copyOfRange(boardState, 0, 3),
+            Arrays.copyOfRange(boardState, 3, 6),
+            Arrays.copyOfRange(boardState, 6, 9)
+        };
+
+        String grid = divider;
+
+        for (String[] row : rows) {
+            String renderedRow = renderRow(row);
+            grid = grid.concat(renderedRow);
+        }
+
+        return grid;
     }
 
-    private void renderDivider() {
-        String divider = "+-----------+";
-        System.out.println(divider);
-    }
-
-    private void renderRow(String[] rowState) {
+    private String renderRow(String[] rowState) {
 
         for (int i = 0; i < rowState.length; i++) {
             if (rowState[i].equals("")) {
@@ -32,7 +37,9 @@ public class Board {
         String center = rowState[1];
         String right = rowState[2];
 
-        String row = String.format("| %s | %s | %s |", left, center, right);
-        System.out.println(row);
+        return String
+                .format("| %s | %s | %s |", left, center, right)
+                .concat(newline)
+                .concat(divider);
     }
 }
