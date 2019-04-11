@@ -1,9 +1,6 @@
 import java.util.Arrays;
 
 public class BoardDisplay {
-    public void display(String boardRender) {
-        System.out.print(boardRender);
-    }
     private String newline = "\n";
     private String divider = "+-----------+" + newline;
 

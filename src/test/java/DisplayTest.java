@@ -38,6 +38,47 @@ public class DisplayTest {
     }
 
     @Test
+    public void testFullBoardStateOutputPrintsCorrectly() {
+        String[] boardState = {
+            "X", "O", "X",
+            "O", "X", "O",
+            "X", "O", "X"
+        };
+
+        String boardOutput =
+            "+-----------+\n" +
+            "| X | O | X |\n" +
+            "+-----------+\n" +
+            "| O | X | O |\n" +
+            "+-----------+\n" +
+            "| X | O | X |\n" +
+            "+-----------+\n";
+
+        Display.outBoardFromState(boardState);
+        assertEquals(boardOutput, outContent.toString());
+    }
+
+    public void testEmptyBoardStateOutputPrintsCorrectly() {
+        String[] boardState = {
+            "", "", "",
+            "", "", "",
+            "", "", ""
+        };
+
+        String boardOutput =
+            "+-----------+\n" +
+            "|   |   |   |\n" +
+            "+-----------+\n" +
+            "|   |   |   |\n" +
+            "+-----------+\n" +
+            "|   |   |   |\n" +
+            "+-----------+\n";
+
+        Display.outBoardFromState(boardState);
+        assertEquals(boardOutput, outContent.toString());
+    }
+
+    @Test
     public void testMessagePrints() {
         String message = "Hello World!";
         String formattedMessage = message + "\n";
