@@ -10,22 +10,15 @@ public class Board {
     }
 
     public Board(String [] boardState) {
-        setBoard(boardState);
-    }
-
-    private void setBoard(String[] boardState) {
-        this.board = removeBoardStateSpaces(boardState);
+        setBoardState(boardState);
     }
 
     String[] getCurrentBoard() {
         return board;
     }
 
-    public String[] updateBoard(int position, Player player) {
-        if (board[position].isEmpty()) {
-            board[position] = player.getSymbol();
-        }
-        return board;
+    private void setBoardState(String[] boardState) {
+        this.board = removeBoardStateSpaces(boardState);
     }
 
     private String[] removeBoardStateSpaces(String[] boardState) {
@@ -35,5 +28,12 @@ public class Board {
             }
         }
         return boardState;
+    }
+
+    public String[] addMoveToBoard(int position, Player player) {
+        if (board[position].isEmpty()) {
+            board[position] = player.getSymbol();
+        }
+        return board;
     }
 }

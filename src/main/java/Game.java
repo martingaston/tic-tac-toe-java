@@ -28,7 +28,7 @@ class Game {
         display.showBoard();
         Display.outMessage(messages.get("playerTurn", currentPlayer));
         int playerInput = currentPlayer.getNextMove();
-        board.updateBoard(playerInput, currentPlayer);
+        board.addMoveToBoard(playerInput, currentPlayer);
     }
 
     private void processTurn() {

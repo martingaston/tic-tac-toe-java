@@ -22,22 +22,6 @@ public class DisplayTest {
     }
 
     @Test
-    public void testBoardPrints() {
-        String board =
-            "+-----------+\n" +
-            "| X | O | X |\n" +
-            "+-----------+\n" +
-            "| O | X | O |\n" +
-            "+-----------+\n" +
-            "| X | O | X |\n" +
-            "+-----------+\n";
-
-
-        Display.outBoard(board);
-        assertEquals(board, outContent.toString());
-    }
-
-    @Test
     public void testFullBoardStateOutputPrintsCorrectly() {
         String[] boardState = {
             "X", "O", "X",

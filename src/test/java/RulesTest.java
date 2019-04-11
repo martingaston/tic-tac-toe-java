@@ -23,7 +23,7 @@ public class RulesTest {
         board = new Board(boardState);
         rules = new Rules(board);
         int boardPositionToUpdate = 2;
-        board.updateBoard(boardPositionToUpdate, player);
+        board.addMoveToBoard(boardPositionToUpdate, player);
         assertTrue(rules.hasWinningMove(player));
 
     }
@@ -38,7 +38,7 @@ public class RulesTest {
         board = new Board(boardState);
         rules = new Rules(board);
         int boardPositionToUpdate = 2;
-        board.updateBoard(boardPositionToUpdate, player);
+        board.addMoveToBoard(boardPositionToUpdate, player);
         assertTrue(rules.hasWinningMove(player));
 
     }

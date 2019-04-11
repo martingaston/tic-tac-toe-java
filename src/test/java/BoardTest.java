@@ -28,7 +28,7 @@ public class BoardTest {
 
     @Test
     public void UpdatedBoardShouldReturnCorrectBoardStateAfterOneMove() {
-        String[] updatedBoard = board.updateBoard(0, playerCross);
+        String[] updatedBoard = board.addMoveToBoard(0, playerCross);
         String[] expectedBoard = {
                 "X", "", "",
                 "", "", "",
@@ -39,8 +39,8 @@ public class BoardTest {
 
     @Test
     public void UpdatedBoardShouldReturnCorrectBoardStateAfterTwoMoves() {
-        board.updateBoard(0, playerCross);
-        String[] updatedBoard = board.updateBoard(4, playerCross);
+        board.addMoveToBoard(0, playerCross);
+        String[] updatedBoard = board.addMoveToBoard(4, playerCross);
         String[] expectedBoard = {
                 "X", "", "",
                 "", "X", "",
@@ -51,8 +51,8 @@ public class BoardTest {
 
     @Test
     public void UpdatedBoardShouldNotAllowOverwritingCells() {
-        board.updateBoard(1, playerNought);
-        String[] updatedBoard = board.updateBoard(1, playerCross);
+        board.addMoveToBoard(1, playerNought);
+        String[] updatedBoard = board.addMoveToBoard(1, playerCross);
         String[] expectedBoard = {
                 "", "O", "",
                 "", "", "",
@@ -63,13 +63,13 @@ public class BoardTest {
 
     @Test
     public void UpdateBoardShouldBeAbleToRunEntireGame() {
-        board.updateBoard(4, playerCross);
-        board.updateBoard(2, playerNought);
-        board.updateBoard(3, playerCross);
-        board.updateBoard(5, playerNought);
-        board.updateBoard(0, playerCross);
-        board.updateBoard(8, playerNought);
-        String[] updatedBoard = board.updateBoard(4, playerCross);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(2, playerNought);
+        board.addMoveToBoard(3, playerCross);
+        board.addMoveToBoard(5, playerNought);
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(8, playerNought);
+        String[] updatedBoard = board.addMoveToBoard(4, playerCross);
         String[] expectedBoard = {
                 "X", "", "O",
                 "X", "X", "O",

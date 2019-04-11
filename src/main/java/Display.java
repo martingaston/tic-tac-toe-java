@@ -7,14 +7,12 @@ class Display {
         this.board = board;
     }
 
-    static void outBoard (String output) { System.out.print(output); }
+    static void outMessage(String output) {
+        System.out.println(output);
+    }
 
     void showBoard() {
         System.out.print(renderBoardFromState());
-    }
-
-    static void outMessage(String output) {
-        System.out.println(output);
     }
 
     private String newline = "\n";
