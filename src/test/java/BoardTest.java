@@ -16,11 +16,6 @@ public class BoardTest {
         board = new Board();
     }
 
-    @After
-    public void restoreStreams() {
-        System.setOut(originalOut);
-    }
-
     @Test
     public void testIsWorking() {
         assertEquals(42, 19 + 23);
@@ -58,7 +53,6 @@ public class BoardTest {
 
     @Test
     public void testBoardPrints() {
-        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
         String boardExpected =
@@ -75,6 +69,6 @@ public class BoardTest {
         board.display(boardRendered);
 
         assertEquals(boardExpected, outContent.toString());
-        System.setOut(System.out);
+        System.setOut(originalOut);
     }
 }

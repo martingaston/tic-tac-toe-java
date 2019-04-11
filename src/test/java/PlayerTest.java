@@ -4,18 +4,14 @@ import static org.junit.Assert.*;
 
 public class PlayerTest {
     @Test
-    public void testPlayerSymbolX() {
+    public void testPlayerSymbolCross() {
         Player player = new Player("X");
-        String playerSymbol = player.getSymbol();
-        String expectedPlayerSymbol = "X";
-        assertEquals(expectedPlayerSymbol, playerSymbol);
+        assertEquals("X", player.getSymbol());
     }
 
     @Test
-    public void testPlayerSymbolO() {
+    public void testPlayerSymbolNought() {
         Player player = new Player("O");
-        String playerSymbol = player.getSymbol();
-        String expectedPlayerSymbol = "O";
-        assertEquals(expectedPlayerSymbol, playerSymbol);
+        assertEquals("O", player.getSymbol());
     }
 }
