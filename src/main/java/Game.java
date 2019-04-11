@@ -9,13 +9,13 @@ class Game {
     private boolean gameOver = false;
     private String winner = "";
 
-    void intro() {
+    private void intro() {
         Display.outMessage(messages.get("gameTitle"));
         Display.outMessage(messages.get("gameIntro"));
         Display.outMessage(messages.get("gameInstructions"));
     }
 
-    void gameEnd() {
+    private void gameEnd() {
         display.showBoard();
         if (!winner.isEmpty()) {
             Display.outMessage(messages.get("gameOverWin", currentPlayer));
@@ -24,14 +24,14 @@ class Game {
         }
     }
 
-    void newTurn() {
+    private void newTurn() {
         display.showBoard();
         Display.outMessage(messages.get("playerTurn", currentPlayer));
         int playerInput = currentPlayer.getNextMove();
         board.updateBoard(playerInput, currentPlayer);
     }
 
-    void processTurn() {
+    private void processTurn() {
         gameOver = rules.gameIsOver();
         boolean hasWon = rules.hasWinningMove(currentPlayer);
         if (hasWon) {
@@ -50,7 +50,16 @@ class Game {
         }
     }
 
-    boolean isGameOver() {
+    private boolean isGameOver() {
         return gameOver;
+    }
+
+    void play() {
+        intro();
+        do {
+            newTurn();
+            processTurn();
+        } while (!isGameOver());
+        gameEnd();
     }
 }
