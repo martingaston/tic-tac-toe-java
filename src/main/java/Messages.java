@@ -25,15 +25,11 @@ public class Messages {
         return standardMessage.get(messageName);
     }
 
-    public String get() {
-        return "";
-    }
-
-    public void display(String messageName) {
+    void display(String messageName) {
         System.out.println(get(messageName));
     }
 
-    public void display(String messageName, Player player) {
+    void display(String messageName, Player player) {
         System.out.println(get(messageName, player));
     }
 }

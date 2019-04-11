@@ -4,22 +4,25 @@ public class BoardDisplay {
     public void display(String boardRender) {
         System.out.print(boardRender);
     }
+    private String newline = "\n";
+    private String divider = "+-----------+" + newline;
 
     public String render(String[] boardState) {
-        String divider = "+-----------+";
-        String[] topRow = Arrays.copyOfRange(boardState, 0, 3);
-        String[] middleRow = Arrays.copyOfRange(boardState, 3, 6);
-        String[] bottomRow = Arrays.copyOfRange(boardState, 6, 9);
-        String newline = "\n";
 
-        return "" +
-            divider + newline +
-            renderRow(topRow) + newline +
-            divider + newline +
-            renderRow(middleRow) + newline +
-            divider + newline +
-            renderRow(bottomRow) + newline +
-            divider + newline;
+        String[][] rows = new String[][] {
+            Arrays.copyOfRange(boardState, 0, 3),
+            Arrays.copyOfRange(boardState, 3, 6),
+            Arrays.copyOfRange(boardState, 6, 9)
+        };
+
+        String grid = divider;
+
+        for (String[] row : rows) {
+            String renderedRow = renderRow(row);
+            grid = grid.concat(renderedRow);
+        }
+
+        return grid;
     }
 
     private String renderRow(String[] rowState) {
@@ -34,6 +37,9 @@ public class BoardDisplay {
         String center = rowState[1];
         String right = rowState[2];
 
-        return String.format("| %s | %s | %s |", left, center, right);
+        return String
+                .format("| %s | %s | %s |", left, center, right)
+                .concat(newline)
+                .concat(divider);
     }
 }
