@@ -9,19 +9,19 @@ class Game {
     private boolean gameOver = false;
     private String winner = "";
 
+    void play() {
+        intro();
+        do {
+            newTurn();
+            processTurn();
+        } while (!isGameOver());
+        gameEnd();
+    }
+
     private void intro() {
         Display.outMessage(messages.get("gameTitle"));
         Display.outMessage(messages.get("gameIntro"));
         Display.outMessage(messages.get("gameInstructions"));
-    }
-
-    private void gameEnd() {
-        display.showBoard();
-        if (!winner.isEmpty()) {
-            Display.outMessage(messages.get("gameOverWin", currentPlayer));
-        } else {
-            Display.outMessage(messages.get("gameOverDraw"));
-        }
     }
 
     private void newTurn() {
@@ -50,16 +50,18 @@ class Game {
         }
     }
 
+    private void gameEnd() {
+        display.showBoard();
+        if (!winner.isEmpty()) {
+            Display.outMessage(messages.get("gameOverWin", currentPlayer));
+        } else {
+            Display.outMessage(messages.get("gameOverDraw"));
+        }
+    }
+
     private boolean isGameOver() {
         return gameOver;
     }
 
-    void play() {
-        intro();
-        do {
-            newTurn();
-            processTurn();
-        } while (!isGameOver());
-        gameEnd();
-    }
+
 }

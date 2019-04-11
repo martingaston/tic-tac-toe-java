@@ -158,7 +158,9 @@ public class RulesTest {
                 "O", " ", " ",
                 " ", "X", " "
         };
-        assertFalse(rules.gameIsOver(boardState));
+        Board board = new Board(boardState);
+        rules = new Rules(board);
+        assertFalse(rules.gameIsOver());
     }
 
     @Test
@@ -180,7 +182,9 @@ public class RulesTest {
                 "O", "O", "X",
                 "X", "X", "O"
         };
-        assertTrue(rules.gameIsOver(boardState));
+        Board board = new Board(boardState);
+        rules = new Rules(board);
+        assertTrue(rules.gameIsOver());
     }
 
     @Test
@@ -190,6 +194,8 @@ public class RulesTest {
                 " ", " ", " ",
                 " ", " ", " "
         };
-        assertFalse(rules.gameIsOver(boardState));
+        Board board = new Board(boardState);
+        rules = new Rules(board);
+        assertFalse(rules.gameIsOver());
     }
 }

@@ -44,11 +44,6 @@ public class Rules {
         return matchFound;
     }
 
-    public boolean gameIsOver(String[] boardState) {
-        this.board = new Board(boardState);
-        return gameIsOver();
-    }
-
     public boolean gameIsOver() {
         for (String cell : this.board.getCurrentBoard()) {
             if (cell.isEmpty()) {
