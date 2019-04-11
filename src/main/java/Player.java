@@ -11,10 +11,6 @@ public class Player {
         return symbol;
     }
 
-    public int getNextMove(int move) {
-        return move;
-    }
-
     public int getNextMove() {
         Scanner input = new Scanner(System.in);
         return input.nextInt();

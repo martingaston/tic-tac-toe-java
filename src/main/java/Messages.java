@@ -24,12 +24,4 @@ public class Messages {
     public String get(String messageName) {
         return standardMessage.get(messageName);
     }
-
-    void display(String messageName) {
-        System.out.println(get(messageName));
-    }
-
-    void display(String messageName, Player player) {
-        System.out.println(get(messageName, player));
-    }
 }
