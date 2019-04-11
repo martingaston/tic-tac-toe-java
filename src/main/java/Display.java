@@ -1,20 +1,27 @@
 import java.util.Arrays;
 
 class Display {
+    private Board board;
+
+    public Display(Board board) {
+        this.board = board;
+    }
+
     static void outBoard (String output) { System.out.print(output); }
 
-    static void outBoardFromState (String[] boardState) {
-        System.out.print(renderBoardFromState(boardState));
+    void showBoard() {
+        System.out.print(renderBoardFromState());
     }
 
     static void outMessage(String output) {
         System.out.println(output);
     }
 
-    private static String newline = "\n";
-    private static String divider = "+-----------+" + newline;
+    private String newline = "\n";
+    private String divider = "+-----------+" + newline;
 
-    private static String renderBoardFromState(String[] boardState) {
+    private String renderBoardFromState() {
+        String[] boardState = this.board.getCurrentBoard();
 
         String[][] rows = new String[][] {
                 Arrays.copyOfRange(boardState, 0, 3),
@@ -32,7 +39,7 @@ class Display {
         return grid;
     }
 
-    private static String renderRow(String[] rowState) {
+    private String renderRow(String[] rowState) {
 
         for (int i = 0; i < rowState.length; i++) {
             if (rowState[i].equals("")) {

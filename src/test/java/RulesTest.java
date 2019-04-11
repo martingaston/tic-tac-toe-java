@@ -14,6 +14,34 @@ public class RulesTest {
     }
 
     @Test
+    public void CheckForBoardStateFromBoardClass() {
+        String[] boardState = {
+                "X", "X", "",
+                "", "", "",
+                "", "", ""
+        };
+        Board board = new Board(boardState);
+        rules = new Rules(board);
+        board.updateBoard(2, player);
+        assertTrue(rules.hasWinningMove(player));
+
+    }
+
+    @Test
+    public void CheckForBoardStateWithSpacesFromBoardClass() {
+        String[] boardState = {
+                "X", "X", " ",
+                " ", " ", " ",
+                " ", " ", " "
+        };
+        Board board = new Board(boardState);
+        rules = new Rules(board);
+        board.updateBoard(2, player);
+        assertTrue(rules.hasWinningMove(player));
+
+    }
+
+    @Test
     public void CheckForWinningDiagonalLeftMove() {
         String[] boardState = {
                 "X", " ", " ",
@@ -131,6 +159,18 @@ public class RulesTest {
                 " ", "X", " "
         };
         assertFalse(rules.gameIsOver(boardState));
+    }
+
+    @Test
+    public void CheckThatBoardStateThatIsFullReturnsTrueOnGameIsOverWithBoardClass() {
+        String[] boardState = {
+                "X", "X", "O",
+                "O", "O", "X",
+                "X", "X", "O"
+        };
+        Board board = new Board(boardState);
+        rules = new Rules(board);
+        assertTrue(rules.gameIsOver());
     }
 
     @Test

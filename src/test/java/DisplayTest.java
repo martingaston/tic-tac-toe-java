@@ -53,11 +53,13 @@ public class DisplayTest {
             "+-----------+\n" +
             "| X | O | X |\n" +
             "+-----------+\n";
-
-        Display.outBoardFromState(boardState);
+        Board board = new Board(boardState);
+        Display display = new Display(board);
+        display.showBoard();
         assertEquals(boardOutput, outContent.toString());
     }
 
+    @Test
     public void testEmptyBoardStateOutputPrintsCorrectly() {
         String[] boardState = {
             "", "", "",
@@ -74,7 +76,9 @@ public class DisplayTest {
             "|   |   |   |\n" +
             "+-----------+\n";
 
-        Display.outBoardFromState(boardState);
+        Board board = new Board(boardState);
+        Display display = new Display(board);
+        display.showBoard();
         assertEquals(boardOutput, outContent.toString());
     }
 

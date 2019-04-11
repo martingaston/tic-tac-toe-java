@@ -1,5 +1,5 @@
 class Game {
-    private Messages messages;
+    private Messages messages = new Messages();
     private Player playerCross = new Player("X");
     private Player playerNought = new Player("O");
     private Player currentPlayer = playerCross;
@@ -8,10 +8,6 @@ class Game {
     private BoardDisplay boardDisplay = new BoardDisplay();
     private boolean gameOver = false;
     private String winner = "";
-
-    Game() {
-        messages = new Messages();
-    }
 
     void intro() {
         Display.outMessage(messages.get("gameTitle"));

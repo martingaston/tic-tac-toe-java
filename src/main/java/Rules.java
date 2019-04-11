@@ -1,4 +1,5 @@
 public class Rules {
+    private Board board;
     private int[][] winningMoves = {
         {0,1,2},
         {3,4,5},
@@ -9,8 +10,20 @@ public class Rules {
         {0,4,8},
         {2,4,6}
     };
-
     private int totalWinningMoves = winningMoves.length;
+
+    public Rules() {
+
+    }
+
+    public Rules(Board board) {
+        this.board = board;
+    }
+
+    public boolean hasWinningMove(Player player) {
+        String[] boardState = this.board.getCurrentBoard();
+        return hasWinningMove(boardState, player);
+    }
 
     public boolean hasWinningMove(String[] boardState, Player player) {
         boolean matchFound = false;
@@ -32,23 +45,17 @@ public class Rules {
     }
 
     public boolean gameIsOver(String[] boardState) {
-        String[] boardStateWithoutSpaces = removeBoardStateSpaces(boardState);
+        this.board = new Board(boardState);
+        return gameIsOver();
+    }
 
-        for (String cell : boardStateWithoutSpaces) {
+    public boolean gameIsOver() {
+        for (String cell : this.board.getCurrentBoard()) {
             if (cell.isEmpty()) {
                 return false;
             }
         }
 
         return true;
-    }
-
-    private String[] removeBoardStateSpaces(String[] boardState) {
-        for (int i = 0; i < boardState.length; i++) {
-            if (boardState[i].equals(" ")) {
-                boardState[i] = "";
-            }
-        }
-        return boardState;
     }
 }
