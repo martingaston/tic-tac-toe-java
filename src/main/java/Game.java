@@ -20,6 +20,9 @@ class Game {
     }
 
     void gameEnd() {
+        String[] currentState = boardState.getCurrentBoard();
+        String renderedBoard = boardDisplay.render(currentState);
+        boardDisplay.display(renderedBoard);
         if (!winner.isEmpty()) {
             messages.display("gameOverWin", currentPlayer);
         } else {
