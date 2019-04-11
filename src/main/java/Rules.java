@@ -21,12 +21,8 @@ public class Rules {
     }
 
     public boolean hasWinningMove(Player player) {
-        String[] boardState = this.board.getCurrentBoard();
-        return hasWinningMove(boardState, player);
-    }
-
-    public boolean hasWinningMove(String[] boardState, Player player) {
         boolean matchFound = false;
+        String[] boardState = this.board.getCurrentBoard();
         String playerSymbol = player.getSymbol();
 
         for (int i = 0; i < totalWinningMoves;i++) {
