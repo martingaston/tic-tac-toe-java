@@ -6,10 +6,10 @@ import static org.junit.Assert.*;
 public class RulesTest {
     private Rules rules;
     private Player player;
+    private Board board;
 
     @Before
     public void setUp() {
-        rules = new Rules();
         player = new Player("X");
     }
 
@@ -20,7 +20,7 @@ public class RulesTest {
                 "", "", "",
                 "", "", ""
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         int boardPositionToUpdate = 2;
         board.updateBoard(boardPositionToUpdate, player);
@@ -35,7 +35,7 @@ public class RulesTest {
                 " ", " ", " ",
                 " ", " ", " "
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         int boardPositionToUpdate = 2;
         board.updateBoard(boardPositionToUpdate, player);
@@ -50,7 +50,7 @@ public class RulesTest {
                 " ", "X", " ",
                 " ", " ", "X"
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.hasWinningMove(player));
     }
@@ -62,7 +62,7 @@ public class RulesTest {
                 " ", "X", " ",
                 "X", " ", " "
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.hasWinningMove(player));
     }
@@ -74,7 +74,7 @@ public class RulesTest {
                 " ", " ", " ",
                 " ", " ", " "
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.hasWinningMove(player));
     }
@@ -86,7 +86,7 @@ public class RulesTest {
                 "X", "X", "X",
                 " ", " ", " "
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.hasWinningMove(player));
     }
@@ -98,7 +98,7 @@ public class RulesTest {
                 " ", " ", " ",
                 "X", "X", "X"
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.hasWinningMove(player));
     }
@@ -110,7 +110,7 @@ public class RulesTest {
                 "X", " ", " ",
                 "X", " ", " "
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.hasWinningMove(player));
     }
@@ -122,7 +122,7 @@ public class RulesTest {
                 " ", "X", " ",
                 " ", "X", " "
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.hasWinningMove(player));
     }
@@ -134,7 +134,7 @@ public class RulesTest {
                 " ", " ", "X",
                 " ", " ", "X"
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.hasWinningMove(player));
     }
@@ -146,7 +146,7 @@ public class RulesTest {
                 " ", "X", "O",
                 "O", "O", "X"
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertFalse(rules.hasWinningMove(player));
     }
@@ -158,7 +158,7 @@ public class RulesTest {
                 "X", "X", "O",
                 "O", "O", "X"
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertFalse(rules.hasWinningMove(player));
     }
@@ -170,7 +170,7 @@ public class RulesTest {
                 "X", "X", "O",
                 "O", "O", "X"
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertFalse(rules.hasWinningMove(player));
     }
@@ -182,7 +182,7 @@ public class RulesTest {
                 "O", " ", " ",
                 " ", "X", " "
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertFalse(rules.gameIsOver());
     }
@@ -194,7 +194,7 @@ public class RulesTest {
                 "O", "O", "X",
                 "X", "X", "O"
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.gameIsOver());
     }
@@ -206,7 +206,7 @@ public class RulesTest {
                 "O", "O", "X",
                 "X", "X", "O"
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertTrue(rules.gameIsOver());
     }
@@ -218,7 +218,7 @@ public class RulesTest {
                 " ", " ", " ",
                 " ", " ", " "
         };
-        Board board = new Board(boardState);
+        board = new Board(boardState);
         rules = new Rules(board);
         assertFalse(rules.gameIsOver());
     }
