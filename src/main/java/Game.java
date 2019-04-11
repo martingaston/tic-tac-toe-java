@@ -14,27 +14,27 @@ class Game {
     }
 
     void intro() {
-        messages.display("gameTitle");
-        messages.display("gameIntro");
-        messages.display("gameInstructions");
+        Display.outMessage(messages.get("gameTitle"));
+        Display.outMessage(messages.get("gameIntro"));
+        Display.outMessage(messages.get("gameInstructions"));
     }
 
     void gameEnd() {
         String[] currentState = boardState.getCurrentBoard();
         String renderedBoard = boardDisplay.render(currentState);
-        boardDisplay.display(renderedBoard);
+        Display.outBoard(renderedBoard);
         if (!winner.isEmpty()) {
-            messages.display("gameOverWin", currentPlayer);
+            Display.outMessage(messages.get("gameOverWin", currentPlayer));
         } else {
-            messages.display("gameOverDraw");
+            Display.outMessage(messages.get("gameOverDraw"));
         }
     }
 
     void newTurn() {
         String[] currentState = boardState.getCurrentBoard();
         String renderedBoard = boardDisplay.render(currentState);
-        boardDisplay.display(renderedBoard);
-        messages.display("playerTurn", currentPlayer);
+        Display.outBoard(renderedBoard);
+        Display.outMessage(messages.get("playerTurn", currentPlayer));
         int playerInput = currentPlayer.getNextMove();
         boardState.updateBoard(playerInput, currentPlayer);
     }
