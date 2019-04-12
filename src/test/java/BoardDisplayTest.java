@@ -5,15 +5,15 @@ import org.junit.After;
 
 import static org.junit.Assert.*;
 
-public class BoardTest {
+public class BoardDisplayTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
-    private Board board;
+    private BoardDisplay boardDisplay;
 
     @Before
     public void setUp() {
-        board = new Board();
+        boardDisplay = new BoardDisplay();
     }
 
     @Test
@@ -23,8 +23,12 @@ public class BoardTest {
 
     @Test
     public void testBlankBoardRenders() {
-        String[] boardState = {"", "", "", "", "", "", "", "", ""};
-        String boardRendered = board.render(boardState);
+        String[] boardState = {
+                "", "", "",
+                "", "", "",
+                "", "", ""
+        };
+        String boardRendered = boardDisplay.render(boardState);
         String boardExpected =
                 "+-----------+\n" +
                 "|   |   |   |\n" +
@@ -38,8 +42,12 @@ public class BoardTest {
 
     @Test
     public void testXBoardRenders() {
-        String[] boardState = {"X", "X", "X", "X", "X", "X", "X", "X", "X"};
-        String boardRendered = board.render(boardState);
+        String[] boardState = {
+                "X", "X", "X",
+                "X", "X", "X",
+                "X", "X", "X"
+        };
+        String boardRendered = boardDisplay.render(boardState);
         String boardExpected =
                 "+-----------+\n" +
                 "| X | X | X |\n" +
@@ -64,9 +72,13 @@ public class BoardTest {
                 "| X | O | X |\n" +
                 "+-----------+\n";
 
-        String[] boardState = {"X", "O", "X", "O", "X", "O", "X", "O", "X"};
-        String boardRendered = board.render(boardState);
-        board.display(boardRendered);
+        String[] boardState = {
+                "X", "O", "X",
+                "O", "X", "O",
+                "X", "O", "X"
+        };
+        String boardRendered = boardDisplay.render(boardState);
+        boardDisplay.display(boardRendered);
 
         assertEquals(boardExpected, outContent.toString());
         System.setOut(originalOut);

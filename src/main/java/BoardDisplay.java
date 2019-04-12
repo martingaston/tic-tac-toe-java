@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Board {
+public class BoardDisplay {
     public void display(String boardRender) {
         System.out.print(boardRender);
     }
