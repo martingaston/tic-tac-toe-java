@@ -1,5 +1,7 @@
 # Tic Tac Toe
 
+![tic tac toe](https://media.giphy.com/media/26tk0YANPbTyjyJ4Q/giphy.gif)
+
 ## What is this?
 
 An 2-player implementation of Tic Tac Toe in Java, the classic 3x3 grid adventure which supposedly ends in a draw if you know what you're doing. Played on the command line, because command lines are cool. 
@@ -33,4 +35,5 @@ Compiling from sources requires an installation of the JDK - my personal prefere
 
 * The app assumes the happy path - that is to say, it does not check for incorrect input. The app will crash with an `InputMismatchException` if a user enters a non-integer, for instance, and the game will discard a user's turn if they overlap on a cell that's already been played.
 * The presentation could be refined, with lightly coloured numbers in the background of currently unplayed squares - so it's easier for players to know what number to press to select the square they want. 
-* There could be better testing for the main game loop itself.
+* There could be better testing for the main game loop itself.\
+* Natural opportunities to expand the game in various areas - board size, winning line size (e.g 4), additional player support, adding a CPU opponent.
