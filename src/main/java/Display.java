@@ -43,7 +43,8 @@ class Display {
 
         for (int i = 0; i < rowState.length; i++) {
             if (rowState[i].equals("")) {
-                rowState[i] = Integer.toString(startIndex + i);
+                String output = Integer.toString(startIndex + i);
+                rowState[i] = Colour.grey(output);
             }
         }
 
