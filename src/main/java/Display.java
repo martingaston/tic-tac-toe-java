@@ -29,19 +29,21 @@ class Display {
 
         String grid = divider;
 
+        int startIndex = 0;
         for (String[] row : rows) {
-            String renderedRow = renderRow(row);
+            String renderedRow = renderRow(row, startIndex);
             grid = grid.concat(renderedRow);
+            startIndex += 3;
         }
 
         return grid;
     }
 
-    private String renderRow(String[] rowState) {
+    private String renderRow(String[] rowState, int startIndex) {
 
         for (int i = 0; i < rowState.length; i++) {
             if (rowState[i].equals("")) {
-                rowState[i] = " ";
+                rowState[i] = Integer.toString(startIndex + i);
             }
         }
 
