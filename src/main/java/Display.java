@@ -1,18 +1,30 @@
 import java.util.Arrays;
 
-public class BoardDisplay {
-    public void display(String boardRender) {
-        System.out.print(boardRender);
+class Display {
+    private Board board;
+
+    public Display(Board board) {
+        this.board = board;
     }
+
+    static void outMessage(String output) {
+        System.out.println(output);
+    }
+
+    void showBoard() {
+        System.out.print(renderBoardFromState());
+    }
+
     private String newline = "\n";
     private String divider = "+-----------+" + newline;
 
-    public String render(String[] boardState) {
+    private String renderBoardFromState() {
+        String[] boardState = this.board.getCurrentBoard();
 
         String[][] rows = new String[][] {
-            Arrays.copyOfRange(boardState, 0, 3),
-            Arrays.copyOfRange(boardState, 3, 6),
-            Arrays.copyOfRange(boardState, 6, 9)
+                Arrays.copyOfRange(boardState, 0, 3),
+                Arrays.copyOfRange(boardState, 3, 6),
+                Arrays.copyOfRange(boardState, 6, 9)
         };
 
         String grid = divider;
