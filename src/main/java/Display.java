@@ -29,11 +29,10 @@ class Display {
 
         String grid = divider;
 
-        int startIndex = 0;
-        for (String[] row : rows) {
-            String renderedRow = renderRow(row, startIndex);
+        for (int i = 0; i < rows.length; i++) {
+            int startingIndexOfRow = i * 3;
+            String renderedRow = renderRow(rows[i], startingIndexOfRow);
             grid = grid.concat(renderedRow);
-            startIndex += 3;
         }
 
         return grid;
