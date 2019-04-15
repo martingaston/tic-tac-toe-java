@@ -53,11 +53,11 @@ public class DisplayTest {
 
         String boardOutput =
             "+-----------+\n" +
-            "|   |   |   |\n" +
+            "| 1 | 2 | 3 |\n" +
             "+-----------+\n" +
-            "|   |   |   |\n" +
+            "| 4 | 5 | 6 |\n" +
             "+-----------+\n" +
-            "|   |   |   |\n" +
+            "| 7 | 8 | 9 |\n" +
             "+-----------+\n";
 
         Board board = new Board(boardState);
