@@ -44,7 +44,7 @@ class Display {
         for (int i = 0; i < rowState.length; i++) {
             if (rowState[i].equals("")) {
                 String output = Integer.toString(startIndex + i);
-                rowState[i] = Colour.grey(output);
+                rowState[i] = Colour.faded(output);
             }
         }
 
