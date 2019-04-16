@@ -2,18 +2,18 @@ public class Cell {
     private Player occupant;
 
     String getOccupant() {
-        if (isOccupied()) {
-            return occupant.getSymbol();
+        if (isNotOccupied()) {
+            return " ";
         }
 
-        return " ";
+        return occupant.getSymbol();
     }
 
     void mark(Player player) {
         this.occupant = player;
     }
 
-    private boolean isOccupied() {
-        return occupant != null;
+    private boolean isNotOccupied() {
+        return occupant == null;
     }
 }

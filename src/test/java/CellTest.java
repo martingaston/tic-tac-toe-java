@@ -9,7 +9,7 @@ public class CellTest {
     private Cell cell;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         playerCross = new Player("X");
         playerNought = new Player("O");
         cell = new Cell();
