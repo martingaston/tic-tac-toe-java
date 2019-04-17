@@ -2,7 +2,7 @@ class Game {
     private Messages messages = new Messages();
     private Player playerCross = new Player("X");
     private Player playerNought = new Player("O");
-    private Player currentPlayer = playerCross;
+    private Players players = new Players(playerCross, playerNought);
     private Board board = new Board();
     private Rules rules = new Rules(board);
     private Display display = new Display(board);
@@ -26,16 +26,16 @@ class Game {
 
     private void newTurn() {
         display.showBoard();
-        Display.outMessage(messages.get("playerTurn", currentPlayer));
-        int playerInput = currentPlayer.getNextMove();
-        board.addMoveToBoard(playerInput, currentPlayer);
+        Display.outMessage(messages.get("playerTurn", currentPlayer()));
+        int playerInput = currentPlayer().getNextMove();
+        board.addMoveToBoard(playerInput, currentPlayer());
     }
 
     private void processTurn() {
         gameOver = rules.gameIsOver();
-        boolean hasWon = rules.hasWinningMove(currentPlayer);
+        boolean hasWon = rules.hasWinningMove(currentPlayer());
         if (hasWon) {
-            winner = currentPlayer.getSymbol();
+            winner = currentPlayer().getSymbol();
             gameOver = true;
             return;
         }
@@ -43,17 +43,17 @@ class Game {
     }
 
     private void switchPlayer() {
-        if (currentPlayer == playerCross) {
-            currentPlayer = playerNought;
-        } else {
-            currentPlayer = playerCross;
-        }
+        players.nextTurn();
+    }
+
+    private Player currentPlayer() {
+        return players.getCurrentPlayer();
     }
 
     private void gameEnd() {
         display.showBoard();
         if (!winner.isEmpty()) {
-            Display.outMessage(messages.get("gameOverWin", currentPlayer));
+            Display.outMessage(messages.get("gameOverWin", currentPlayer()));
         } else {
             Display.outMessage(messages.get("gameOverDraw"));
         }
