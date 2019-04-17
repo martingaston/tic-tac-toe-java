@@ -5,6 +5,12 @@ class Display {
     private String newline = "\n";
     private String divider = "+-----------+" + newline;
 
+    private String faded(String message) {
+        String ANSI_RESET ="\033[0m";
+        String ANSI_DARK_GREY = "\033[38;5;242m";
+        return ANSI_DARK_GREY + message + ANSI_RESET;
+    }
+
     public Display(Board board) {
         this.board = board;
     }
@@ -44,8 +50,8 @@ class Display {
 
         for (int i = 0; i < rowState.length; i++) {
             if (rowState[i].equals("")) {
-                String output = Integer.toString(startIndex + i);
-                rowState[i] = Colour.faded(output);
+                String output = Integer.toString(startIndex + i + 1);
+                rowState[i] = faded(output);
             }
         }
 
