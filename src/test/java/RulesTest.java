@@ -1,225 +1,152 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class RulesTest {
-    private Rules rules;
-    private Player player;
     private Board board;
+    private Player playerCross;
+    private Player playerNought;
+    private Rules rules;
+
+    private String[] createStringArrayFromBoard() {
+        ArrayList<String> boardAsArrayList = new ArrayList<>();
+        int totalCells = board.getTotalCells();
+        Cell currentCell;
+        for (int i = 0; i < totalCells; i++) {
+            currentCell = board.getCellFromBoardPosition(i);
+            boardAsArrayList.add(currentCell.getOccupant());
+        }
+        return boardAsArrayList.toArray(new String[]{});
+    }
 
     @Before
     public void setUp() {
-        player = new Player("X");
-    }
-
-    @Test
-    public void checkForBoardStateFromBoardClass() {
-        String[] boardState = {
-                "X", "X", "",
-                "", "", "",
-                "", "", ""
-        };
-        board = new Board(boardState);
+        board = new Board();
         rules = new Rules(board);
-        int boardPositionToUpdate = 2;
-        board.addMoveToBoard(boardPositionToUpdate, player);
-        assertTrue(rules.hasWinningMove(player));
+        playerCross = new Player("X");
+        playerNought = new Player("O");
 
     }
 
     @Test
-    public void checkForBoardStateWithSpacesFromBoardClass() {
-        String[] boardState = {
-                "X", "X", " ",
-                " ", " ", " ",
-                " ", " ", " "
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        int boardPositionToUpdate = 2;
-        board.addMoveToBoard(boardPositionToUpdate, player);
-        assertTrue(rules.hasWinningMove(player));
+    public void checkHorizontalTopIsValidWinCondition() {
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(1, playerCross);
+        board.addMoveToBoard(2, playerCross);
+        assertTrue(rules.hasWinningMove(playerCross));
 
     }
 
     @Test
-    public void checkForWinningDiagonalLeftMove() {
-        String[] boardState = {
-                "X", " ", " ",
-                " ", "X", " ",
-                " ", " ", "X"
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertTrue(rules.hasWinningMove(player));
+    public void checkHorizontalMiddleIsValidWinCondition() {
+        board.addMoveToBoard(3, playerCross);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+        assertTrue(rules.hasWinningMove(playerCross));
+
     }
 
     @Test
-    public void checkForWinningDiagonalRightMove() {
-        String[] boardState = {
-                " ", " ", "X",
-                " ", "X", " ",
-                "X", " ", " "
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertTrue(rules.hasWinningMove(player));
+    public void checkHorizontalBottomIsValidWinCondition() {
+        board.addMoveToBoard(6, playerCross);
+        board.addMoveToBoard(7, playerCross);
+        board.addMoveToBoard(8, playerCross);
+        assertTrue(rules.hasWinningMove(playerCross));
+
     }
 
     @Test
-    public void checkForWinningHorizontalTopMove() {
-        String[] boardState = {
-                "X", "X", "X",
-                " ", " ", " ",
-                " ", " ", " "
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertTrue(rules.hasWinningMove(player));
+    public void checkVerticalLeftIsValidWinCondition() {
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(3, playerCross);
+        board.addMoveToBoard(6, playerCross);
+        assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
-    public void checkForWinningHorizontalMiddleMove() {
-        String[] boardState = {
-                " ", " ", " ",
-                "X", "X", "X",
-                " ", " ", " "
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertTrue(rules.hasWinningMove(player));
+    public void checkVerticalMiddleIsValidWinCondition() {
+        board.addMoveToBoard(1, playerCross);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(7, playerCross);
+        assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
-    public void checkForWinningHorizontalBottomMove() {
-        String[] boardState = {
-                " ", " ", " ",
-                " ", " ", " ",
-                "X", "X", "X"
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertTrue(rules.hasWinningMove(player));
+    public void checkVerticalRightIsValidWinCondition() {
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(5, playerCross);
+        board.addMoveToBoard(8, playerCross);
+        assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
-    public void checkForWinningVerticalLeftMove() {
-        String[] boardState = {
-                "X", " ", " ",
-                "X", " ", " ",
-                "X", " ", " "
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertTrue(rules.hasWinningMove(player));
+    public void checkLeftDiagonalIsValidWinCondition() {
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(8, playerCross);
+        assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
-    public void checkForWinningVerticalCenterMove() {
-        String[] boardState = {
-                " ", "X", " ",
-                " ", "X", " ",
-                " ", "X", " "
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertTrue(rules.hasWinningMove(player));
+    public void checkRightDiagonalIsValidWinCondition() {
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(6, playerCross);
+        assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
-    public void checkForWinningVerticalRightMove() {
-        String[] boardState = {
-                " ", " ", "X",
-                " ", " ", "X",
-                " ", " ", "X"
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertTrue(rules.hasWinningMove(player));
-    }
+    public void checkNoWinningHorizontalMoveReturnsFalse() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(2, playerNought);
+        board.addMoveToBoard(3, playerCross);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerNought);
+        board.addMoveToBoard(6, playerNought);
+        board.addMoveToBoard(7, playerNought);
+        board.addMoveToBoard(8, playerCross);
 
-    @Test
-    public void checkThatNoWinningVerticalMoveReturnsFalse() {
-        String[] boardState = {
-                "O", "X", "O",
-                " ", "X", "O",
-                "O", "O", "X"
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertFalse(rules.hasWinningMove(player));
-    }
-
-    @Test
-    public void checkThatNoWinningHorizontalMoveReturnsFalse() {
-        String[] boardState = {
-                "O", " ", "O",
-                "X", "X", "O",
-                "O", "O", "X"
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertFalse(rules.hasWinningMove(player));
+        assertFalse(rules.hasWinningMove(playerCross));
     }
 
     @Test
     public void checkThatWinningMovesIsFalseIfOtherPlayerShouldWin() {
-        String[] boardState = {
-                "O", "O", "O",
-                "X", "X", "O",
-                "O", "O", "X"
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertFalse(rules.hasWinningMove(player));
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerNought);
+
+        assertFalse(rules.hasWinningMove(playerCross));
     }
 
     @Test
-    public void checkThatBoardStateThatIsNotFullReturnsFalseOnGameIsOver() {
-        String[] boardState = {
-                " ", "X", " ",
-                "O", " ", " ",
-                " ", "X", " "
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertFalse(rules.gameIsOver());
-    }
+    public void checkFullBoardReturnsGameOver() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerCross);
+        board.addMoveToBoard(2, playerNought);
+        board.addMoveToBoard(3, playerCross);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerNought);
+        board.addMoveToBoard(6, playerNought);
+        board.addMoveToBoard(7, playerNought);
+        board.addMoveToBoard(8, playerCross);
 
-    @Test
-    public void checkThatBoardStateThatIsFullReturnsTrueOnGameIsOverWithBoardClass() {
-        String[] boardState = {
-                "X", "X", "O",
-                "O", "O", "X",
-                "X", "X", "O"
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
         assertTrue(rules.gameIsOver());
     }
 
     @Test
-    public void checkThatBoardStateThatIsFullReturnsTrueOnGameIsOver() {
-        String[] boardState = {
-                "X", "X", "O",
-                "O", "O", "X",
-                "X", "X", "O"
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
-        assertTrue(rules.gameIsOver());
-    }
+    public void checkNotFullBoardDoesNotReturnGameOver() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerCross);
+        board.addMoveToBoard(3, playerCross);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerNought);
+        board.addMoveToBoard(6, playerNought);
+        board.addMoveToBoard(7, playerNought);
+        board.addMoveToBoard(8, playerCross);
 
-    @Test
-    public void checkThatBoardOfSpacesReturnsFalseOnGameIsOver() {
-        String[] boardState = {
-                " ", " ", " ",
-                " ", " ", " ",
-                " ", " ", " "
-        };
-        board = new Board(boardState);
-        rules = new Rules(board);
         assertFalse(rules.gameIsOver());
     }
 }

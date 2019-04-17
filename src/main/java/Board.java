@@ -1,39 +1,34 @@
+import java.util.ArrayList;
+import java.util.Set;
+
 public class Board {
-    private String[] board;
+    private int totalCells = 9;
+    private ArrayList<Cell> board = new ArrayList<>(totalCells);
 
     public Board() {
-        this.board = new String[] {
-                "", "", "",
-                "", "", "",
-                "", "", ""
-        };
+        board.addAll(generateEmptyBoard());
     }
 
-    public Board(String [] boardState) {
-        setBoardState(boardState);
+    private Set<Cell> generateEmptyBoard() {
+        return Set.of(
+                new Cell(), new Cell(), new Cell(),
+                new Cell(), new Cell(), new Cell(),
+                new Cell(), new Cell(), new Cell()
+        );
     }
 
-    String[] getCurrentBoard() {
-        return board;
+    public Cell getCellFromBoardPosition(int position) {
+        return board.get(position);
     }
 
-    private void setBoardState(String[] boardState) {
-        this.board = removeBoardStateSpaces(boardState);
+    public int getTotalCells() {
+        return totalCells;
     }
 
-    private String[] removeBoardStateSpaces(String[] boardState) {
-        for (int i = 0; i < boardState.length; i++) {
-            if (boardState[i].equals(" ")) {
-                boardState[i] = "";
-            }
+    public void addMoveToBoard(int position, Player player) {
+        Cell requestedCell = board.get(position);
+        if (requestedCell.isNotOccupied()) {
+            requestedCell.mark(player);
         }
-        return boardState;
-    }
-
-    public String[] addMoveToBoard(int position, Player player) {
-        if (board[position].isEmpty()) {
-            board[position] = player.getSymbol();
-        }
-        return board;
     }
 }

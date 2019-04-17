@@ -1,11 +1,13 @@
-import java.util.Arrays;
-
-class Display {
+public class Display {
     private Board board;
     private String newline = "\n";
     private String divider = "+-----------+" + newline;
 
-    public String faded(String message) {
+    static void outMessage(String output) {
+        System.out.println(output);
+    }
+
+    private String faded(String message) {
         String ANSI_RESET ="\033[0m";
         String ANSI_DARK_GREY = "\033[38;5;242m";
         return ANSI_DARK_GREY + message + ANSI_RESET;
@@ -15,53 +17,55 @@ class Display {
         this.board = board;
     }
 
-    static void outMessage(String output) {
-        System.out.println(output);
-    }
-
     void showBoard() {
-        String[][] boardInRows = processBoardIntoRows();
-        System.out.print(renderRows(boardInRows));
+        System.out.print(renderRows());
     }
 
-    private String[][] processBoardIntoRows() {
-        String[] boardState = this.board.getCurrentBoard();
+    private String renderRows() {
+        int totalCells = board.getTotalCells();
+        int cellsInRow = (int)Math.sqrt(totalCells);
 
-        return new String[][]{
-                Arrays.copyOfRange(boardState, 0, 3),
-                Arrays.copyOfRange(boardState, 3, 6),
-                Arrays.copyOfRange(boardState, 6, 9)
-        };
-    }
+        StringBuilder grid = new StringBuilder(divider);
 
-    private String renderRows(String[][] rows) {
-        String grid = divider;
-
-        for (int i = 0; i < rows.length; i++) {
-            int startingIndexOfRow = i * 3;
-            String renderedRow = renderRow(rows[i], startingIndexOfRow);
-            grid = grid.concat(renderedRow);
+        for (int i = 0; i < totalCells; i += cellsInRow) {
+            String renderedRow = renderRow(i, i + cellsInRow);
+            grid.append(renderedRow);
         }
 
-        return grid;
+        return grid.toString();
     }
 
-    private String renderRow(String[] rowState, int startIndex) {
+    private String renderRow(int startIndex, int endIndex) {
+        StringBuilder renderedRowString = new StringBuilder();
+        Cell currentBoardCell;
+        renderedRowString.append("|");
 
-        for (int i = 0; i < rowState.length; i++) {
-            if (rowState[i].equals("")) {
-                String output = Integer.toString(startIndex + i);
-                rowState[i] = faded(output);
+        for (int i = startIndex; i < endIndex; i++) {
+            renderedRowString.append(" ");
+
+            currentBoardCell = board.getCellFromBoardPosition(i);
+
+            String output;
+            if (currentBoardCell.isNotOccupied()) {
+                int boardNumber = zeroIndexToOneIndex(i);
+                output = faded(Integer.toString(boardNumber));
+            } else {
+                output = renderCell(currentBoardCell);
             }
+
+            renderedRowString.append(output);
+            renderedRowString.append(" |");
         }
 
-        String left = rowState[0];
-        String center = rowState[1];
-        String right = rowState[2];
+        renderedRowString.append(newline);
+        renderedRowString.append(divider);
 
-        return String
-                .format("| %s | %s | %s |", left, center, right)
-                .concat(newline)
-                .concat(divider);
+        return renderedRowString.toString();
     }
+
+    private String renderCell(Cell cell) {
+        return cell.getOccupant();
+    }
+
+    private int zeroIndexToOneIndex(int zeroIndexedNumber) { return zeroIndexedNumber + 1; }
 }
