@@ -16,7 +16,7 @@ public class BoardTest {
     }
 
     @Test
-    public void CreateBoardShouldReturnBlankBoard() {
+    public void createBoardShouldReturnBlankBoard() {
         String[] createdBoard = board.getCurrentBoard();
         String[] expectedBoard = {
                 "", "", "",
@@ -27,7 +27,7 @@ public class BoardTest {
     }
 
     @Test
-    public void UpdatedBoardShouldReturnCorrectBoardStateAfterOneMove() {
+    public void updatedBoardShouldReturnCorrectBoardStateAfterOneMove() {
         String[] updatedBoard = board.addMoveToBoard(0, playerCross);
         String[] expectedBoard = {
                 "X", "", "",
@@ -38,7 +38,7 @@ public class BoardTest {
     }
 
     @Test
-    public void UpdatedBoardShouldReturnCorrectBoardStateAfterTwoMoves() {
+    public void updatedBoardShouldReturnCorrectBoardStateAfterTwoMoves() {
         board.addMoveToBoard(0, playerCross);
         String[] updatedBoard = board.addMoveToBoard(4, playerCross);
         String[] expectedBoard = {
@@ -50,7 +50,7 @@ public class BoardTest {
     }
 
     @Test
-    public void UpdatedBoardShouldNotAllowOverwritingCells() {
+    public void updatedBoardShouldNotAllowOverwritingCells() {
         board.addMoveToBoard(1, playerNought);
         String[] updatedBoard = board.addMoveToBoard(1, playerCross);
         String[] expectedBoard = {
@@ -62,7 +62,7 @@ public class BoardTest {
     }
 
     @Test
-    public void UpdateBoardShouldBeAbleToRunEntireGame() {
+    public void updateBoardShouldBeAbleToRunEntireGame() {
         board.addMoveToBoard(4, playerCross);
         board.addMoveToBoard(2, playerNought);
         board.addMoveToBoard(3, playerCross);
