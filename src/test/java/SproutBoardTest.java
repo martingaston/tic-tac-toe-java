@@ -31,6 +31,11 @@ public class SproutBoardTest {
     }
 
     @Test
+    public void totalCellsShouldEqualNine() {
+        assertEquals(9, board.getTotalCells());
+    }
+
+    @Test
     public void cellZeroShouldBeBlankOnEmptyBoard() {
         String cellOccupant = board.getCellFromBoardPosition(0).getOccupant();
         assertEquals(" ", cellOccupant);

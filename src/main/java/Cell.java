@@ -13,7 +13,7 @@ public class Cell {
         this.occupant = player;
     }
 
-    private boolean isNotOccupied() {
+    boolean isNotOccupied() {
         return occupant == null;
     }
 }

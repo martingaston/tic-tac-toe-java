@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class SproutBoard {
-    private ArrayList<Cell> board = new ArrayList<>(9);
+    private int totalCells = 9;
+    private ArrayList<Cell> board = new ArrayList<>(totalCells);
 
     public SproutBoard() {
         board.addAll(generateEmptyBoard());
@@ -18,6 +19,10 @@ public class SproutBoard {
 
     public Cell getCellFromBoardPosition(int position) {
         return board.get(position);
+    }
+
+    public int getTotalCells() {
+        return totalCells;
     }
 
     public void addMoveToBoard(int position, Player player) {
