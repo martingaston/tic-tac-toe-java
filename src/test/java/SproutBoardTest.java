@@ -11,7 +11,7 @@ public class SproutBoardTest {
     private Player playerCross;
     private Player playerNought;
 
-    private String[] createBoardArrayList() {
+    private String[] createStringArrayFromBoard() {
         ArrayList<String> boardAsArrayList = new ArrayList<>();
         int totalCells = 9;
         Cell currentCell;
@@ -50,7 +50,7 @@ public class SproutBoardTest {
 
     @Test
     public void newBoardShouldBeBlank() {
-        String[] updatedBoard = createBoardArrayList();
+        String[] updatedBoard = createStringArrayFromBoard();
         String[] expectedBoard = {
                 " ", " ", " ",
                 " ", " ", " ",
@@ -62,7 +62,7 @@ public class SproutBoardTest {
     @Test
     public void UpdatedBoardShouldReturnCorrectBoardStateAfterOneMove() {
         board.addMoveToBoard(0, playerCross);
-        String[] updatedBoard = createBoardArrayList();
+        String[] updatedBoard = createStringArrayFromBoard();
         String[] expectedBoard = {
                 "X", " ", " ",
                 " ", " ", " ",
@@ -75,7 +75,7 @@ public class SproutBoardTest {
     public void UpdatedBoardShouldReturnCorrectBoardStateAfterTwoMoves() {
         board.addMoveToBoard(0, playerCross);
         board.addMoveToBoard(4, playerCross);
-        String[] updatedBoard = createBoardArrayList();
+        String[] updatedBoard = createStringArrayFromBoard();
         String[] expectedBoard = {
                 "X", " ", " ",
                 " ", "X", " ",
@@ -88,7 +88,7 @@ public class SproutBoardTest {
     public void UpdatedBoardShouldNotAllowOverwritingCells() {
         board.addMoveToBoard(1, playerNought);
         board.addMoveToBoard(1, playerCross);
-        String[] updatedBoard = createBoardArrayList();
+        String[] updatedBoard = createStringArrayFromBoard();
         String[] expectedBoard = {
                 " ", "O", " ",
                 " ", " ", " ",
@@ -106,7 +106,7 @@ public class SproutBoardTest {
         board.addMoveToBoard(0, playerCross);
         board.addMoveToBoard(8, playerNought);
         board.addMoveToBoard(4, playerCross);
-        String[] updatedBoard = createBoardArrayList();
+        String[] updatedBoard = createStringArrayFromBoard();
         String[] expectedBoard = {
                 "X", " ", "O",
                 "X", "X", "O",
