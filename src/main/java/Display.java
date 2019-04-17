@@ -2,6 +2,8 @@ import java.util.Arrays;
 
 class Display {
     private Board board;
+    private String newline = "\n";
+    private String divider = "+-----------+" + newline;
 
     public Display(Board board) {
         this.board = board;
@@ -12,36 +14,38 @@ class Display {
     }
 
     void showBoard() {
-        System.out.print(renderBoardFromState());
+        String[][] boardInRows = processBoardIntoRows();
+        System.out.print(renderRows(boardInRows));
     }
 
-    private String newline = "\n";
-    private String divider = "+-----------+" + newline;
-
-    private String renderBoardFromState() {
+    private String[][] processBoardIntoRows() {
         String[] boardState = this.board.getCurrentBoard();
 
-        String[][] rows = new String[][] {
+        return new String[][]{
                 Arrays.copyOfRange(boardState, 0, 3),
                 Arrays.copyOfRange(boardState, 3, 6),
                 Arrays.copyOfRange(boardState, 6, 9)
         };
+    }
 
+    private String renderRows(String[][] rows) {
         String grid = divider;
 
-        for (String[] row : rows) {
-            String renderedRow = renderRow(row);
+        for (int i = 0; i < rows.length; i++) {
+            int startingIndexOfRow = i * 3;
+            String renderedRow = renderRow(rows[i], startingIndexOfRow);
             grid = grid.concat(renderedRow);
         }
 
         return grid;
     }
 
-    private String renderRow(String[] rowState) {
+    private String renderRow(String[] rowState, int startIndex) {
 
         for (int i = 0; i < rowState.length; i++) {
             if (rowState[i].equals("")) {
-                rowState[i] = " ";
+                String output = Integer.toString(startIndex + i);
+                rowState[i] = Colour.faded(output);
             }
         }
 
