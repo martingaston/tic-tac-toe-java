@@ -10,9 +10,14 @@ public class Messages {
         standardMessage.put("gameIntro", "The classic game of noughts and crosses! Turn friends into enemies as 2 players take turns marking spaces in a 3x3 grid. Win short-lived glory by succeeding in placing three marks on the any horizontal, vertical or diagonal direction.");
         standardMessage.put("gameInstructions", "Input numbers between 0-8 on alternative turns to place your mark in the 3x3 grid");
         standardMessage.put("gameOverDraw", "Bad luck! It's a draw!");
+        standardMessage.put("setup", "Select a game mode:\n1. Human v Human\n2. Human v CPU\n");
 
         formatMessage.put("playerTurn", "Player %s's turn");
         formatMessage.put("gameOverWin", "Player %s wins!");
+    }
+
+    String setupInstructions() {
+        return standardMessage.get("setup");
     }
 
     String playerWin(Player player) {
