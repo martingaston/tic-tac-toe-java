@@ -1,8 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class RulesTest {
@@ -10,7 +8,7 @@ public class RulesTest {
     private Player playerCross;
     private Player playerNought;
     private Rules rules;
-    
+
     @Before
     public void setUp() {
         board = new Board();

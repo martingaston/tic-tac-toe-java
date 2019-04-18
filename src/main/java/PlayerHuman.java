@@ -10,6 +10,10 @@ public class PlayerHuman implements Player {
         this.rules = rules;
     }
 
+    public PlayerHuman(String symbol) {
+        this.symbol = symbol;
+    }
+
     public String getSymbol() {
         return symbol;
     }
