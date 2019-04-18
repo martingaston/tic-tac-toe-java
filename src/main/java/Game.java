@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 class Game {
     private Messages messages = new Messages();
 
@@ -7,29 +5,10 @@ class Game {
     private Rules rules = new Rules(board);
     private Display display = new Display(board);
 
-    private Player playerCross;
-    private Player playerNought;
     private Players players;
 
     private boolean gameOver = false;
     private String winner = "";
-
-    private void setUp() {
-        Display.outMessage(messages.setupInstructions());
-        Scanner input = new Scanner(System.in);
-        int modeNumber = input.nextInt();
-        switch(modeNumber) {
-            case 1:
-                this.playerCross = new PlayerHuman("X");
-                this.playerNought = new PlayerHuman("O");
-                break;
-            case 2:
-                this.playerCross = new PlayerHuman("X");
-                this.playerNought = new PlayerCPU("O", board);
-                break;
-        }
-        this.players = new Players(playerCross, playerNought);
-    }
 
     void play() {
         intro();
@@ -43,6 +22,11 @@ class Game {
 
     private void intro() {
         Display.outMessage(messages.getIntro());
+    }
+
+    private void setUp() {
+        Display.outMessage(messages.setupInstructions());
+        players = new Players(board);
     }
 
     private void newTurn() {
