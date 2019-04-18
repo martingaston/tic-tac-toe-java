@@ -36,7 +36,7 @@ public class Rules {
         int desiredCellNumber = player.getMove();
         int totalBoardCells = board.getTotalCells();
 
-        if (desiredCellNumber < 1 || desiredCellNumber > totalBoardCells) {
+        if (desiredCellNumber < 0 || desiredCellNumber > totalBoardCells - 1) {
             return true;
         }
 

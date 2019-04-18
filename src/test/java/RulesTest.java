@@ -10,24 +10,13 @@ public class RulesTest {
     private Player playerCross;
     private Player playerNought;
     private Rules rules;
-
-    private String[] createStringArrayFromBoard() {
-        ArrayList<String> boardAsArrayList = new ArrayList<>();
-        int totalCells = board.getTotalCells();
-        Cell currentCell;
-        for (int i = 0; i < totalCells; i++) {
-            currentCell = board.getCellFromBoardPosition(i);
-            boardAsArrayList.add(currentCell.getOccupant());
-        }
-        return boardAsArrayList.toArray(new String[]{});
-    }
-
+    
     @Before
     public void setUp() {
         board = new Board();
         rules = new Rules(board);
-        playerCross = new Player("X");
-        playerNought = new Player("O");
+        playerCross = new PlayerHuman("X");
+        playerNought = new PlayerHuman("O");
 
     }
 

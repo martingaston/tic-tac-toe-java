@@ -11,9 +11,14 @@ public class Messages {
         standardMessage.put("gameInstructions", "Input numbers between 1-9 on alternative turns to place your mark in the 3x3 grid");
         standardMessage.put("gameOverDraw", "Bad luck! It's a draw!");
         standardMessage.put("invalidMove", "Sorry, that move is invalid. Please choose an unoccupied square between 1 and 9");
+        standardMessage.put("setup", "Select a game mode:\n1. Human v Human\n2. Human v CPU\n");
 
         formatMessage.put("playerTurn", "Player %s's turn");
         formatMessage.put("gameOverWin", "Player %s wins!");
+    }
+
+    String setupInstructions() {
+        return standardMessage.get("setup");
     }
 
     String playerWin(Player player) {

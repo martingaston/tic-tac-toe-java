@@ -5,17 +5,14 @@ class Game {
     private Rules rules = new Rules(board);
     private Display display = new Display(board);
 
-    private Player playerCross = new Player("X", rules);
-    private Player playerNought = new Player("O", rules);
-
-    //TODO can Players be the factory? It's the only part where there is change
-    private Players players = new Players(playerCross, playerNought);
+    private Players players;
 
     private boolean gameOver = false;
     private String winner = "";
 
     void play() {
         intro();
+        setUp();
         do {
             newTurn();
             processTurn();
@@ -25,6 +22,11 @@ class Game {
 
     private void intro() {
         Display.outMessage(messages.getIntro());
+    }
+
+    private void setUp() {
+        Display.outMessage(messages.setupInstructions());
+        players = new Players(rules);
     }
 
     private void newTurn() {
