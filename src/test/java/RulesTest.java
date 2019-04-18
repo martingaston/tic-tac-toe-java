@@ -3,6 +3,29 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+class PlayerMock implements Player {
+    private int move;
+
+    void setMove(int move) {
+        this.move = move;
+    }
+
+    @Override
+    public String getSymbol() {
+        return "T";
+    }
+
+    @Override
+    public int getNextMove() {
+        return 0;
+    }
+
+    @Override
+    public int getMove() {
+        return this.move;
+    }
+}
+
 public class RulesTest {
     private Board board;
     private Player playerCross;
@@ -16,6 +39,49 @@ public class RulesTest {
         playerCross = new PlayerHuman("X");
         playerNought = new PlayerHuman("O");
 
+    }
+
+    @Test
+    public void testValidCellNumberIsValidMove() {
+        PlayerMock playerMock = new PlayerMock();
+        playerMock.setMove(4);
+        assertFalse(rules.isNotValidMove(playerMock));
+    }
+
+    @Test
+    public void testEighthCellIsValidMove() {
+        PlayerMock playerMock = new PlayerMock();
+        playerMock.setMove(8);
+        assertFalse(rules.isNotValidMove(playerMock));
+    }
+
+    @Test
+    public void testZeroCellIsValidMove() {
+        PlayerMock playerMock = new PlayerMock();
+        playerMock.setMove(0);
+        assertFalse(rules.isNotValidMove(playerMock));
+    }
+
+    @Test
+    public void testMinusOneIsInvalidMove() {
+        PlayerMock playerMock = new PlayerMock();
+        playerMock.setMove(-1);
+        assertTrue(rules.isNotValidMove(playerMock));
+    }
+
+    @Test
+    public void testNineIsInvalidMove() {
+        PlayerMock playerMock = new PlayerMock();
+        playerMock.setMove(9);
+        assertTrue(rules.isNotValidMove(playerMock));
+    }
+
+    @Test
+    public void testOccupiedCellIsInvalidMove() {
+        board.addMoveToBoard(4, playerCross);
+        PlayerMock playerMock = new PlayerMock();
+        playerMock.setMove(4);
+        assertTrue(rules.isNotValidMove(playerMock));
     }
 
     @Test
