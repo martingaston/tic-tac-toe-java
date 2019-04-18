@@ -47,7 +47,7 @@ public class Display {
 
             String output;
             if (currentBoardCell.isNotOccupied()) {
-                int boardNumber = zeroIndexToOneIndex(i);
+                int boardNumber = humanise(i);
                 output = faded(Integer.toString(boardNumber));
             } else {
                 output = renderCell(currentBoardCell);
@@ -67,5 +67,5 @@ public class Display {
         return cell.getOccupant();
     }
 
-    private int zeroIndexToOneIndex(int zeroIndexedNumber) { return zeroIndexedNumber + 1; }
+    private int humanise(int zeroIndexedNumber) { return zeroIndexedNumber + 1; }
 }

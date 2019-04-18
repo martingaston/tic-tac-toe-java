@@ -1,12 +1,14 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class Board {
-    private int totalCells = 9;
-    private ArrayList<Cell> board = new ArrayList<>(totalCells);
+    private int totalCells;
+    private List<Cell> board = new ArrayList<>();
 
     public Board() {
-        board.addAll(generateEmptyBoard());
+        this.board.addAll(generateEmptyBoard());
+        totalCells = this.board.size();
     }
 
     private Set<Cell> generateEmptyBoard() {

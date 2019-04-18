@@ -24,9 +24,9 @@ class Game {
 
     private void newTurn() {
         display.showBoard();
-        Display.outMessage(messages.announcePlayerTurn(currentPlayer));
-        int playerInput = currentPlayer.getNextMove();
-        board.addMoveToBoard(playerInput, currentPlayer);
+        Display.outMessage(messages.announcePlayerTurn(currentPlayer()));
+        int playerInput = currentPlayer().getNextMove();
+        board.addMoveToBoard(playerInput, currentPlayer());
     }
 
     private void processTurn() {
