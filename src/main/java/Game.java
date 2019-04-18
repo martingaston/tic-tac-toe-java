@@ -2,7 +2,7 @@ class Game {
     private Messages messages = new Messages();
     private Player playerCross = new Player("X");
     private Player playerNought = new Player("O");
-    private Player currentPlayer = playerCross;
+    private Players players = new Players(playerCross, playerNought);
     private Board board = new Board();
     private Rules rules = new Rules(board);
     private Display display = new Display(board);
@@ -31,9 +31,9 @@ class Game {
 
     private void processTurn() {
         gameOver = rules.gameIsOver();
-        boolean hasWon = rules.hasWinningMove(currentPlayer);
+        boolean hasWon = rules.hasWinningMove(currentPlayer());
         if (hasWon) {
-            winner = currentPlayer.getSymbol();
+            winner = currentPlayer().getSymbol();
             gameOver = true;
             return;
         }
@@ -41,17 +41,18 @@ class Game {
     }
 
     private void switchPlayer() {
-        if (currentPlayer == playerCross) {
-            currentPlayer = playerNought;
-        } else {
-            currentPlayer = playerCross;
-        }
+        players.nextTurn();
+    }
+
+    private Player currentPlayer() {
+        return players.getCurrentPlayer();
     }
 
     private void gameEnd() {
         display.showBoard();
+      
         if (aPlayerHasWon()) {
-            Display.outMessage(messages.playerWin(currentPlayer));
+            Display.outMessage(messages.playerWin(currentPlayer()));
         } else {
             Display.outMessage(messages.playersDraw());
         }
