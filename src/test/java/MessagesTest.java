@@ -1,70 +1,56 @@
-import java.util.Arrays;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
-import org.junit.experimental.runners.Enclosed;
 
 import static org.junit.Assert.*;
 
-@RunWith(Enclosed.class)
 public class MessagesTest {
-
-    public static class SpecificMessages {
-        private Messages messages;
-        private Player player;
-
-        @Before
-        public void setUp() {
-            messages = new Messages();
-            player = new Player("X");
-        }
-
-        @Test
-        public void playerWinsIsFormattedBasedOnPlayerClass() {
-            String expectedResult = "Player X wins!";
-            String message = messages.get("gameOverWin", player);
-            assertEquals(expectedResult, message);
-        }
-
-        @Test
-        public void playerTurnIsFormattedBasedOnPlayerClass() {
-            String expectedResult = "Player X's turn";
-            String message = messages.get("playerTurn", player);
-            assertEquals(expectedResult, message);
-        }
+    private Messages messages;
+    private Player player;
+    private boolean isString(String message) {
+        return message.getClass() == String.class;
     }
 
-    @RunWith(Parameterized.class)
-    public static class CheckLookupTypes {
+    @Before
+    public void setUp() {
+        messages = new Messages();
+        player = new Player("X");
+    }
 
-        private boolean isString(String message) {
-            return message.getClass() == String.class;
-        }
+    @Test
+    public void playerWinsIsFormattedBasedOnPlayerClass() {
+        String expectedResult = "Player X wins!";
+        String message = messages.playerWin(player);
+        assertEquals(expectedResult, message);
+    }
 
-        private Messages messages = new Messages();
+    @Test
+    public void announcePlayerTurnIsFormattedBasedOnPlayerClass() {
+        String expectedResult = "Player X's turn";
+        String message = messages.announcePlayerTurn(player);
+        assertEquals(expectedResult, message);
+    }
 
-        @Parameters
-        public static Iterable<?> data() {
-            return Arrays.asList("gameTitle", "gameIntro", "gameInstructions", "gameOverDraw");
-        }
+    @Test
+    public void playersDrawReturnsString() {
+        String message = messages.playersDraw();
+        assertTrue(isString(message));
+    }
 
-        @Parameter
-        public String messageKey;
+    @Test
+    public void playersDrawStringIsNotEmpty() {
+        String message = messages.playersDraw();
+        assertFalse(message.isEmpty());
+    }
 
-        @Test
-        public void testMessageKeysReturnStrings() {
-            String message = messages.get(messageKey);
-            assertTrue(isString(message));
-        }
+    @Test
+    public void getIntroReturnsString() {
+        String message = messages.getIntro();
+        assertTrue(isString(message));
+    }
 
-        @Test
-        public void testMessageKeyStringsAreNotEmpty() {
-            String message = messages.get(messageKey);
-            assertFalse(message.isEmpty());
-        }
+    @Test
+    public void getIntroStringIsNotEmpty() {
+        String message = messages.getIntro();
+        assertFalse(message.isEmpty());
     }
 }
