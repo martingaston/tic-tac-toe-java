@@ -14,7 +14,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForBoardStateFromBoardClass() {
+    public void checkForBoardStateFromBoardClass() {
         String[] boardState = {
                 "X", "X", "",
                 "", "", "",
@@ -29,7 +29,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForBoardStateWithSpacesFromBoardClass() {
+    public void checkForBoardStateWithSpacesFromBoardClass() {
         String[] boardState = {
                 "X", "X", " ",
                 " ", " ", " ",
@@ -44,7 +44,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForWinningDiagonalLeftMove() {
+    public void checkForWinningDiagonalLeftMove() {
         String[] boardState = {
                 "X", " ", " ",
                 " ", "X", " ",
@@ -56,7 +56,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForWinningDiagonalRightMove() {
+    public void checkForWinningDiagonalRightMove() {
         String[] boardState = {
                 " ", " ", "X",
                 " ", "X", " ",
@@ -68,7 +68,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForWinningHorizontalTopMove() {
+    public void checkForWinningHorizontalTopMove() {
         String[] boardState = {
                 "X", "X", "X",
                 " ", " ", " ",
@@ -80,7 +80,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForWinningHorizontalMiddleMove() {
+    public void checkForWinningHorizontalMiddleMove() {
         String[] boardState = {
                 " ", " ", " ",
                 "X", "X", "X",
@@ -92,7 +92,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForWinningHorizontalBottomMove() {
+    public void checkForWinningHorizontalBottomMove() {
         String[] boardState = {
                 " ", " ", " ",
                 " ", " ", " ",
@@ -104,7 +104,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForWinningVerticalLeftMove() {
+    public void checkForWinningVerticalLeftMove() {
         String[] boardState = {
                 "X", " ", " ",
                 "X", " ", " ",
@@ -116,7 +116,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForWinningVerticalCenterMove() {
+    public void checkForWinningVerticalCenterMove() {
         String[] boardState = {
                 " ", "X", " ",
                 " ", "X", " ",
@@ -128,7 +128,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckForWinningVerticalRightMove() {
+    public void checkForWinningVerticalRightMove() {
         String[] boardState = {
                 " ", " ", "X",
                 " ", " ", "X",
@@ -140,7 +140,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckThatNoWinningVerticalMoveReturnsFalse() {
+    public void checkThatNoWinningVerticalMoveReturnsFalse() {
         String[] boardState = {
                 "O", "X", "O",
                 " ", "X", "O",
@@ -152,7 +152,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckThatNoWinningHorizontalMoveReturnsFalse() {
+    public void checkThatNoWinningHorizontalMoveReturnsFalse() {
         String[] boardState = {
                 "O", " ", "O",
                 "X", "X", "O",
@@ -164,7 +164,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckThatWinningMovesIsFalseIfOtherPlayerShouldWin() {
+    public void checkThatWinningMovesIsFalseIfOtherPlayerShouldWin() {
         String[] boardState = {
                 "O", "O", "O",
                 "X", "X", "O",
@@ -176,7 +176,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckThatBoardStateThatIsNotFullReturnsFalseOnGameIsOver() {
+    public void checkThatBoardStateThatIsNotFullReturnsFalseOnGameIsOver() {
         String[] boardState = {
                 " ", "X", " ",
                 "O", " ", " ",
@@ -188,7 +188,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckThatBoardStateThatIsFullReturnsTrueOnGameIsOverWithBoardClass() {
+    public void checkThatBoardStateThatIsFullReturnsTrueOnGameIsOverWithBoardClass() {
         String[] boardState = {
                 "X", "X", "O",
                 "O", "O", "X",
@@ -200,7 +200,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckThatBoardStateThatIsFullReturnsTrueOnGameIsOver() {
+    public void checkThatBoardStateThatIsFullReturnsTrueOnGameIsOver() {
         String[] boardState = {
                 "X", "X", "O",
                 "O", "O", "X",
@@ -212,7 +212,7 @@ public class RulesTest {
     }
 
     @Test
-    public void CheckThatBoardOfSpacesReturnsFalseOnGameIsOver() {
+    public void checkThatBoardOfSpacesReturnsFalseOnGameIsOver() {
         String[] boardState = {
                 " ", " ", " ",
                 " ", " ", " ",

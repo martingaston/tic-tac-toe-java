@@ -19,16 +19,14 @@ class Game {
     }
 
     private void intro() {
-        Display.outMessage(messages.get("gameTitle"));
-        Display.outMessage(messages.get("gameIntro"));
-        Display.outMessage(messages.get("gameInstructions"));
+        Display.outMessage(messages.getIntro());
     }
 
     private void newTurn() {
         display.showBoard();
-        Display.outMessage(messages.get("playerTurn", currentPlayer()));
-        int playerInput = currentPlayer().getNextMove();
-        board.addMoveToBoard(playerInput, currentPlayer());
+        Display.outMessage(messages.announcePlayerTurn(currentPlayer));
+        int playerInput = currentPlayer.getNextMove();
+        board.addMoveToBoard(playerInput, currentPlayer);
     }
 
     private void processTurn() {
@@ -52,16 +50,17 @@ class Game {
 
     private void gameEnd() {
         display.showBoard();
-        if (!winner.isEmpty()) {
-            Display.outMessage(messages.get("gameOverWin", currentPlayer()));
+      
+        if (aPlayerHasWon()) {
+            Display.outMessage(messages.playerWin(currentPlayer()));
         } else {
-            Display.outMessage(messages.get("gameOverDraw"));
+            Display.outMessage(messages.playersDraw());
         }
     }
+
+    private boolean aPlayerHasWon() { return this.gameOver && !this.winner.isEmpty(); }
 
     private boolean isGameOver() {
         return gameOver;
     }
-
-
 }
