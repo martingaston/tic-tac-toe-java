@@ -1,7 +1,7 @@
 class Game {
     private Messages messages = new Messages();
-    private Player playerCross = new Player("X");
-    private Player playerNought = new Player("O");
+    private Player playerCross = new PlayerHuman("X");
+    private Player playerNought = new PlayerHuman("O");
     private Players players = new Players(playerCross, playerNought);
     private Board board = new Board();
     private Rules rules = new Rules(board);

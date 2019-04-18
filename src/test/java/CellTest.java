@@ -10,8 +10,8 @@ public class CellTest {
 
     @Before
     public void setUp() {
-        playerCross = new Player("X");
-        playerNought = new Player("O");
+        playerCross = new PlayerHuman("X");
+        playerNought = new PlayerHuman("O");
         cell = new Cell();
     }
 

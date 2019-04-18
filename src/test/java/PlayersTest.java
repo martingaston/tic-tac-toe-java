@@ -8,8 +8,8 @@ public class PlayersTest {
 
     @Before
     public void setUp() {
-        Player playerCross = new Player("X");
-        Player playerNought = new Player("O");
+        Player playerCross = new PlayerHuman("X");
+        Player playerNought = new PlayerHuman("O");
         players = new Players(playerCross, playerNought);
     }
 

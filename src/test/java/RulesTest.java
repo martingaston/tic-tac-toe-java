@@ -26,8 +26,8 @@ public class RulesTest {
     public void setUp() {
         board = new Board();
         rules = new Rules(board);
-        playerCross = new Player("X");
-        playerNought = new Player("O");
+        playerCross = new PlayerHuman("X");
+        playerNought = new PlayerHuman("O");
 
     }
 
