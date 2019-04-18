@@ -15,13 +15,23 @@ public class Messages {
         formatMessage.put("gameOverWin", "Player %s wins!");
     }
 
-    public String get(String messageName, Player player) {
-        String message = formatMessage.get(messageName);
-        String playerSymbol = player.getSymbol();
-        return String.format(message, playerSymbol);
+    String playerWin(Player player) {
+        String message = formatMessage.get("gameOverWin");
+        return String.format(message, player.getSymbol());
     }
 
-    public String get(String messageName) {
-        return standardMessage.get(messageName);
+    String playersDraw() {
+        return standardMessage.get("gameOverDraw");
+    }
+
+    String announcePlayerTurn(Player player) {
+        String message = formatMessage.get("playerTurn");
+        return String.format(message, player.getSymbol());
+    }
+
+    String getIntro() {
+        return standardMessage.get("gameTitle") + "\n" +
+                standardMessage.get("gameIntro") +  "\n" +
+                standardMessage.get("gameInstructions");
     }
 }

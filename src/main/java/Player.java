@@ -13,6 +13,10 @@ public class Player {
 
     public int getNextMove() {
         Scanner input = new Scanner(System.in);
-        return input.nextInt();
+        return computerise(input.nextInt());
+    }
+
+    private int computerise(int oneIndexedNumber) {
+        return oneIndexedNumber - 1;
     }
 }
