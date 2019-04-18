@@ -32,6 +32,18 @@ public class Rules {
                 playerOccupiesCell(move[2], player);
     }
 
+    boolean isNotValidMove(Player player) {
+        int desiredCellNumber = player.getMove();
+        int totalBoardCells = board.getTotalCells();
+
+        if (desiredCellNumber < 1 || desiredCellNumber > totalBoardCells) {
+            return true;
+        }
+
+        Cell desiredCell = board.getCellFromBoardPosition(desiredCellNumber);
+        return desiredCell.isOccupied();
+    }
+
     private boolean playerOccupiesCell(int index, Player player) {
         String playerSymbol = player.getSymbol();
         return board.getCellFromBoardPosition(index).getOccupant().equals(playerSymbol);

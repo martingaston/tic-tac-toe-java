@@ -1,11 +1,16 @@
 class Game {
     private Messages messages = new Messages();
-    private Player playerCross = new Player("X");
-    private Player playerNought = new Player("O");
-    private Players players = new Players(playerCross, playerNought);
+
     private Board board = new Board();
     private Rules rules = new Rules(board);
     private Display display = new Display(board);
+
+    private Player playerCross = new Player("X", rules);
+    private Player playerNought = new Player("O", rules);
+
+    //TODO can Players be the factory? It's the only part where there is change
+    private Players players = new Players(playerCross, playerNought);
+
     private boolean gameOver = false;
     private String winner = "";
 

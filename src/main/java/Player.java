@@ -2,9 +2,12 @@ import java.util.Scanner;
 
 public class Player {
     private String symbol;
+    private int move;
+    private Rules rules;
 
-    public Player(String symbol) {
+    public Player(String symbol, Rules rules) {
         this.symbol = symbol;
+        this.rules = rules;
     }
 
     public String getSymbol() {
@@ -13,7 +16,22 @@ public class Player {
 
     public int getNextMove() {
         Scanner input = new Scanner(System.in);
-        return computerise(input.nextInt());
+        do {
+            this.move = getAnInteger(input);
+        } while (rules.isNotValidMove(this));
+
+        return this.move;
+    }
+
+    int getMove() {
+        return this.move;
+    }
+
+    private int getAnInteger(Scanner scanner) {
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
+        return computerise(scanner.nextInt());
     }
 
     private int computerise(int oneIndexedNumber) {
