@@ -1,13 +1,11 @@
 public class Rules {
     private Board board;
+
     public Rules(Board board) {
         this.board = board;
     }
 
     public boolean hasWinningMove(Player player) {
-        boolean matchFound = false;
-        String playerSymbol = player.getSymbol();
-
         int[][] winningMoves = {
                 {0,1,2},
                 {3,4,5},
@@ -20,24 +18,28 @@ public class Rules {
         };
 
         for (int[] move : winningMoves) {
-            if (playerHasCompleteRow(move, playerSymbol)) {
-                matchFound = true;
+            if (playerHasValidWinCondition(move, player)) {
+                return true;
             }
         }
 
-        return matchFound;
+        return false;
     }
 
-    private boolean playerHasCompleteRow(int[] move, String playerSymbol) {
-        String[] boardState = this.board.getCurrentBoard();
-        return boardState[move[0]].equals(playerSymbol) &&
-                boardState[move[1]].equals(playerSymbol) &&
-                boardState[move[2]].equals(playerSymbol);
+    private boolean playerHasValidWinCondition(int[] move, Player player) {
+        return playerOccupiesCell(move[0], player) &&
+                playerOccupiesCell(move[1], player) &&
+                playerOccupiesCell(move[2], player);
+    }
+
+    private boolean playerOccupiesCell(int index, Player player) {
+        String playerSymbol = player.getSymbol();
+        return board.getCellFromBoardPosition(index).getOccupant().equals(playerSymbol);
     }
 
     public boolean gameIsOver() {
-        for (String cell : this.board.getCurrentBoard()) {
-            if (cell.isEmpty()) {
+        for (int i = 0; i < board.getTotalCells(); i++) {
+            if (board.getCellFromBoardPosition(i).isNotOccupied()) {
                 return false;
             }
         }
