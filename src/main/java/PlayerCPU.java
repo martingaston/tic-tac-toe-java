@@ -17,7 +17,7 @@ public class PlayerCPU implements Player {
         int randomGuess;
         do {
             randomGuess = pickRandomCell();
-        } while (!board.getCellFromBoardPosition(randomGuess).isNotOccupied());
+        } while (isCPUMoveValid(randomGuess));
         oneSecondSleep();
         return randomGuess;
     }
@@ -32,5 +32,9 @@ public class PlayerCPU implements Player {
         } catch(InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+    private boolean isCPUMoveValid(int cellNumber) {
+        Cell queriedCell = board.getCellFromBoardPosition(cellNumber);
+        return !queriedCell.isNotOccupied();
     }
 }
