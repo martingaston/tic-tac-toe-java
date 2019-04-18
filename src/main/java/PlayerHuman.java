@@ -20,9 +20,12 @@ public class PlayerHuman implements Player {
 
     public int getNextMove() {
         Scanner input = new Scanner(System.in);
-        do {
+        this.move = getAnInteger(input);
+
+        while (rules.isNotValidMove(this)) {
+            invalidMove();
             this.move = getAnInteger(input);
-        } while (rules.isNotValidMove(this));
+        }
 
         return this.move;
     }
@@ -33,6 +36,7 @@ public class PlayerHuman implements Player {
 
     private int getAnInteger(Scanner scanner) {
         while (!scanner.hasNextInt()) {
+            invalidMove();
             scanner.next();
         }
         return computerise(scanner.nextInt());
@@ -40,5 +44,10 @@ public class PlayerHuman implements Player {
 
     private int computerise(int oneIndexedNumber) {
         return oneIndexedNumber - 1;
+    }
+
+    private void invalidMove() {
+        Messages messages = new Messages();
+        Display.outMessage(messages.invalidMove());
     }
 }
