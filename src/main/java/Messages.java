@@ -7,11 +7,12 @@ public class Messages {
 
     public Messages() {
         standardMessage.put("gameTitle", "TIC TAC TOE");
-        standardMessage.put("gameIntro", "The classic game of noughts and crosses! Turn friends into enemies as 2 players take turns marking spaces in a 3x3 grid. Win short-lived glory by succeeding in placing three marks on the any horizontal, vertical or diagonal direction.");
+        standardMessage.put("gameIntro", "The classic game of noughts and crosses!\nTurn friends into enemies as 2 players take turns marking spaces in a grid.\nWin short-lived glory by succeeding in placing a complete line in any horizontal, vertical or diagonal direction.");
 
         standardMessage.put("gameOverDraw", "Bad luck! It's a draw!");
         standardMessage.put("invalidMove", "Sorry, that move is invalid.\nPlease choose an unoccupied square between 1 and 9");
         standardMessage.put("setup", "Select a game mode:\n1. Human v Human\n2. Human v CPU\n3. CPU v CPU\n");
+        standardMessage.put("boardSize", "Select a board size:\n1. 3x3 (default)\n2. 4x4");
 
         formatMessage.put("gameInstructions", "Input numbers between 1-%s on alternative turns to place your mark in the %s grid.");
         formatMessage.put("playerTurn", "Player %s's turn");
@@ -21,6 +22,8 @@ public class Messages {
     String setupInstructions() {
         return standardMessage.get("setup");
     }
+
+    String boardSetupInstructions() { return standardMessage.get("boardSize"); }
 
     String invalidMove() { return standardMessage.get("invalidMove"); }
 
@@ -38,15 +41,15 @@ public class Messages {
         return String.format(message, player.getSymbol());
     }
 
-    String getIntro(int totalCells) {
+    String getInstructions(int totalCells) {
         int sideLength = (int) Math.sqrt(totalCells);
         String gridShape = sideLength + "x" + sideLength;
-
         String instructionsMessage = formatMessage.get("gameInstructions");
-        String formattedInstructions = String.format(instructionsMessage, totalCells, gridShape);
+        return String.format(instructionsMessage, totalCells, gridShape);
+    }
 
+    String getIntro() {
         return standardMessage.get("gameTitle") + "\n" +
-                standardMessage.get("gameIntro") +  "\n" +
-                formattedInstructions;
+                standardMessage.get("gameIntro") + "\n";
     }
 }
