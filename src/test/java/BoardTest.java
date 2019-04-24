@@ -11,9 +11,9 @@ public class BoardTest {
     private Player playerCross;
     private Player playerNought;
 
-    private String[] createStringArrayFromBoard() {
+    private String[] createStringArrayFromBoard(Board board) {
         ArrayList<String> boardAsArrayList = new ArrayList<>();
-        int totalCells = 9;
+        int totalCells = board.getTotalCells();
         Cell currentCell;
         for (int i = 0; i < totalCells; i++) {
             currentCell = board.getCellFromBoardPosition(i);
@@ -25,14 +25,20 @@ public class BoardTest {
 
     @Before
     public void setUp() {
-        board = new Board();;
+        board = new Board();
         playerCross = new PlayerHuman("X");
         playerNought = new PlayerHuman("O");
     }
 
     @Test
-    public void totalCellsShouldEqualNine() {
+    public void zeroArgumentBoardShouldTotalCellsShouldEqualNine() {
         assertEquals(9, board.getTotalCells());
+    }
+
+    @Test
+    public void argumentOfFourToBoardShouldHaveTotalCellsEqualSixteen() {
+        Board fourByFourBoard = new Board(4);
+        assertEquals(16, fourByFourBoard.getTotalCells());
     }
 
     @Test
@@ -50,7 +56,7 @@ public class BoardTest {
 
     @Test
     public void newBoardShouldBeBlank() {
-        String[] updatedBoard = createStringArrayFromBoard();
+        String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",
                 " ", " ", " ",
@@ -60,9 +66,22 @@ public class BoardTest {
     }
 
     @Test
+    public void newFourByFourBoardShouldBeBlank() {
+        Board fourByFourBoard = new Board(4);
+        String[] updatedBoard = createStringArrayFromBoard(fourByFourBoard);
+        String[] expectedBoard = {
+                " ", " ", " ", " ",
+                " ", " ", " ", " ",
+                " ", " ", " ", " ",
+                " ", " ", " ", " "
+        };
+        assertArrayEquals(expectedBoard, updatedBoard);
+    }
+
+    @Test
     public void UpdatedBoardShouldReturnCorrectBoardStateAfterOneMove() {
         board.addMoveToBoard(0, playerCross);
-        String[] updatedBoard = createStringArrayFromBoard();
+        String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "X", " ", " ",
                 " ", " ", " ",
@@ -75,7 +94,7 @@ public class BoardTest {
     public void UpdatedBoardShouldReturnCorrectBoardStateAfterTwoMoves() {
         board.addMoveToBoard(0, playerCross);
         board.addMoveToBoard(4, playerCross);
-        String[] updatedBoard = createStringArrayFromBoard();
+        String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "X", " ", " ",
                 " ", "X", " ",
@@ -88,7 +107,7 @@ public class BoardTest {
     public void UpdatedBoardShouldNotAllowOverwritingCells() {
         board.addMoveToBoard(1, playerNought);
         board.addMoveToBoard(1, playerCross);
-        String[] updatedBoard = createStringArrayFromBoard();
+        String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", "O", " ",
                 " ", " ", " ",
@@ -106,12 +125,16 @@ public class BoardTest {
         board.addMoveToBoard(0, playerCross);
         board.addMoveToBoard(8, playerNought);
         board.addMoveToBoard(4, playerCross);
-        String[] updatedBoard = createStringArrayFromBoard();
+        String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "X", " ", "O",
                 "X", "X", "O",
                 " ", " ", "O"
         };
         assertArrayEquals(expectedBoard, updatedBoard);
+    }
+
+    @Test
+    public void name() {
     }
 }

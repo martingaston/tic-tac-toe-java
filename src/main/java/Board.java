@@ -1,22 +1,29 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Board {
     private int totalCells;
     private List<Cell> board = new ArrayList<>();
 
     public Board() {
-        this.board.addAll(generateEmptyBoard());
-        totalCells = this.board.size();
+        int defaultRowLength = 3;
+        generateEmptyBoard(defaultRowLength);
     }
 
-    private Set<Cell> generateEmptyBoard() {
-        return Set.of(
-                new Cell(), new Cell(), new Cell(),
-                new Cell(), new Cell(), new Cell(),
-                new Cell(), new Cell(), new Cell()
-        );
+    public Board(int rowLength) {
+        generateEmptyBoard(rowLength);
+    }
+
+    private void generateEmptyBoard(int rowLength) {
+        totalCells = calculateTotalCellsFromRowLength(rowLength);
+        for (int i = 0; i < totalCells; i++) {
+            board.add(new Cell());
+        }
+    }
+
+    private int calculateTotalCellsFromRowLength(int rowLength) {
+        int squared = 2;
+        return (int) Math.pow(rowLength, squared);
     }
 
     public Cell getCellFromBoardPosition(int position) {
