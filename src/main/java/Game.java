@@ -21,7 +21,7 @@ class Game {
     }
 
     private void intro() {
-        Display.outMessage(messages.getIntro());
+        Display.outMessage(messages.getIntro(board.getTotalCells()));
     }
 
     private void setUp() {

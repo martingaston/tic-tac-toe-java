@@ -9,8 +9,15 @@ public class Display {
     }
 
     private String generateDivider() {
+
+        int cellLength = 4;
+
+        if (board.getTotalCells() > 10) {
+            cellLength = 5;
+        }
+
         StringBuilder divider = new StringBuilder();
-        int rowLength = -2 + 4 * (int) Math.sqrt(board.getTotalCells()) + 1;
+        int rowLength = -2 + cellLength * (int) Math.sqrt(board.getTotalCells()) + 1;
         divider.append("+");
         divider.append("-".repeat(rowLength));
         divider.append("+");
@@ -59,7 +66,7 @@ public class Display {
             String output;
             if (currentBoardCell.isNotOccupied()) {
                 int boardNumber = humanise(i);
-                output = faded(Integer.toString(boardNumber));
+                output = faded(renderItem(Integer.toString(boardNumber)));
             } else {
                 output = renderCell(currentBoardCell);
             }
@@ -75,7 +82,15 @@ public class Display {
     }
 
     private String renderCell(Cell cell) {
-        return cell.getOccupant();
+        return renderItem(cell.getOccupant());
+    }
+
+    private String renderItem(String occupant) {
+        if (board.getTotalCells() > 9 && occupant.length() == 1) {
+            return " " + occupant;
+        }
+
+        return occupant;
     }
 
     private int humanise(int zeroIndexedNumber) { return zeroIndexedNumber + 1; }

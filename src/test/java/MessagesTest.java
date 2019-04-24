@@ -44,13 +44,15 @@ public class MessagesTest {
 
     @Test
     public void getIntroReturnsString() {
-        String message = messages.getIntro();
+        int boardSize = 9;
+        String message = messages.getIntro(boardSize);
         assertTrue(isString(message));
     }
 
     @Test
     public void getIntroStringIsNotEmpty() {
-        String message = messages.getIntro();
+        int boardSize = 9;
+        String message = messages.getIntro(boardSize);
         assertFalse(message.isEmpty());
     }
 }
