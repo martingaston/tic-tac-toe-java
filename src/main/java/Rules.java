@@ -50,9 +50,13 @@ public class Rules {
     }
     
     private boolean playerHasValidWinCondition(List<Integer> move, Player player) {
-        return playerOccupiesCell(move.get(0), player) &&
-                playerOccupiesCell(move.get(1), player) &&
-                playerOccupiesCell(move.get(2), player);
+        for (int cellIndex : move) {
+            if (!playerOccupiesCell(cellIndex, player)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     boolean isNotValidMove(Player player) {
