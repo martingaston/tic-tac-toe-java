@@ -48,34 +48,7 @@ public class Rules {
 
         return false;
     }
-
-    public boolean hasWinningMoveOld(Player player) {
-        int[][] winningMoves = {
-                {0,1,2},
-                {3,4,5},
-                {6,7,8},
-                {0,3,6},
-                {1,4,7},
-                {2,5,8},
-                {0,4,8},
-                {2,4,6}
-        };
-
-        for (int[] move : winningMoves) {
-            if (playerHasValidWinCondition(move, player)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private boolean playerHasValidWinCondition(int[] move, Player player) {
-        return playerOccupiesCell(move[0], player) &&
-                playerOccupiesCell(move[1], player) &&
-                playerOccupiesCell(move[2], player);
-    }
-
+    
     private boolean playerHasValidWinCondition(List<Integer> move, Player player) {
         return playerOccupiesCell(move.get(0), player) &&
                 playerOccupiesCell(move.get(1), player) &&
