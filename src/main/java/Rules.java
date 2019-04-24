@@ -48,7 +48,7 @@ public class Rules {
 
         return false;
     }
-    
+
     private boolean playerHasValidWinCondition(List<Integer> move, Player player) {
         for (int cellIndex : move) {
             if (!playerOccupiesCell(cellIndex, player)) {

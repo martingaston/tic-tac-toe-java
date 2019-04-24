@@ -1,7 +1,22 @@
 public class Display {
     private Board board;
     private String newline = "\n";
-    private String divider = "+-----------+" + newline;
+    private String divider;
+
+    public Display(Board board) {
+        this.board = board;
+        this.divider = generateDivider() + newline;
+    }
+
+    private String generateDivider() {
+        StringBuilder divider = new StringBuilder();
+        int rowLength = -2 + 4 * (int) Math.sqrt(board.getTotalCells()) + 1;
+        divider.append("+");
+        divider.append("-".repeat(rowLength));
+        divider.append("+");
+
+        return divider.toString();
+    }
 
     static void outMessage(String output) {
         System.out.println(output);
@@ -11,10 +26,6 @@ public class Display {
         String ANSI_RESET ="\033[0m";
         String ANSI_DARK_GREY = "\033[38;5;242m";
         return ANSI_DARK_GREY + message + ANSI_RESET;
-    }
-
-    public Display(Board board) {
-        this.board = board;
     }
 
     void showBoard() {
