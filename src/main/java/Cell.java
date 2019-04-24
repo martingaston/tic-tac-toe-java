@@ -16,4 +16,6 @@ public class Cell {
     boolean isNotOccupied() {
         return occupant == null;
     }
+
+    boolean isOccupied() { return occupant != null; }
 }

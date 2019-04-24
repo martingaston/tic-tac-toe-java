@@ -1,16 +1,18 @@
 class Game {
     private Messages messages = new Messages();
-    private Player playerCross = new Player("X");
-    private Player playerNought = new Player("O");
-    private Players players = new Players(playerCross, playerNought);
+
     private Board board = new Board();
     private Rules rules = new Rules(board);
     private Display display = new Display(board);
+
+    private Players players;
+
     private boolean gameOver = false;
     private String winner = "";
 
     void play() {
         intro();
+        setUp();
         do {
             newTurn();
             processTurn();
@@ -20,6 +22,11 @@ class Game {
 
     private void intro() {
         Display.outMessage(messages.getIntro());
+    }
+
+    private void setUp() {
+        Display.outMessage(messages.setupInstructions());
+        players = new Players(rules);
     }
 
     private void newTurn() {
