@@ -3,27 +3,29 @@ import java.util.List;
 
 public class Board {
     private int totalCells;
+    private int sideLength;
     private List<Cell> board = new ArrayList<>();
 
     public Board() {
-        int defaultRowLength = 3;
-        generateEmptyBoard(defaultRowLength);
+        int defaultSideLength = 3;
+        generateEmptyBoard(defaultSideLength);
     }
 
-    public Board(int rowLength) {
-        generateEmptyBoard(rowLength);
+    public Board(int sideLength) {
+        generateEmptyBoard(sideLength);
     }
 
-    private void generateEmptyBoard(int rowLength) {
-        totalCells = calculateTotalCellsFromRowLength(rowLength);
+    private void generateEmptyBoard(int sideLength) {
+        this.sideLength = sideLength;
+        this.totalCells = calculateTotalCellsFromSideLength(sideLength);
         for (int i = 0; i < totalCells; i++) {
             board.add(new Cell());
         }
     }
 
-    private int calculateTotalCellsFromRowLength(int rowLength) {
+    private int calculateTotalCellsFromSideLength(int sideLength) {
         int squared = 2;
-        return (int) Math.pow(rowLength, squared);
+        return (int) Math.pow(sideLength, squared);
     }
 
     public Cell getCellFromBoardPosition(int position) {
@@ -31,8 +33,10 @@ public class Board {
     }
 
     public int getTotalCells() {
-        return totalCells;
+        return this.totalCells;
     }
+
+    int getSideLength() { return this.sideLength; }
 
     public void addMoveToBoard(int position, Player player) {
         Cell requestedCell = board.get(position);

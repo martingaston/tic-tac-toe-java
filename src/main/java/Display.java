@@ -17,7 +17,7 @@ public class Display {
         }
 
         StringBuilder divider = new StringBuilder();
-        int rowLength = -2 + cellLength * (int) Math.sqrt(board.getTotalCells()) + 1;
+        int rowLength = -2 + cellLength * board.getSideLength() + 1;
         divider.append("+");
         divider.append("-".repeat(rowLength));
         divider.append("+");
@@ -41,7 +41,7 @@ public class Display {
 
     private String renderRows() {
         int totalCells = board.getTotalCells();
-        int cellsInRow = (int)Math.sqrt(totalCells);
+        int cellsInRow = board.getSideLength();
 
         StringBuilder grid = new StringBuilder(divider);
 

@@ -15,7 +15,7 @@ public class Rules {
         List<Integer> diagonalLeftMove;
         List<Integer> diagonalRightMove;
 
-        int sideLength = (int) Math.sqrt(board.getTotalCells());
+        int sideLength = board.getSideLength();
 
         diagonalLeftMove = new ArrayList<>();
         diagonalRightMove = new ArrayList<>();

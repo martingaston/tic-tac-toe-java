@@ -41,11 +41,10 @@ public class Messages {
         return String.format(message, player.getSymbol());
     }
 
-    String getInstructions(int totalCells) {
-        int sideLength = (int) Math.sqrt(totalCells);
+    String getInstructions(int sideLength) {
         String gridShape = sideLength + "x" + sideLength;
         String instructionsMessage = formatMessage.get("gameInstructions");
-        return String.format(instructionsMessage, totalCells, gridShape);
+        return String.format(instructionsMessage, sideLength, gridShape);
     }
 
     String getIntro() {

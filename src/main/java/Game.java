@@ -31,7 +31,7 @@ class Game {
     }
 
     private void instructions() {
-        Display.outMessage(messages.getInstructions(board.getTotalCells()));
+        Display.outMessage(messages.getInstructions(board.getSideLength()));
     }
 
     private void setUpPlayers() {
