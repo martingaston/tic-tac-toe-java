@@ -53,4 +53,18 @@ public class MessagesTest {
         String message = messages.getIntro();
         assertFalse(message.isEmpty());
     }
+
+    @Test
+    public void getInstructionsReturnsString() {
+        int boardSize = 9;
+        String message = messages.getInstructions(boardSize);
+        assertTrue(isString(message));
+    }
+
+    @Test
+    public void getInstructionsStringIsNotEmpty() {
+        int boardSize = 9;
+        String message = messages.getInstructions(boardSize);
+        assertFalse(message.isEmpty());
+    }
 }

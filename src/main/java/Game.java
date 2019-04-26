@@ -1,18 +1,19 @@
+import java.util.Scanner;
+
 class Game {
     private Messages messages = new Messages();
 
-    private Board board = new Board();
-    private Rules rules = new Rules(board);
-    private Display display = new Display(board);
-
+    private Board board;
+    private Rules rules;
+    private Display display;
     private Players players;
-
     private boolean gameOver = false;
     private String winner = "";
 
     void play() {
         intro();
         setUp();
+        instructions();
         do {
             newTurn();
             processTurn();
@@ -25,8 +26,33 @@ class Game {
     }
 
     private void setUp() {
+        setUpBoard();
+        setUpPlayers();
+    }
+
+    private void instructions() {
+        Display.outMessage(messages.getInstructions(board.getSideLength()));
+    }
+
+    private void setUpPlayers() {
         Display.outMessage(messages.setupInstructions());
-        players = new Players(rules);
+        players = new Players(rules, board);
+    }
+
+    private void setUpBoard() {
+        Display.outMessage(messages.boardSetupInstructions());
+        Scanner input = new Scanner(System.in);
+        int modeNumber = input.nextInt();
+        switch(modeNumber) {
+            case 1:
+                board = new Board();
+                break;
+            case 2:
+                board = new Board(4);
+                break;
+        }
+        rules = new Rules(board);
+        display = new Display(board);
     }
 
     private void newTurn() {

@@ -2,10 +2,12 @@ public class PlayerCPU implements Player {
     private String symbol;
     private Rules rules;
     private int move;
+    private int totalCells;
 
-    PlayerCPU(String symbol, Rules rules) {
+    PlayerCPU(String symbol, Rules rules, Board board) {
         this.symbol = symbol;
         this.rules = rules;
+        this.totalCells = board.getTotalCells();
     }
 
     public int getMove() {
@@ -28,7 +30,7 @@ public class PlayerCPU implements Player {
     }
 
     private int pickRandomCell() {
-        return (int)Math.floor(Math.random() * 9);
+        return (int)Math.floor(Math.random() * totalCells);
     }
 
     private void oneSecondSleep() {

@@ -1,23 +1,20 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rules {
     private Board board;
+    private int boardSideLength;
+    private List<List<Integer>> winningMoves;
 
     public Rules(Board board) {
         this.board = board;
+        this.boardSideLength = board.getSideLength();
+        generateWinningMovesFromBoard();
     }
 
     public boolean hasWinningMove(Player player) {
-        int[][] winningMoves = {
-                {0,1,2},
-                {3,4,5},
-                {6,7,8},
-                {0,3,6},
-                {1,4,7},
-                {2,5,8},
-                {0,4,8},
-                {2,4,6}
-        };
 
-        for (int[] move : winningMoves) {
+        for (List<Integer> move : this.winningMoves) {
             if (playerHasValidWinCondition(move, player)) {
                 return true;
             }
@@ -26,10 +23,53 @@ public class Rules {
         return false;
     }
 
-    private boolean playerHasValidWinCondition(int[] move, Player player) {
-        return playerOccupiesCell(move[0], player) &&
-                playerOccupiesCell(move[1], player) &&
-                playerOccupiesCell(move[2], player);
+    private void generateWinningMovesFromBoard() {
+        this.winningMoves = new ArrayList<>();
+        List<Integer> diagonalLeftMove = new ArrayList<>();
+        List<Integer> diagonalRightMove = new ArrayList<>();
+
+        calculateBoardCombinations(diagonalLeftMove, diagonalRightMove);
+        addWinningPositionsToWinningMoves(diagonalLeftMove, diagonalRightMove);
+    }
+
+    private void calculateBoardCombinations(List<Integer> diagonalLeftMove, List<Integer> diagonalRightMove) {
+        List<Integer> horizontalMove;
+        List<Integer> verticalMove;
+        for (int row = 0; row < this.boardSideLength; row++) {
+            horizontalMove = new ArrayList<>();
+            verticalMove = new ArrayList<>();
+
+            generateNextHorizontalAndVerticalWinCondition(horizontalMove, verticalMove, row);
+            addWinningPositionsToWinningMoves(horizontalMove, verticalMove);
+            calculateNextDiagonalPosition(diagonalLeftMove, diagonalRightMove, row);
+        }
+    }
+
+    private void addWinningPositionsToWinningMoves(List<Integer> firstMove, List<Integer> secondMove) {
+        winningMoves.add(firstMove);
+        winningMoves.add(secondMove);
+    }
+
+    private void calculateNextDiagonalPosition(List<Integer> diagonalLeftMove, List<Integer> diagonalRightMove, int row) {
+        diagonalLeftMove.add(row + (row * this.boardSideLength));
+        diagonalRightMove.add(this.boardSideLength - 1 + (row * this.boardSideLength) - row);
+    }
+
+    private void generateNextHorizontalAndVerticalWinCondition(List<Integer> horizontalMove, List<Integer> verticalMove, int row) {
+        for (int column = 0; column < this.boardSideLength; column++) {
+            horizontalMove.add(column + this.boardSideLength * row);
+            verticalMove.add(row + this.boardSideLength * column);
+        }
+    }
+
+    private boolean playerHasValidWinCondition(List<Integer> move, Player player) {
+        for (int cellIndex : move) {
+            if (!playerOccupiesCell(cellIndex, player)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     boolean isNotValidMove(Player player) {

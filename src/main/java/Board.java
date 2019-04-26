@@ -1,22 +1,25 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Board {
-    private int totalCells;
+    private int sideLength;
     private List<Cell> board = new ArrayList<>();
 
     public Board() {
-        this.board.addAll(generateEmptyBoard());
-        totalCells = this.board.size();
+        this.sideLength = 3;
+        generateEmptyBoard();
     }
 
-    private Set<Cell> generateEmptyBoard() {
-        return Set.of(
-                new Cell(), new Cell(), new Cell(),
-                new Cell(), new Cell(), new Cell(),
-                new Cell(), new Cell(), new Cell()
-        );
+    public Board(int sideLength) {
+        this.sideLength = sideLength;
+        generateEmptyBoard();
+    }
+
+    private void generateEmptyBoard() {
+        int totalCells = this.sideLength * this.sideLength;
+        for (int i = 0; i < totalCells; i++) {
+            board.add(new Cell());
+        }
     }
 
     public Cell getCellFromBoardPosition(int position) {
@@ -24,8 +27,10 @@ public class Board {
     }
 
     public int getTotalCells() {
-        return totalCells;
+        return this.sideLength * this.sideLength;
     }
+
+    int getSideLength() { return this.sideLength; }
 
     public void addMoveToBoard(int position, Player player) {
         Cell requestedCell = board.get(position);
