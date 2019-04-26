@@ -2,30 +2,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private int totalCells;
     private int sideLength;
     private List<Cell> board = new ArrayList<>();
 
     public Board() {
-        int defaultSideLength = 3;
-        generateEmptyBoard(defaultSideLength);
+        this.sideLength = 3;
+        generateEmptyBoard();
     }
 
     public Board(int sideLength) {
-        generateEmptyBoard(sideLength);
+        this.sideLength = sideLength;
+        generateEmptyBoard();
     }
 
-    private void generateEmptyBoard(int sideLength) {
-        this.sideLength = sideLength;
-        this.totalCells = calculateTotalCellsFromSideLength(sideLength);
+    private void generateEmptyBoard() {
+        int totalCells = this.sideLength * this.sideLength;
         for (int i = 0; i < totalCells; i++) {
             board.add(new Cell());
         }
-    }
-
-    private int calculateTotalCellsFromSideLength(int sideLength) {
-        int squared = 2;
-        return (int) Math.pow(sideLength, squared);
     }
 
     public Cell getCellFromBoardPosition(int position) {
@@ -33,7 +27,7 @@ public class Board {
     }
 
     public int getTotalCells() {
-        return this.totalCells;
+        return this.sideLength * this.sideLength;
     }
 
     int getSideLength() { return this.sideLength; }
