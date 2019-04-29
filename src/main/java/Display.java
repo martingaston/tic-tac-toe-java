@@ -5,24 +5,7 @@ public class Display {
 
     public Display(Board board) {
         this.board = board;
-        this.divider = generateDivider() + newline;
-    }
-
-    private String generateDivider() {
-
-        int cellLength = 4;
-
-        if (board.getTotalCells() > 10) {
-            cellLength = 5;
-        }
-
-        StringBuilder divider = new StringBuilder();
-        int rowLength = -2 + cellLength * board.getSideLength() + 1;
-        divider.append("+");
-        divider.append("-".repeat(rowLength));
-        divider.append("+");
-
-        return divider.toString();
+        this.divider = generateDivider();
     }
 
     static void outMessage(String output) {
@@ -37,6 +20,26 @@ public class Display {
 
     void showBoard() {
         System.out.print(renderRows());
+    }
+
+    private String generateDivider() {
+        int cellLength = getCellLength();
+
+        StringBuilder divider = new StringBuilder("+");
+        int lineLength = getLineLength(cellLength);
+        divider.append("-".repeat(lineLength));
+        divider.append("+");
+        divider.append(newline);
+
+        return divider.toString();
+    }
+
+    private int getLineLength(int cellLength) {
+        return cellLength * board.getSideLength() - 1;
+    }
+
+    private int getCellLength() {
+        return board.getTotalCells() > 10 ? 5 : 4;
     }
 
     private String renderRows() {
@@ -66,9 +69,9 @@ public class Display {
             String output;
             if (currentBoardCell.isNotOccupied()) {
                 int boardNumber = humanise(i);
-                output = faded(renderItem(Integer.toString(boardNumber)));
+                output = faded(renderOccupant(Integer.toString(boardNumber)));
             } else {
-                output = renderCell(currentBoardCell);
+                output = renderOccupant(currentBoardCell);
             }
 
             renderedRowString.append(output);
@@ -81,16 +84,16 @@ public class Display {
         return renderedRowString.toString();
     }
 
-    private String renderCell(Cell cell) {
-        return renderItem(cell.getOccupant());
+    private String renderOccupant(Cell cell) {
+        return renderOccupant(cell.getOccupant());
     }
 
-    private String renderItem(String occupant) {
-        if (board.getTotalCells() > 9 && occupant.length() == 1) {
-            return " " + occupant;
-        }
+    private String renderOccupant(String occupant) {
+        return occupantNeedsPadding(occupant) ? " " + occupant : occupant;
+    }
 
-        return occupant;
+    private boolean occupantNeedsPadding(String occupant) {
+        return board.getTotalCells() > 9 && occupant.length() == 1;
     }
 
     private int humanise(int zeroIndexedNumber) { return zeroIndexedNumber + 1; }
