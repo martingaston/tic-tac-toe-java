@@ -77,26 +77,25 @@ public class Rules {
         return true;
     }
 
-    boolean isNotValidMove(Player player) {
-        int desiredCellNumber = player.getMove();
+    boolean isNotValidMove(int desiredPosition) {
         int totalBoardCells = board.getTotalCells();
 
-        if (desiredCellNumber < 0 || desiredCellNumber > totalBoardCells - 1) {
+        if (desiredPosition < 0 || desiredPosition > totalBoardCells - 1) {
             return true;
         }
 
-        Cell desiredCell = board.getCellFromBoardPosition(desiredCellNumber);
+        Cell desiredCell = board.getCell(desiredPosition);
         return desiredCell.isOccupied();
     }
 
     private boolean playerOccupiesCell(int index, Player player) {
         String playerSymbol = player.getSymbol();
-        return board.getCellFromBoardPosition(index).getOccupant().equals(playerSymbol);
+        return board.getCell(index).getOccupant().equals(playerSymbol);
     }
 
     public boolean gameIsOver() {
         for (int i = 0; i < board.getTotalCells(); i++) {
-            if (board.getCellFromBoardPosition(i).isNotOccupied()) {
+            if (board.getCell(i).isNotOccupied()) {
                 return false;
             }
         }

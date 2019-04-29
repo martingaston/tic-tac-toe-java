@@ -62,7 +62,7 @@ public class Display {
         for (int i = startIndex; i < endIndex; i++) {
             renderedRowString.append(" ");
 
-            currentBoardCell = board.getCellFromBoardPosition(i);
+            currentBoardCell = board.getCell(i);
 
             String output;
             if (currentBoardCell.isNotOccupied()) {

@@ -16,7 +16,7 @@ public class BoardTest {
         int totalCells = board.getTotalCells();
         Cell currentCell;
         for (int i = 0; i < totalCells; i++) {
-            currentCell = board.getCellFromBoardPosition(i);
+            currentCell = board.getCell(i);
             boardAsArrayList.add(currentCell.getOccupant());
         }
         return boardAsArrayList.toArray(new String[]{});
@@ -43,14 +43,14 @@ public class BoardTest {
 
     @Test
     public void cellZeroShouldBeBlankOnEmptyBoard() {
-        String cellOccupant = board.getCellFromBoardPosition(0).getOccupant();
+        String cellOccupant = board.getCell(0).getOccupant();
         assertEquals(" ", cellOccupant);
     }
 
     @Test
     public void cellZeroShouldBeCrossWhenAddedToBoard() {
-        board.addMoveToBoard(0, playerCross);
-        String cellOccupant = board.getCellFromBoardPosition(0).getOccupant();
+        board.addMove(0, playerCross);
+        String cellOccupant = board.getCell(0).getOccupant();
         assertEquals("X", cellOccupant);
     }
 
@@ -80,7 +80,7 @@ public class BoardTest {
 
     @Test
     public void UpdatedBoardShouldReturnCorrectBoardStateAfterOneMove() {
-        board.addMoveToBoard(0, playerCross);
+        board.addMove(0, playerCross);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "X", " ", " ",
@@ -92,8 +92,8 @@ public class BoardTest {
 
     @Test
     public void UpdatedBoardShouldReturnCorrectBoardStateAfterTwoMoves() {
-        board.addMoveToBoard(0, playerCross);
-        board.addMoveToBoard(4, playerCross);
+        board.addMove(0, playerCross);
+        board.addMove(4, playerCross);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "X", " ", " ",
@@ -105,8 +105,8 @@ public class BoardTest {
 
     @Test
     public void UpdatedBoardShouldNotAllowOverwritingCells() {
-        board.addMoveToBoard(1, playerNought);
-        board.addMoveToBoard(1, playerCross);
+        board.addMove(1, playerNought);
+        board.addMove(1, playerCross);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", "O", " ",
@@ -118,13 +118,13 @@ public class BoardTest {
 
     @Test
     public void UpdateBoardShouldBeAbleToRunEntireGame() {
-        board.addMoveToBoard(4, playerCross);
-        board.addMoveToBoard(2, playerNought);
-        board.addMoveToBoard(3, playerCross);
-        board.addMoveToBoard(5, playerNought);
-        board.addMoveToBoard(0, playerCross);
-        board.addMoveToBoard(8, playerNought);
-        board.addMoveToBoard(4, playerCross);
+        board.addMove(4, playerCross);
+        board.addMove(2, playerNought);
+        board.addMove(3, playerCross);
+        board.addMove(5, playerNought);
+        board.addMove(0, playerCross);
+        board.addMove(8, playerNought);
+        board.addMove(4, playerCross);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "X", " ", "O",

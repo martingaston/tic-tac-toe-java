@@ -11,10 +11,10 @@ public class Board {
     }
 
     public Board(int sideLength) {
-        generateEmptyBoard(sideLength);
+        generate(sideLength);
     }
 
-    private void generateEmptyBoard(int sideLength) {
+    private void generate(int sideLength) {
         this.sideLength = sideLength;
         this.totalCells = sideLength * sideLength;
         for (int i = 0; i < this.totalCells; i++) {
@@ -22,7 +22,7 @@ public class Board {
         }
     }
 
-    public Cell getCellFromBoardPosition(int position) {
+    public Cell getCell(int position) {
         return board.get(position);
     }
 
@@ -32,7 +32,7 @@ public class Board {
 
     int getSideLength() { return this.sideLength; }
 
-    public void addMoveToBoard(int position, Player player) {
+    public void addMove(int position, Player player) {
         Cell requestedCell = board.get(position);
         if (requestedCell.isNotOccupied()) {
             requestedCell.mark(player);
