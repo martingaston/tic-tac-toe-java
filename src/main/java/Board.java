@@ -3,21 +3,21 @@ import java.util.List;
 
 public class Board {
     private int sideLength;
+    private int totalCells;
     private List<Cell> board = new ArrayList<>();
 
     public Board() {
-        this.sideLength = 3;
-        generateEmptyBoard();
+        this(3);
     }
 
     public Board(int sideLength) {
-        this.sideLength = sideLength;
-        generateEmptyBoard();
+        generateEmptyBoard(sideLength);
     }
 
-    private void generateEmptyBoard() {
-        int totalCells = this.sideLength * this.sideLength;
-        for (int i = 0; i < totalCells; i++) {
+    private void generateEmptyBoard(int sideLength) {
+        this.sideLength = sideLength;
+        this.totalCells = sideLength * sideLength;
+        for (int i = 0; i < this.totalCells; i++) {
             board.add(new Cell());
         }
     }
@@ -27,7 +27,7 @@ public class Board {
     }
 
     public int getTotalCells() {
-        return this.sideLength * this.sideLength;
+        return this.totalCells;
     }
 
     int getSideLength() { return this.sideLength; }
