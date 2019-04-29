@@ -1,11 +1,9 @@
 public class Display {
     private Board board;
     private String newline = "\n";
-    private String divider;
 
     public Display(Board board) {
         this.board = board;
-        this.divider = generateDivider();
     }
 
     static void outMessage(String output) {
@@ -46,7 +44,7 @@ public class Display {
         int totalCells = board.getTotalCells();
         int cellsInRow = board.getSideLength();
 
-        StringBuilder grid = new StringBuilder(divider);
+        StringBuilder grid = new StringBuilder(generateDivider());
 
         for (int i = 0; i < totalCells; i += cellsInRow) {
             String renderedRow = renderRow(i, i + cellsInRow);
@@ -79,7 +77,7 @@ public class Display {
         }
 
         renderedRowString.append(newline);
-        renderedRowString.append(divider);
+        renderedRowString.append(generateDivider());
 
         return renderedRowString.toString();
     }
