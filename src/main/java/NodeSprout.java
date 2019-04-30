@@ -17,7 +17,7 @@ public class NodeSprout<T> {
         return this.children.size() == 0;
     }
 
-    public NodeSprout getChild(int index) {
+    public NodeSprout<T> getChild(int index) {
         return this.children.get(index);
     }
 

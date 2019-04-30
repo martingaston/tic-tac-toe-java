@@ -34,7 +34,7 @@ public class NodeSproutTest {
         node.addChild(left);
         node.addChild(right);
 
-        int leftChild = (int) node.getChild(0).getValue();
+        int leftChild = node.getChild(0).getValue();
 
         assertEquals(1, leftChild);
     }
@@ -47,7 +47,7 @@ public class NodeSproutTest {
         node.addChild(left);
         node.addChild(right);
 
-        int leftChild = (int) node.getChild(1).getValue();
+        int leftChild = node.getChild(1).getValue();
 
         assertEquals(2, leftChild);
     }
