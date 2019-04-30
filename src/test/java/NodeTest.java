@@ -25,6 +25,15 @@ public class NodeTest {
     }
 
     @Test
+    public void branchNodeReturnsLeftLeaf() {
+        Node left = new Node(1);
+        Node right = new Node(2);
+        Node node = new Node(3, left, right);
+
+        assertEquals(1, node.getLeftNode().getValue());
+    }
+
+    @Test
     public void branchNodeReturnsRightLeaf() {
         Node left = new Node(1);
         Node right = new Node(2);
