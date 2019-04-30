@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -135,6 +136,26 @@ public class BoardTest {
     }
 
     @Test
-    public void name() {
+    public void emptyBoardShouldReturnAllAvailableIndexes() {
+        List<Integer> availableIndexes = board.getAvailableIndexes();
+        assertEquals(9, availableIndexes.size());
+    }
+
+    @Test
+    public void boardWithSixMovesShouldReturnThreeAvailableIndexes() {
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(2, playerNought);
+        board.addMoveToBoard(3, playerCross);
+        board.addMoveToBoard(5, playerNought);
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(8, playerNought);
+        board.addMoveToBoard(4, playerCross);
+
+        List<Integer> expectedIndexes = new ArrayList<>();
+        expectedIndexes.add(1);
+        expectedIndexes.add(6);
+        expectedIndexes.add(7);
+
+        assertEquals(expectedIndexes, board.getAvailableIndexes());
     }
 }

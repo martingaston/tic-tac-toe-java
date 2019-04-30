@@ -39,6 +39,14 @@ public class Players {
         }
     }
 
+    public Player getOpponentPlayer() {
+        if (currentPlayer == playerCross) {
+            return playerNought;
+        } else {
+            return playerCross;
+        }
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }

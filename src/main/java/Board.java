@@ -30,6 +30,19 @@ public class Board {
         return this.sideLength * this.sideLength;
     }
 
+    public List<Integer> getAvailableIndexes() {
+        int totalCells = getTotalCells();
+        List<Integer> availableCells = new ArrayList<>();
+
+        for (int position = 0; position < totalCells; position++) {
+            if (board.get(position).isNotOccupied()) {
+                availableCells.add(position);
+            }
+        }
+
+        return availableCells;
+    }
+
     int getSideLength() { return this.sideLength; }
 
     public void addMoveToBoard(int position, Player player) {
