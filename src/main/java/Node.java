@@ -1,31 +1,31 @@
-public class Node {
-    private int value;
-    private Node left;
-    private Node right;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Node(int value) {
-        this(value, null, null);
-    }
+public class Node<T> {
+    private T value;
+    private List<Node<T>> children = new ArrayList<>();
 
-    public Node(int value, Node left, Node right) {
+    public Node(T value) {
         this.value = value;
-        this.left = left;
-        this.right = right;
     }
 
-    public int getValue() {
-        return value;
+    public T getValue() {
+        return this.value;
     }
 
     public boolean isLeaf() {
-        return this.left == null && this.right == null;
+        return this.children.size() == 0;
     }
 
-    public Node getLeftNode() {
-        return left;
+    public int size() {
+        return this.children.size();
     }
 
-    public Node getRightNode() {
-        return right;
+    public Node<T> getChild(int index) {
+        return this.children.get(index);
+    }
+
+    public void addChild(Node<T> child) {
+        this.children.add(child);
     }
 }

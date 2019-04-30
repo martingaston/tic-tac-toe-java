@@ -5,40 +5,50 @@ import static org.junit.Assert.*;
 public class NodeTest {
     @Test
     public void leafNodeReturnsValue() {
-        Node node = new Node(4);
-        assertEquals(4, node.getValue());
+        Node<Integer> node = new Node<>(4);
+        assertEquals(4, (int) node.getValue());
     }
 
     @Test
     public void leafNodeIsLeafReturnsTrue() {
-        Node node = new Node(4);
+        Node<Integer> node = new Node<>(4);
         assertTrue(node.isLeaf());
     }
 
     @Test
     public void branchNodeIsLeafReturnsFalse() {
-        Node left = new Node(1);
-        Node right = new Node(2);
-        Node node = new Node(3, left, right);
+        Node<Integer> left = new Node<>(1);
+        Node<Integer> right = new Node<>(2);
+        Node<Integer> node = new Node<>(3);
+        node.addChild(left);
+        node.addChild(right);
 
         assertFalse(node.isLeaf());
     }
 
     @Test
     public void branchNodeReturnsLeftLeaf() {
-        Node left = new Node(1);
-        Node right = new Node(2);
-        Node node = new Node(3, left, right);
+        Node<Integer> left = new Node<>(1);
+        Node<Integer> right = new Node<>(2);
+        Node<Integer> node = new Node<>(3);
+        node.addChild(left);
+        node.addChild(right);
 
-        assertEquals(1, node.getLeftNode().getValue());
+        int leftChild = node.getChild(0).getValue();
+
+        assertEquals(1, leftChild);
     }
 
     @Test
     public void branchNodeReturnsRightLeaf() {
-        Node left = new Node(1);
-        Node right = new Node(2);
-        Node node = new Node(3, left, right);
+        Node<Integer> left = new Node<>(1);
+        Node<Integer> right = new Node<>(2);
+        Node<Integer> node = new Node<>(3);
+        node.addChild(left);
+        node.addChild(right);
 
-        assertEquals(2, node.getRightNode().getValue());
+        int leftChild = node.getChild(1).getValue();
+
+        assertEquals(2, leftChild);
     }
 }

@@ -1,24 +1,33 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Minimax {
-    public static int optimal(Node root) {
+    public static int optimal(Node<Integer> root) {
         return optimal(root, "maximiser");
     }
 
-    private static int optimal(Node root, String currentPlayer) {
+    private static int optimal(Node<Integer> root, String currentPlayer) {
         if (root.isLeaf()) {
             return root.getValue();
         }
 
+        List<Integer> optimalChildren = loopChildren(root, currentPlayer);
+
         if (currentPlayer.equals("maximiser")) {
-            return Math.max(
-                    optimal(root.getLeftNode(), switchPlayer(currentPlayer)),
-                    optimal(root.getRightNode(), switchPlayer(currentPlayer))
-            );
+            return Collections.max(optimalChildren);
         } else {
-            return Math.min(
-                    optimal(root.getLeftNode(), switchPlayer(currentPlayer)),
-                    optimal(root.getRightNode(), switchPlayer(currentPlayer))
-            );
+            return Collections.min(optimalChildren);
         }
+    }
+
+    private static List<Integer> loopChildren(Node<Integer> root, String currentPlayer) {
+        List<Integer> optimalChildren = new ArrayList<>();
+        for (int i = 0; i < root.size(); i++) {
+            int nextOptimal = optimal(root.getChild(i), switchPlayer(currentPlayer));
+            optimalChildren.add(nextOptimal);
+        }
+        return optimalChildren;
     }
 
     private static String switchPlayer(String currentPlayer) {
