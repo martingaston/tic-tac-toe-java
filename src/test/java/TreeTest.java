@@ -31,8 +31,8 @@ public class TreeTest {
         board.addMoveToBoard(7, playerNought);
         board.addMoveToBoard(8, playerNought);
 
-        Node node = Tree.makeNode(board, rules, playerCross, players);
-        assertEquals(0, node.getValue());
+        Node<NodeValue> node = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(0, node.getValue().score());
     }
 
     @Test
@@ -46,8 +46,8 @@ public class TreeTest {
         board.addMoveToBoard(6, playerNought);
         board.addMoveToBoard(7, playerCross);
 
-        Node node = Tree.makeNode(board, rules, playerCross, players);
-        assertEquals(1, node.getValue());
+        Node<NodeValue> node = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(1, node.getValue().score());
     }
 
     @Test
@@ -61,8 +61,8 @@ public class TreeTest {
         board.addMoveToBoard(6, playerNought);
         board.addMoveToBoard(7, playerCross);
 
-        Node node = Tree.makeNode(board, rules, playerNought, players);
-        assertEquals(-1, node.getValue());
+        Node<NodeValue> node = Tree.makeNode(board, rules, playerNought, players);
+        assertEquals(-1, node.getValue().score());
     }
 
     @Test
@@ -91,9 +91,9 @@ public class TreeTest {
         board.addMoveToBoard(7, playerCross);
         players.nextTurn();
 
-        Node node = Tree.makeNode(board, rules, playerCross, players);
+        Node<NodeValue> node = Tree.makeNode(board, rules, playerCross, players);
         int loss = -1;
-        assertEquals(loss, node.getChild(0).getValue());
+        assertEquals(loss, node.getChild(0).getValue().score());
     }
 
     @Test
@@ -124,8 +124,8 @@ public class TreeTest {
 
         int win = 1;
 
-        Node node = Tree.makeNode(board, rules, playerCross, players);
-        assertEquals(win, node.getChild(1).getChild(0).getValue());
+        Node<NodeValue> node = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(win, node.getChild(1).getChild(0).getValue().score());
     }
 
     @Test
@@ -141,7 +141,7 @@ public class TreeTest {
 
         Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
         int optimalScore = 1;
-        assertEquals(optimalScore, Minimax.optimal(boardTree));
+        assertEquals(optimalScore, Minimax.optimal(boardTree).score());
     }
 
     @Test
@@ -155,8 +155,8 @@ public class TreeTest {
         board.addMoveToBoard(7, playerNought);
         players.nextTurn();
 
-        Node boardTree = Tree.makeNode(board, rules, playerNought, players);
-        assertEquals(-1, boardTree.getChild(0).getChild(0).getValue());
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerNought, players);
+        assertEquals(-1, boardTree.getChild(0).getChild(0).getValue().score());
     }
 
     @Test
@@ -170,8 +170,8 @@ public class TreeTest {
         board.addMoveToBoard(7, playerNought);
         players.nextTurn();
 
-        Node boardTree = Tree.makeNode(board, rules, playerNought, players);
-        assertEquals(0, boardTree.getChild(1).getChild(0).getValue());
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerNought, players);
+        assertEquals(0, boardTree.getChild(1).getChild(0).getValue().score());
     }
 
     @Test
@@ -187,7 +187,7 @@ public class TreeTest {
 
         Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerNought, players);
         int optimalScore = 0;
-        assertEquals(optimalScore, Minimax.optimal(boardTree));
+        assertEquals(optimalScore, Minimax.optimal(boardTree).score());
     }
 
     @Test
