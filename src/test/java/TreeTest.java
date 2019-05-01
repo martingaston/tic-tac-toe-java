@@ -127,4 +127,10 @@ public class TreeTest {
         Node node = Tree.makeNode(board, rules, playerCross, players);
         assertEquals(win, node.getChild(1).getChild(0).getValue());
     }
+
+    @Test
+    public void emptyBoardReturnsNineChildren() {
+        Node node = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(9, node.size());
+    }
 }

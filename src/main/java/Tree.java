@@ -10,8 +10,6 @@ public class Tree {
 
         if (availableMoves.size() == 1) {
             int moveIndex = availableMoves.get(0);
-            System.out.println("Adding leaf node " + moveIndex);
-
             board.addMoveToBoard(moveIndex, currentPlayer);
 
             if (maximisingPlayer == currentPlayer && rules.hasWinningMove(currentPlayer)) {
@@ -29,30 +27,31 @@ public class Tree {
 
         Node<Integer> currentMoveOutcomes = new Node<>(0);
 
-        for ( int moveIndex : availableMoves) {
+        for ( int move : availableMoves) {
             currentPlayer = players.getCurrentPlayer();
-            System.out.println("current player: " + currentPlayer.getSymbol());
-
-            System.out.println("Adding moveIndex" + moveIndex);
-            board.addMoveToBoard(moveIndex, currentPlayer);
+            board.addMoveToBoard(move, currentPlayer);
 
             if (maximisingPlayer == currentPlayer && rules.hasWinningMove(currentPlayer)) {
                 currentMoveOutcomes.addChild(new Node<>(1));
             } else if (maximisingPlayer != currentPlayer && rules.hasWinningMove(currentPlayer)) {
                 currentMoveOutcomes.addChild(new Node<>(-1));
             } else {
-                System.out.println("New branch");
                 Node<Integer> nextChildNode = new Node<>(0);
                 players.nextTurn();
                 nextChildNode.addChild(makeNode(board, rules, maximisingPlayer, players));
                 currentMoveOutcomes.addChild(nextChildNode);
+                resetPlayer(maximisingPlayer, players);
             }
 
-            board.removeMoveFromBoard(moveIndex);
+            board.removeMoveFromBoard(move);
         }
 
-        currentMoveOutcomes.print();
-
         return currentMoveOutcomes;
+    }
+
+    private static void resetPlayer(Player maximisingPlayer, Players players) {
+        if (players.getCurrentPlayer() != maximisingPlayer) {
+            players.nextTurn();
+        }
     }
 }
