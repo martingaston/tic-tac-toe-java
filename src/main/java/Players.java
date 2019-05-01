@@ -18,6 +18,10 @@ public class Players {
                 this.playerNought = new PlayerCPU("O", rules, board);
                 break;
             case 3:
+                this.playerCross = new PlayerHuman("X", rules);
+                this.playerNought = new PlayerMinimax("O", rules, board, this);
+                break;
+            case 4:
                 this.playerCross = new PlayerCPU("X", rules, board);
                 this.playerNought = new PlayerCPU("O", rules, board);
                 break;

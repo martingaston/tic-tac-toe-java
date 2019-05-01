@@ -195,4 +195,104 @@ public class TreeTest {
         Node node = Tree.makeNode(board, rules, playerCross, players);
         assertEquals(9, node.size());
     }
+
+    @Test
+    public void TwoRowsFilledBoardReturnsThreeChildren() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(3, boardTree.size());
+    }
+
+    @Test
+    public void TwoRowsFilledBoardReturnsThreeChildrenFirstChildIsLeaf() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        assertTrue(boardTree.getChild(0).isLeaf());
+        assertEquals(1, boardTree.getChild(0).getValue().score());
+    }
+
+    @Test
+    public void TwoRowsFilledBoardReturnsThreeChildrenMiddleChildHasTwoChildren() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        System.out.println(boardTree.getValue().score());
+        assertEquals(2, boardTree.getChild(1).size());
+    }
+
+    @Test
+    public void TwoRowsFilledBoardReturnsThreeChildrenMiddleChildHasTwoChildrenFirstIsLose() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(-1, boardTree.getChild(1).getChild(0).getValue().score());
+        assertEquals(6, boardTree.getChild(1).getChild(0).getValue().position());
+        assertTrue(boardTree.getChild(1).getChild(0).isLeaf());
+    }
+
+    @Test
+    public void TwoRowsFilledBoardReturnsThreeChildrenMiddleChildHasTwoChildrenSecondIsZero() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(0, boardTree.getChild(1).getChild(1).getValue().score());
+        assertEquals(8, boardTree.getChild(1).getChild(1).getValue().position());
+        assertFalse(boardTree.getChild(1).getChild(1).isLeaf());
+    }
+
+    @Test
+    public void TwoRowsFilledBoardReturnsThreeChildrenMiddleChildSecondChildIsWinLeafNode() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(1, boardTree.getChild(1).getChild(1).getChild(0).getValue().score());
+        assertEquals(6, boardTree.getChild(1).getChild(1).getChild(0).getValue().position());
+        assertTrue(boardTree.getChild(1).getChild(1).getChild(0).isLeaf());
+    }
+
+    @Test
+    public void TwoRowsFilledBoardReturnsThreeChildrenLastChildIsLeaf() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        assertTrue(boardTree.getChild(2).isLeaf());
+        assertEquals(1, boardTree.getChild(2).getValue().score());
+    }
 }

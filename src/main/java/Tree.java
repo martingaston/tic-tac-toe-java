@@ -27,6 +27,7 @@ public class Tree {
             }
         }
 
+        //TODO this is creating extra root nodes :(
         Node<NodeValue> root = new Node<>(new NodeValue(Integer.MIN_VALUE, Integer.MIN_VALUE));
 
         for ( int move : availableMoves) {
@@ -41,7 +42,7 @@ public class Tree {
             } else {
                 Node<NodeValue> nextChildNode = new Node<>(new NodeValue(0, move));
                 players.nextTurn();
-                nextChildNode.addChild(makeNode(board, rules, maximisingPlayer, players));
+                makeNewChildNode(board, nextChildNode, rules, maximisingPlayer, players);
                 root.addChild(nextChildNode);
                 resetPlayer(maximisingPlayer, players);
             }
@@ -49,6 +50,32 @@ public class Tree {
             board.removeMoveFromBoard(move);
         }
         return root;
+    }
+
+    private static void makeNewChildNode(Board board, Node<NodeValue> node, Rules rules,
+                                                    Player maximisingPlayer, Players players) {
+        List<Integer> availableMoves = board.getAvailableIndexes();
+        for ( int move : availableMoves) {
+            Player currentPlayer = players.getCurrentPlayer();
+
+            board.addMoveToBoard(move, currentPlayer);
+
+            if (maximisingPlayer == currentPlayer && rules.hasWinningMove(currentPlayer)) {
+                node.addChild(new Node<>(new NodeValue(1, move)));
+            } else if (maximisingPlayer != currentPlayer && rules.hasWinningMove(currentPlayer)) {
+                node.addChild(new Node<>(new NodeValue(-1, move)));
+            } else if (rules.gameIsOver()) {
+                node.addChild(new Node<>(new NodeValue(0, move)));
+            } else {
+                Node<NodeValue> nextChildNode = new Node<>(new NodeValue(0, move));
+                players.nextTurn();
+                makeNewChildNode(board, nextChildNode, rules, maximisingPlayer, players);
+                node.addChild(nextChildNode);
+                resetPlayer(maximisingPlayer, players);
+            }
+
+            board.removeMoveFromBoard(move);
+        }
     }
 
     private static void resetPlayer(Player maximisingPlayer, Players players) {

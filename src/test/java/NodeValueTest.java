@@ -57,4 +57,16 @@ public class NodeValueTest {
         assertEquals(42, nodeValues.get(2).score());
         assertEquals(45, nodeValues.get(3).score());
     }
+
+    @Test
+    public void collectionsMaxReturnsCorrectValueFromNodeValueList() {
+        List<NodeValue> nodeValues = new ArrayList<>();
+        nodeValues.add(new NodeValue(45, 0));
+        nodeValues.add(new NodeValue(-5, 1));
+        nodeValues.add(new NodeValue(42, 2));
+        nodeValues.add(new NodeValue(-15, 3));
+
+        NodeValue max = Collections.max(nodeValues, new NodeValueSort());
+        assertEquals(45, max.score());
+    }
 }
