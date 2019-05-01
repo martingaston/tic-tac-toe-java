@@ -64,4 +64,67 @@ public class TreeTest {
         Node node = Tree.makeNode(board, rules, playerNought, players);
         assertEquals(-1, node.getValue());
     }
+
+    @Test
+    public void drawStateReturnsTreeWithTwoChildren() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+        board.addMoveToBoard(7, playerCross);
+        players.nextTurn();
+
+        Node node = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(2, node.size());
+    }
+
+    @Test
+    public void drawStateReturnsTreeWithTwoChildrenAndFirstChildIsLoss() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+        board.addMoveToBoard(7, playerCross);
+        players.nextTurn();
+
+        Node node = Tree.makeNode(board, rules, playerCross, players);
+        int loss = -1;
+        assertEquals(loss, node.getChild(0).getValue());
+    }
+
+    @Test
+    public void drawStateReturnsTreeWithTwoChildrenAndSecondChildIsNotLeaf() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+        board.addMoveToBoard(7, playerCross);
+        players.nextTurn();
+
+        Node node = Tree.makeNode(board, rules, playerCross, players);
+        assertFalse(node.getChild(1).isLeaf());
+    }
+
+    @Test
+    public void drawStateReturnsTreeWithTwoChildrenAndSecondChildValueIsOne() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+        board.addMoveToBoard(7, playerCross);
+        players.nextTurn();
+
+        int win = 1;
+
+        Node node = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(win, node.getChild(1).getChild(0).getValue());
+    }
 }

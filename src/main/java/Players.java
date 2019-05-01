@@ -39,8 +39,8 @@ public class Players {
         }
     }
 
-    public Player getOpponentPlayer() {
-        if (currentPlayer == playerCross) {
+    public Player getOpponentPlayer(Player player) {
+        if (player == playerCross) {
             return playerNought;
         } else {
             return playerCross;

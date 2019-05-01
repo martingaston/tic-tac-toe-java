@@ -13,8 +13,20 @@ public class Node<T> {
         return this.value;
     }
 
+    public void setValue(T value) {
+        this.value = value;
+    }
+
     public boolean isLeaf() {
         return this.children.size() == 0;
+    }
+
+    public void print() {
+        for (Node node : this.children) {
+            System.out.println("NEW NODE");
+            System.out.println("NODE VALUE: " + node.getValue());
+            System.out.println("NUMBER OF CHILDREN: " + node.size());
+        }
     }
 
     public int size() {
