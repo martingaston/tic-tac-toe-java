@@ -3,28 +3,28 @@ import java.util.Collections;
 import java.util.List;
 
 public class Minimax {
-    public static int optimal(Node<Integer> root) {
+    public static NodeValue optimal(Node<NodeValue> root) {
         return optimal(root, "maximiser");
     }
 
-    private static int optimal(Node<Integer> root, String currentPlayer) {
+    private static NodeValue optimal(Node<NodeValue> root, String currentPlayer) {
         if (root.isLeaf()) {
             return root.getValue();
         }
 
-        List<Integer> optimalChildren = loopChildren(root, currentPlayer);
+        List<NodeValue> optimalChildren = loopChildren(root, currentPlayer);
 
         if (currentPlayer.equals("maximiser")) {
-            return Collections.max(optimalChildren);
+            return Collections.max(optimalChildren, new NodeValueSort());
         } else {
-            return Collections.min(optimalChildren);
+            return Collections.min(optimalChildren, new NodeValueSort());
         }
     }
 
-    private static List<Integer> loopChildren(Node<Integer> root, String currentPlayer) {
-        List<Integer> optimalChildren = new ArrayList<>();
+    private static List<NodeValue> loopChildren(Node<NodeValue> root, String currentPlayer) {
+        List<NodeValue> optimalChildren = new ArrayList<>();
         for (int i = 0; i < root.size(); i++) {
-            int nextOptimal = optimal(root.getChild(i), switchPlayer(currentPlayer));
+            NodeValue nextOptimal = optimal(root.getChild(i), switchPlayer(currentPlayer));
             optimalChildren.add(nextOptimal);
         }
         return optimalChildren;

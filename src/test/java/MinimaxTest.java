@@ -3,104 +3,104 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MinimaxTest {
-    private Node<Integer> leftBranch;
-    private Node<Integer> rightBranch;
-    private Node<Integer> root;
+    private Node<NodeValue> leftBranch;
+    private Node<NodeValue> rightBranch;
+    private Node<NodeValue> root;
 
     @Test
     public void testMinimaxForZeroAndZeroIsZero() {
-        leftBranch = new Node<>(0);
-        rightBranch = new Node<>(0);
-        root = new Node<>(0);
+        leftBranch = new Node<>(new NodeValue(0, 0));
+        rightBranch = new Node<>(new NodeValue(0, 0));
+        root = new Node<>(new NodeValue(0, 0));
         root.addChild(leftBranch);
         root.addChild(rightBranch);
 
-        assertEquals(0, Minimax.optimal(root));
+        assertEquals(0, Minimax.optimal(root).score());
     }
 
     @Test
     public void testMinimaxForZeroAndOneIsOne() {
-        leftBranch = new Node<>(0);
-        rightBranch = new Node<>(1);
-        root = new Node<>(0);
+        leftBranch = new Node<>(new NodeValue(0, 0));
+        rightBranch = new Node<>(new NodeValue(1, 0));
+        root = new Node<>(new NodeValue(0, 0));
         root.addChild(leftBranch);
         root.addChild(rightBranch);
 
-        assertEquals(1, Minimax.optimal(root));
+        assertEquals(1, Minimax.optimal(root).score());
     }
 
     @Test
     public void testMinimaxForOneAndFiveIsFive() {
-        leftBranch = new Node<>(1);
-        rightBranch = new Node<>(5);
-        root = new Node<>(0);
+        leftBranch = new Node<>(new NodeValue(1, 0));
+        rightBranch = new Node<>(new NodeValue(5, 0));
+        root = new Node<>(new NodeValue(0, 0));
         root.addChild(leftBranch);
         root.addChild(rightBranch);
 
-        assertEquals(5, Minimax.optimal(root));
+        assertEquals(5, Minimax.optimal(root).score());
     }
 
     @Test
     public void testMinimaxForDepthOfTwoAndLeafsOfZeroAndOneReturnsZero() {
-        leftBranch = new Node<>(0);
-        Node<Integer> leftBranchLeftLeaf = new Node<>(0);
-        Node<Integer> leftBranchRightLeaf = new Node<>(1);
+        leftBranch = new Node<>(new NodeValue(0, 0));
+        Node<NodeValue> leftBranchLeftLeaf = new Node<>(new NodeValue(0, 0));
+        Node<NodeValue> leftBranchRightLeaf = new Node<>(new NodeValue(1, 0));
         leftBranch.addChild(leftBranchLeftLeaf);
         leftBranch.addChild(leftBranchRightLeaf);
 
-        rightBranch = new Node<>(0);
-        Node<Integer> rightBranchLeftLeaf = new Node<>(0);
-        Node<Integer> rightBranchRightLeaf = new Node<>(1);
+        rightBranch = new Node<>(new NodeValue(0, 0));
+        Node<NodeValue> rightBranchLeftLeaf = new Node<>(new NodeValue(0, 0));
+        Node<NodeValue> rightBranchRightLeaf = new Node<>(new NodeValue(1, 0));
         rightBranch.addChild(rightBranchLeftLeaf);
         rightBranch.addChild(rightBranchRightLeaf);
 
-        root = new Node<>(0);
+        root = new Node<>(new NodeValue(0, 0));
         root.addChild(leftBranch);
         root.addChild(rightBranch);
 
-        assertEquals(0, Minimax.optimal(root));
+        assertEquals(0, Minimax.optimal(root).score());
     }
 
     @Test
     public void testMinimaxForDepthOfTwoAndLeafsOfOneAndTwoReturnsOne() {
-        leftBranch = new Node<>(0);
-        Node<Integer> leftBranchLeftLeaf = new Node<>(1);
-        Node<Integer> leftBranchRightLeaf = new Node<>(2);
+        leftBranch = new Node<>(new NodeValue(0, 0));
+        Node<NodeValue> leftBranchLeftLeaf = new Node<>(new NodeValue(1, 0));
+        Node<NodeValue> leftBranchRightLeaf = new Node<>(new NodeValue(2, 0));
         leftBranch.addChild(leftBranchLeftLeaf);
         leftBranch.addChild(leftBranchRightLeaf);
 
-        rightBranch = new Node<>(0);
-        Node<Integer> rightBranchLeftLeaf = new Node<>(1);
-        Node<Integer> rightBranchRightLeaf = new Node<>(2);
+        rightBranch = new Node<>(new NodeValue(0, 0));
+        Node<NodeValue> rightBranchLeftLeaf = new Node<>(new NodeValue(1, 0));
+        Node<NodeValue> rightBranchRightLeaf = new Node<>(new NodeValue(2, 0));
         rightBranch.addChild(rightBranchLeftLeaf);
         rightBranch.addChild(rightBranchRightLeaf);
 
-        root = new Node<>(0);
+        root = new Node<>(new NodeValue(0, 0));
         root.addChild(leftBranch);
         root.addChild(rightBranch);
 
-        assertEquals(1, Minimax.optimal(root));
+        assertEquals(1, Minimax.optimal(root).score());
     }
 
     @Test
     public void testMinimaxForDepthOfTwoAndLeafsOfThreeFiveTwoAndNineReturnsThree() {
-        leftBranch = new Node<>(0);
-        Node<Integer> leftBranchLeftLeaf = new Node<>(3);
-        Node<Integer> leftBranchRightLeaf = new Node<>(5);
+        leftBranch = new Node<>(new NodeValue(0, 0));
+        Node<NodeValue> leftBranchLeftLeaf = new Node<>(new NodeValue(3, 0));
+        Node<NodeValue> leftBranchRightLeaf = new Node<>(new NodeValue(5, 0));
         leftBranch.addChild(leftBranchLeftLeaf);
         leftBranch.addChild(leftBranchRightLeaf);
 
-        rightBranch = new Node<>(0);
-        Node<Integer> rightBranchLeftLeaf = new Node<>(2);
-        Node<Integer> rightBranchRightLeaf = new Node<>(9);
+        rightBranch = new Node<>(new NodeValue(0, 0));
+        Node<NodeValue> rightBranchLeftLeaf = new Node<>(new NodeValue(2, 0));
+        Node<NodeValue> rightBranchRightLeaf = new Node<>(new NodeValue(9, 0));
         rightBranch.addChild(rightBranchLeftLeaf);
         rightBranch.addChild(rightBranchRightLeaf);
 
-        root = new Node<>(0);
+        root = new Node<>(new NodeValue(0, 0));
         root.addChild(leftBranch);
         root.addChild(rightBranch);
 
-        assertEquals(3, Minimax.optimal(root));
+        assertEquals(3, Minimax.optimal(root).score());
     }
 
 

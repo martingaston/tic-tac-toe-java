@@ -139,7 +139,7 @@ public class TreeTest {
         board.addMoveToBoard(7, playerCross);
         players.nextTurn();
 
-        Node<Integer> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
         int optimalScore = 1;
         assertEquals(optimalScore, Minimax.optimal(boardTree));
     }
@@ -185,7 +185,7 @@ public class TreeTest {
         board.addMoveToBoard(7, playerNought);
         players.nextTurn();
 
-        Node<Integer> boardTree = Tree.makeNode(board, rules, playerNought, players);
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerNought, players);
         int optimalScore = 0;
         assertEquals(optimalScore, Minimax.optimal(boardTree));
     }
