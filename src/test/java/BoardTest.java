@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -135,6 +136,20 @@ public class BoardTest {
     }
 
     @Test
-    public void name() {
+    public void aBoardKnowsOfItsLines() {
+        Board board = new Board(3);
+        List<Board.Line> lines = board.lines();
+
+        assertEquals(8, lines.size());
+    }
+
+    @Test
+    public void findsAsWinner() {
+        Board board = new Board(3);
+        board.addMove(0, playerCross);
+        board.addMove(1, playerCross);
+        board.addMove(2, playerCross);
+
+        assertTrue(board.hasWinner());
     }
 }

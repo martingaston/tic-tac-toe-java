@@ -15,7 +15,6 @@ public class RulesTest {
         rules = new Rules(board);
         playerCross = new PlayerHuman("X");
         playerNought = new PlayerHuman("O");
-
     }
 
     @Test

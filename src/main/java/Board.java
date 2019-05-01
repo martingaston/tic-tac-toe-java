@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Board {
@@ -11,10 +13,6 @@ public class Board {
     }
 
     public Board(int sideLength) {
-        generate(sideLength);
-    }
-
-    private void generate(int sideLength) {
         this.sideLength = sideLength;
         this.totalCells = sideLength * sideLength;
         for (int i = 0; i < this.totalCells; i++) {
@@ -36,6 +34,82 @@ public class Board {
         Cell requestedCell = board.get(position);
         if (requestedCell.isNotOccupied()) {
             requestedCell.mark(player);
+        }
+    }
+
+    public List<Line> lines() {
+        List<Line> lines = new LinkedList<>();
+        lines.addAll(rows());
+        lines.addAll(columns());
+        lines.addAll(diagonals());
+        return lines;
+    }
+
+    private List<Line> diagonals() {
+        return Arrays.asList(
+                new Line(Arrays.asList(0, 4, 8)),
+                new Line(Arrays.asList(2, 4, 6))
+         );
+    }
+
+    private List<Line> columns() {
+        List<Line> verticalMoves = new LinkedList<>();
+
+        for (int column = 0; column < this.sideLength; column++) {
+            verticalMoves.add(columnAt(column));
+        }
+
+        return verticalMoves;
+    }
+
+    private Line columnAt(int column) {
+        List<Integer> populatedColumn = new LinkedList<>();
+        for (int i = 0; i < sideLength;i++) {
+            populatedColumn.add(column + sideLength * i);
+        }
+
+        return new Line(populatedColumn);
+    }
+
+    private List<Line> rows() {
+        List<Line> horizontalMoves = new LinkedList<>();
+
+        for (int row = 0; row < this.sideLength; row++) {
+            horizontalMoves.add(rowAt(row));
+        }
+
+        return horizontalMoves;
+    }
+
+    private Line rowAt(int row) {
+        int startIndex = row * sideLength;
+
+        List<Integer> populatedRow = new LinkedList<>();
+        for (int i = startIndex; i < sideLength;i++) {
+            populatedRow.add(i);
+        }
+
+        return new Line(populatedRow);
+    }
+
+    public boolean hasWinner() {
+        for (Line line : lines()) {
+            if (line.hasWinner()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static class Line {
+        private List<Integer> cells;
+
+        public Line(List<Integer> cells) {
+            this.cells = cells;
+        }
+
+        public boolean hasWinner() {
+            return cell1.equals(cell2) && cell2.equals(cell3);
         }
     }
 }
