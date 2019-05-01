@@ -1,5 +1,9 @@
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class NodeValueTest {
@@ -37,5 +41,20 @@ public class NodeValueTest {
     public void positionOfNodeSixtySixFifteenIsFifteen() {
         NodeValue nodeValue = new NodeValue(66, 15);
         assertEquals(15, nodeValue.position());
+    }
+
+    @Test
+    public void ListOfNodeValuesCanBeProperlySorted() {
+        List<NodeValue> nodeValues = new ArrayList<>();
+        nodeValues.add(new NodeValue(45, 0));
+        nodeValues.add(new NodeValue(-5, 1));
+        nodeValues.add(new NodeValue(42, 2));
+        nodeValues.add(new NodeValue(-15, 3));
+
+        nodeValues.sort(new NodeValueSort());
+        assertEquals(-15, nodeValues.get(0).score());
+        assertEquals(-5, nodeValues.get(1).score());
+        assertEquals(42, nodeValues.get(2).score());
+        assertEquals(45, nodeValues.get(3).score());
     }
 }
