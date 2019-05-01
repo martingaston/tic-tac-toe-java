@@ -2,7 +2,6 @@ import java.util.List;
 
 public class Tree {
     public static Node<Integer> makeNode (Board board, Rules rules, Player maximisingPlayer, Players players) {
-
         Player currentPlayer = players.getCurrentPlayer();
 
         //TODO - Board state is MUTABLE so this will probably go really bad really fast - fix :)
@@ -13,14 +12,17 @@ public class Tree {
             board.addMoveToBoard(moveIndex, currentPlayer);
 
             if (maximisingPlayer == currentPlayer && rules.hasWinningMove(currentPlayer)) {
+                board.removeMoveFromBoard(moveIndex);
                 return new Node<>(1);
             }
 
             if (maximisingPlayer != currentPlayer && rules.hasWinningMove(currentPlayer)) {
+                board.removeMoveFromBoard(moveIndex);
                 return new Node<>(-1);
             }
 
             if (rules.gameIsOver()) {
+                board.removeMoveFromBoard(moveIndex);
                 return new Node<>(0);
             }
         }
@@ -29,6 +31,7 @@ public class Tree {
 
         for ( int move : availableMoves) {
             currentPlayer = players.getCurrentPlayer();
+
             board.addMoveToBoard(move, currentPlayer);
 
             if (maximisingPlayer == currentPlayer && rules.hasWinningMove(currentPlayer)) {
@@ -45,7 +48,6 @@ public class Tree {
 
             board.removeMoveFromBoard(move);
         }
-
         return currentMoveOutcomes;
     }
 

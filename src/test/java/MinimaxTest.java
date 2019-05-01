@@ -102,4 +102,6 @@ public class MinimaxTest {
 
         assertEquals(3, Minimax.optimal(root));
     }
+
+
 }

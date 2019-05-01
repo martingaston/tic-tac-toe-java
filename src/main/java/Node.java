@@ -13,10 +13,6 @@ public class Node<T> {
         return this.value;
     }
 
-    public void setValue(T value) {
-        this.value = value;
-    }
-
     public boolean isLeaf() {
         return this.children.size() == 0;
     }
