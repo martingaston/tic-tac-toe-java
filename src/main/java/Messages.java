@@ -10,7 +10,7 @@ public class Messages {
         standardMessage.put("gameIntro", "The classic game of noughts and crosses!\nTurn friends into enemies as 2 players take turns marking spaces in a grid.\nWin short-lived glory by succeeding in placing a complete line in any horizontal, vertical or diagonal direction.");
 
         standardMessage.put("gameOverDraw", "Bad luck! It's a draw!");
-        standardMessage.put("invalidMove", "Sorry, that move is invalid.\nPlease choose an unoccupied square between 1 and 9");
+        standardMessage.put("invalidMove", "Sorry, that move is invalid.\nPlease choose an unoccupied square.");
         standardMessage.put("setup", "Select a game mode:\n1. Human v Human\n2. Human v CPU\n3. CPU v CPU\n");
         standardMessage.put("boardSize", "Select a board size:\n1. 3x3 (default)\n2. 4x4");
 
@@ -43,8 +43,9 @@ public class Messages {
 
     String getInstructions(int sideLength) {
         String gridShape = sideLength + "x" + sideLength;
+        int totalCells = sideLength * sideLength;
         String instructionsMessage = formatMessage.get("gameInstructions");
-        return String.format(instructionsMessage, sideLength, gridShape);
+        return String.format(instructionsMessage, totalCells, gridShape);
     }
 
     String getIntro() {
