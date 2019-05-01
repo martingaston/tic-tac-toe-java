@@ -3,36 +3,36 @@ import java.util.List;
 
 public class Board {
     private int sideLength;
+    private int totalCells;
     private List<Cell> board = new ArrayList<>();
 
     public Board() {
-        this.sideLength = 3;
-        generateEmptyBoard();
+        this(3);
     }
 
     public Board(int sideLength) {
-        this.sideLength = sideLength;
-        generateEmptyBoard();
+        generate(sideLength);
     }
 
-    private void generateEmptyBoard() {
-        int totalCells = this.sideLength * this.sideLength;
-        for (int i = 0; i < totalCells; i++) {
+    private void generate(int sideLength) {
+        this.sideLength = sideLength;
+        this.totalCells = sideLength * sideLength;
+        for (int i = 0; i < this.totalCells; i++) {
             board.add(new Cell());
         }
     }
 
-    public Cell getCellFromBoardPosition(int position) {
+    public Cell getCell(int position) {
         return board.get(position);
     }
 
     public int getTotalCells() {
-        return this.sideLength * this.sideLength;
+        return this.totalCells;
     }
 
     int getSideLength() { return this.sideLength; }
 
-    public void addMoveToBoard(int position, Player player) {
+    public void addMove(int position, Player player) {
         Cell requestedCell = board.get(position);
         if (requestedCell.isNotOccupied()) {
             requestedCell.mark(player);

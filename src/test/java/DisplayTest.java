@@ -54,15 +54,15 @@ public class DisplayTest {
         Display display = new Display(board);
         Player playerCross = new PlayerHuman("X");
         Player playerNought = new PlayerHuman("O");
-        board.addMoveToBoard(0, playerCross);
-        board.addMoveToBoard(2, playerCross);
-        board.addMoveToBoard(4, playerCross);
-        board.addMoveToBoard(6, playerCross);
-        board.addMoveToBoard(8, playerCross);
-        board.addMoveToBoard(1, playerNought);
-        board.addMoveToBoard(3, playerNought);
-        board.addMoveToBoard(5, playerNought);
-        board.addMoveToBoard(7, playerNought);
+        board.addMove(0, playerCross);
+        board.addMove(2, playerCross);
+        board.addMove(4, playerCross);
+        board.addMove(6, playerCross);
+        board.addMove(8, playerCross);
+        board.addMove(1, playerNought);
+        board.addMove(3, playerNought);
+        board.addMove(5, playerNought);
+        board.addMove(7, playerNought);
         display.showBoard();
         assertEquals(boardOutput, outContent.toString());
     }

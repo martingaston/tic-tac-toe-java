@@ -12,6 +12,50 @@ public class Rules {
         generateWinningMovesFromBoard();
     }
 
+    private void generateWinningMovesFromBoard() {
+        this.winningMoves = new ArrayList<>();
+
+        addHorizontalAndVerticalWinConditions();
+        addDiagonalWinConditions();
+    }
+
+    private void addHorizontalAndVerticalWinConditions() {
+        List<Integer> horizontalMove;
+        List<Integer> verticalMove;
+        for (int row = 0; row < this.boardSideLength; row++) {
+            horizontalMove = new ArrayList<>();
+            verticalMove = new ArrayList<>();
+
+            addNextHorizontalAndVerticalWinCondition(horizontalMove, verticalMove, row);
+            addWinningPositionsToWinningMoves(horizontalMove, verticalMove);
+        }
+    }
+
+    private void addNextHorizontalAndVerticalWinCondition(List<Integer> horizontalMove, List<Integer> verticalMove, int row) {
+        for (int column = 0; column < this.boardSideLength; column++) {
+            horizontalMove.add(column + this.boardSideLength * row);
+            verticalMove.add(row + this.boardSideLength * column);
+        }
+    }
+
+    private void addDiagonalWinConditions() {
+        List<Integer> diagonalLeftMove = new ArrayList<>();
+        List<Integer> diagonalRightMove = new ArrayList<>();
+
+        for (int row = 0; row < this.boardSideLength; row++) {
+            diagonalLeftMove.add(row + (row * this.boardSideLength));
+            diagonalRightMove.add(this.boardSideLength - 1 + (row * this.boardSideLength) - row);
+
+        }
+
+        addWinningPositionsToWinningMoves(diagonalLeftMove, diagonalRightMove);
+    }
+
+    private void addWinningPositionsToWinningMoves(List<Integer> firstMove, List<Integer> secondMove) {
+        winningMoves.add(firstMove);
+        winningMoves.add(secondMove);
+    }
+
     public boolean hasWinningMove(Player player) {
 
         for (List<Integer> move : this.winningMoves) {
@@ -21,45 +65,6 @@ public class Rules {
         }
 
         return false;
-    }
-
-    private void generateWinningMovesFromBoard() {
-        this.winningMoves = new ArrayList<>();
-        List<Integer> diagonalLeftMove = new ArrayList<>();
-        List<Integer> diagonalRightMove = new ArrayList<>();
-
-        calculateBoardCombinations(diagonalLeftMove, diagonalRightMove);
-        addWinningPositionsToWinningMoves(diagonalLeftMove, diagonalRightMove);
-    }
-
-    private void calculateBoardCombinations(List<Integer> diagonalLeftMove, List<Integer> diagonalRightMove) {
-        List<Integer> horizontalMove;
-        List<Integer> verticalMove;
-        for (int row = 0; row < this.boardSideLength; row++) {
-            horizontalMove = new ArrayList<>();
-            verticalMove = new ArrayList<>();
-
-            generateNextHorizontalAndVerticalWinCondition(horizontalMove, verticalMove, row);
-            addWinningPositionsToWinningMoves(horizontalMove, verticalMove);
-            calculateNextDiagonalPosition(diagonalLeftMove, diagonalRightMove, row);
-        }
-    }
-
-    private void addWinningPositionsToWinningMoves(List<Integer> firstMove, List<Integer> secondMove) {
-        winningMoves.add(firstMove);
-        winningMoves.add(secondMove);
-    }
-
-    private void calculateNextDiagonalPosition(List<Integer> diagonalLeftMove, List<Integer> diagonalRightMove, int row) {
-        diagonalLeftMove.add(row + (row * this.boardSideLength));
-        diagonalRightMove.add(this.boardSideLength - 1 + (row * this.boardSideLength) - row);
-    }
-
-    private void generateNextHorizontalAndVerticalWinCondition(List<Integer> horizontalMove, List<Integer> verticalMove, int row) {
-        for (int column = 0; column < this.boardSideLength; column++) {
-            horizontalMove.add(column + this.boardSideLength * row);
-            verticalMove.add(row + this.boardSideLength * column);
-        }
     }
 
     private boolean playerHasValidWinCondition(List<Integer> move, Player player) {
@@ -72,26 +77,25 @@ public class Rules {
         return true;
     }
 
-    boolean isNotValidMove(Player player) {
-        int desiredCellNumber = player.getMove();
+    boolean isNotValidMove(int desiredPosition) {
         int totalBoardCells = board.getTotalCells();
 
-        if (desiredCellNumber < 0 || desiredCellNumber > totalBoardCells - 1) {
+        if (desiredPosition < 0 || desiredPosition > totalBoardCells - 1) {
             return true;
         }
 
-        Cell desiredCell = board.getCellFromBoardPosition(desiredCellNumber);
+        Cell desiredCell = board.getCell(desiredPosition);
         return desiredCell.isOccupied();
     }
 
     private boolean playerOccupiesCell(int index, Player player) {
         String playerSymbol = player.getSymbol();
-        return board.getCellFromBoardPosition(index).getOccupant().equals(playerSymbol);
+        return board.getCell(index).getOccupant().equals(playerSymbol);
     }
 
     public boolean gameIsOver() {
         for (int i = 0; i < board.getTotalCells(); i++) {
-            if (board.getCellFromBoardPosition(i).isNotOccupied()) {
+            if (board.getCell(i).isNotOccupied()) {
                 return false;
             }
         }

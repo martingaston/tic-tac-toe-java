@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class PlayerHuman implements Player {
     private String symbol;
-    private int move;
     private Rules rules;
 
     public PlayerHuman(String symbol, Rules rules) {
@@ -20,18 +19,14 @@ public class PlayerHuman implements Player {
 
     public int getNextMove() {
         Scanner input = new Scanner(System.in);
-        this.move = getAnInteger(input);
+        int desiredCell = getAnInteger(input);
 
-        while (rules.isNotValidMove(this)) {
+        while (rules.isNotValidMove(desiredCell)) {
             invalidMove();
-            this.move = getAnInteger(input);
+            desiredCell = getAnInteger(input);
         }
 
-        return this.move;
-    }
-
-    public int getMove() {
-        return this.move;
+        return desiredCell;
     }
 
     private int getAnInteger(Scanner scanner) {

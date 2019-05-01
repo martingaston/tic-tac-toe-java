@@ -1,17 +1,12 @@
 public class PlayerCPU implements Player {
     private String symbol;
     private Rules rules;
-    private int move;
     private int totalCells;
 
     PlayerCPU(String symbol, Rules rules, Board board) {
         this.symbol = symbol;
         this.rules = rules;
         this.totalCells = board.getTotalCells();
-    }
-
-    public int getMove() {
-        return this.move;
     }
 
     @Override
@@ -21,12 +16,13 @@ public class PlayerCPU implements Player {
 
     @Override
     public int getNextMove() {
+        int desiredCell;
         do {
-            this.move = pickRandomCell();
-        } while (rules.isNotValidMove(this));
+            desiredCell = pickRandomCell();
+        } while (rules.isNotValidMove(desiredCell));
 
         oneSecondSleep();
-        return this.move;
+        return desiredCell;
     }
 
     private int pickRandomCell() {
