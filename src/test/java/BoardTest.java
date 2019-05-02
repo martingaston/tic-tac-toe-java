@@ -222,4 +222,39 @@ public class BoardTest {
 
         assertTrue(board.hasWinner());
     }
+
+    @Test
+    public void gameIsNotOverWithEmptyBoard() {
+        Board board = new Board(3);
+
+        assertFalse(board.isGameOver());
+    }
+
+    @Test
+    public void gameIsNotOverWithHalfFullBoard() {
+        Board board = new Board(3);
+        board.addMove(0, playerCross);
+        board.addMove(1, playerCross);
+        board.addMove(2, playerCross);
+        board.addMove(3, playerCross);
+        board.addMove(4, playerCross);
+
+        assertFalse(board.isGameOver());
+    }
+
+    @Test
+    public void gameIsOverWithFullBoard() {
+        Board board = new Board(3);
+        board.addMove(0, playerCross);
+        board.addMove(1, playerCross);
+        board.addMove(2, playerCross);
+        board.addMove(3, playerCross);
+        board.addMove(4, playerCross);
+        board.addMove(5, playerCross);
+        board.addMove(6, playerCross);
+        board.addMove(7, playerCross);
+        board.addMove(8, playerCross);
+
+        assertTrue(board.isGameOver());
+    }
 }

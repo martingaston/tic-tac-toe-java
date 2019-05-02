@@ -117,6 +117,16 @@ public class Board {
         return false;
     }
 
+    public boolean isGameOver() {
+        for (int i = 0; i < this.totalCells; i++) {
+            if(board.get(i).isNotOccupied()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static class Line {
         private List<Cell> cells;
 
