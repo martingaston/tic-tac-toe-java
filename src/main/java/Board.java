@@ -46,8 +46,8 @@ public class Board {
     }
 
     private List<Line> diagonals() {
-        List<Integer> diagonalLeft = new LinkedList<>();
-        List<Integer> diagonalRight = new LinkedList<>();
+        List<Cell> diagonalLeft = new LinkedList<>();
+        List<Cell> diagonalRight = new LinkedList<>();
 
         for (int row = 0; row < this.sideLength; row++) {
             diagonalLeft.add(leftDiagonalAt(row));
@@ -55,17 +55,17 @@ public class Board {
         }
 
         return Arrays.asList(
-                new Line<>(diagonalLeft),
-                new Line<>(diagonalRight)
+                new Line(diagonalLeft),
+                new Line(diagonalRight)
          );
     }
 
-    private Integer rightDiagonalAt(int row) {
-        return this.sideLength - 1 + (row * this.sideLength) - row;
+    private Cell rightDiagonalAt(int row) {
+        return getCell(this.sideLength - 1 + (row * this.sideLength) - row);
     }
 
-    private Integer leftDiagonalAt(int row) {
-        return row + (row * this.sideLength);
+    private Cell leftDiagonalAt(int row) {
+        return getCell(row + (row * this.sideLength));
     }
 
     private List<Line> columns() {
@@ -78,13 +78,13 @@ public class Board {
         return verticalMoves;
     }
 
-    private Line<Integer> columnAt(int column) {
-        List<Integer> populatedColumn = new LinkedList<>();
+    private Line columnAt(int column) {
+        List<Cell> populatedColumn = new LinkedList<>();
         for (int i = 0; i < sideLength;i++) {
-            populatedColumn.add(column + sideLength * i);
+            populatedColumn.add(getCell(column + sideLength * i));
         }
 
-        return new Line<>(populatedColumn);
+        return new Line(populatedColumn);
     }
 
     private List<Line> rows() {
@@ -97,15 +97,15 @@ public class Board {
         return horizontalMoves;
     }
 
-    private Line<Integer> rowAt(int row) {
+    private Line rowAt(int row) {
         int startIndex = row * sideLength;
 
-        List<Integer> populatedRow = new LinkedList<>();
+        List<Cell> populatedRow = new LinkedList<>();
         for (int i = startIndex; i < startIndex + sideLength; i++) {
-            populatedRow.add(i);
+            populatedRow.add(getCell(i));
         }
 
-        return new Line<>(populatedRow);
+        return new Line(populatedRow);
     }
 
     public boolean hasWinner() {
@@ -117,24 +117,26 @@ public class Board {
         return false;
     }
 
-    public static class Line<T> {
-        private List<T> cells;
+    public static class Line {
+        private List<Cell> cells;
 
-        public Line(List<T> cells) {
+        public Line(List<Cell> cells) {
             this.cells = cells;
         }
 
         public boolean hasWinner() {
-            System.out.println(toString());
-            return false;
+            return cells.get(0).getOccupant().equals(cells.get(1).getOccupant()) && cells.get(1).getOccupant().equals(cells.get(2).getOccupant());
         }
 
         @Override
         public String toString() {
             StringBuilder stringify = new StringBuilder("Cell: ");
-            for (T cell : cells) {
-                stringify.append(cell);
-                stringify.append(" ");
+            for (Cell cell : cells) {
+                stringify.append("| isOccupied: ").append(cell.isOccupied());
+                if (cell.isOccupied()) {
+                    stringify.append(", occupant: ").append(cell.getOccupant());
+                }
+                stringify.append(" | ");
             }
             return stringify.toString();
         }
