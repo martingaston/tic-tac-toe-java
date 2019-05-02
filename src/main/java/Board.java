@@ -125,7 +125,14 @@ public class Board {
         }
 
         public boolean hasWinner() {
-            return cells.get(0).getOccupant().equals(cells.get(1).getOccupant()) && cells.get(1).getOccupant().equals(cells.get(2).getOccupant());
+            Player occupant = cells.get(0).occupant();
+            for (Cell cell : cells) {
+                if (cell.occupant() != occupant) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         @Override
