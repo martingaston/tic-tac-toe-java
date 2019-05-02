@@ -55,8 +55,8 @@ public class Board {
         }
 
         return Arrays.asList(
-                new Line(diagonalLeft),
-                new Line(diagonalRight)
+                new Line<>(diagonalLeft),
+                new Line<>(diagonalRight)
          );
     }
 
@@ -78,13 +78,13 @@ public class Board {
         return verticalMoves;
     }
 
-    private Line columnAt(int column) {
+    private Line<Integer> columnAt(int column) {
         List<Integer> populatedColumn = new LinkedList<>();
         for (int i = 0; i < sideLength;i++) {
             populatedColumn.add(column + sideLength * i);
         }
 
-        return new Line(populatedColumn);
+        return new Line<>(populatedColumn);
     }
 
     private List<Line> rows() {
@@ -97,15 +97,15 @@ public class Board {
         return horizontalMoves;
     }
 
-    private Line rowAt(int row) {
+    private Line<Integer> rowAt(int row) {
         int startIndex = row * sideLength;
 
         List<Integer> populatedRow = new LinkedList<>();
-        for (int i = startIndex; i < sideLength;i++) {
+        for (int i = startIndex; i < startIndex + sideLength; i++) {
             populatedRow.add(i);
         }
 
-        return new Line(populatedRow);
+        return new Line<>(populatedRow);
     }
 
     public boolean hasWinner() {
@@ -117,21 +117,22 @@ public class Board {
         return false;
     }
 
-    public static class Line {
-        private List<Integer> cells;
+    public static class Line<T> {
+        private List<T> cells;
 
-        public Line(List<Integer> cells) {
+        public Line(List<T> cells) {
             this.cells = cells;
         }
 
         public boolean hasWinner() {
+            System.out.println(toString());
             return false;
         }
 
         @Override
         public String toString() {
             StringBuilder stringify = new StringBuilder("Cell: ");
-            for (Integer cell : cells) {
+            for (T cell : cells) {
                 stringify.append(cell);
                 stringify.append(" ");
             }
