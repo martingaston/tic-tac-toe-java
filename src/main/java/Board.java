@@ -30,6 +30,16 @@ public class Board {
         return this.totalCells;
     }
 
+    public List<Integer> available() {
+        List<Integer> available = new ArrayList<>();
+        for (int i = 0; i < this.totalCells; i++) {
+            if(getCell(i).isNotOccupied()) {
+                available.add(i);
+            }
+        }
+        return available;
+    }
+
     int getSideLength() { return this.sideLength; }
 
     public void addMove(int position, Player player) {
