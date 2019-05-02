@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -136,11 +138,42 @@ public class BoardTest {
     }
 
     @Test
+    public void availableReturnsSixIfThreeMovesArePlayed() {
+        Board board = new Board(3);
+        board.addMove(1, playerCross);
+        board.addMove(2, playerNought);
+        board.addMove(3, playerCross);
+
+        assertEquals(6, board.available().size());
+    }
+
+    @Test
+    public void availableReturnsArrayOfMoves() {
+        Board board = new Board(3);
+        board.addMove(0, playerCross);
+        board.addMove(1, playerNought);
+        board.addMove(2, playerCross);
+
+        List<Integer> expected = new LinkedList<>(Arrays.asList(3,4,5,6,7,8));
+
+        assertEquals(expected, board.available());
+    }
+
+    @Test
     public void aBoardKnowsOfItsLines() {
         Board board = new Board(3);
-        List<Board.Line> lines = board.lines();
+        List<Line> lines = board.lines();
 
         assertEquals(8, lines.size());
+    }
+
+    @Test
+    public void doesNotFindWinnerIfNoWinner() {
+        Board board = new Board(3);
+        board.addMove(0, playerCross);
+        board.addMove(1, playerCross);
+
+        assertFalse(board.hasWinner());
     }
 
     @Test
@@ -234,10 +267,9 @@ public class BoardTest {
     public void gameIsNotOverWithHalfFullBoard() {
         Board board = new Board(3);
         board.addMove(0, playerCross);
-        board.addMove(1, playerCross);
+        board.addMove(1, playerNought);
         board.addMove(2, playerCross);
-        board.addMove(3, playerCross);
-        board.addMove(4, playerCross);
+        board.addMove(3, playerNought);
 
         assertFalse(board.isGameOver());
     }

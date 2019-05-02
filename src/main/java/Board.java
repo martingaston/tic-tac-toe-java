@@ -30,6 +30,18 @@ public class Board {
 
     int getSideLength() { return this.sideLength; }
 
+    public List<Integer> available() {
+        List<Integer> moves = new LinkedList<>();
+
+        for (int i = 0; i < this.totalCells; i++) {
+            if(board.get(i).isNotOccupied()) {
+                moves.add(i);
+            }
+        }
+
+        return moves;
+    }
+
     public void addMove(int position, Player player) {
         Cell requestedCell = board.get(position);
         if (requestedCell.isNotOccupied()) {
@@ -118,47 +130,15 @@ public class Board {
     }
 
     public boolean isGameOver() {
-        return hasWinner() || isBoardFull();
+        return isBoardFull() || hasWinner();
     }
 
     private boolean isBoardFull() {
         for (int i = 0; i < this.totalCells; i++) {
             if(board.get(i).isNotOccupied()) {
-                return true;
+                return false;
             }
         }
-        return false;
-    }
-
-    public static class Line {
-        private List<Cell> cells;
-
-        public Line(List<Cell> cells) {
-            this.cells = cells;
-        }
-
-        public boolean hasWinner() {
-            Player occupant = cells.get(0).occupant();
-            for (Cell cell : cells) {
-                if (cell.occupant() != occupant) {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder stringify = new StringBuilder("Cell: ");
-            for (Cell cell : cells) {
-                stringify.append("| isOccupied: ").append(cell.isOccupied());
-                if (cell.isOccupied()) {
-                    stringify.append(", occupant: ").append(cell.getOccupant());
-                }
-                stringify.append(" | ");
-            }
-            return stringify.toString();
-        }
+        return true;
     }
 }
