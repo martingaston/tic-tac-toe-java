@@ -144,11 +144,81 @@ public class BoardTest {
     }
 
     @Test
-    public void findsAWinner() {
+    public void findsTopHorizontalWinner() {
         Board board = new Board(3);
         board.addMove(0, playerCross);
         board.addMove(1, playerCross);
         board.addMove(2, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsMiddleHorizontalWinner() {
+        Board board = new Board(3);
+        board.addMove(3, playerCross);
+        board.addMove(4, playerCross);
+        board.addMove(5, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsBottomHorizontalWinner() {
+        Board board = new Board(3);
+        board.addMove(6, playerCross);
+        board.addMove(7, playerCross);
+        board.addMove(8, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsLeftVerticalWinner() {
+        Board board = new Board(3);
+        board.addMove(0, playerCross);
+        board.addMove(3, playerCross);
+        board.addMove(6, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsMiddleVerticalWinner() {
+        Board board = new Board(3);
+        board.addMove(1, playerCross);
+        board.addMove(4, playerCross);
+        board.addMove(7, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsRightVerticalWinner() {
+        Board board = new Board(3);
+        board.addMove(2, playerCross);
+        board.addMove(5, playerCross);
+        board.addMove(8, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsLeftDiagonalWinner() {
+        Board board = new Board(3);
+        board.addMove(0, playerCross);
+        board.addMove(4, playerCross);
+        board.addMove(8, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsRightDiagonalWinner() {
+        Board board = new Board(3);
+        board.addMove(2, playerCross);
+        board.addMove(4, playerCross);
+        board.addMove(6, playerCross);
 
         assertTrue(board.hasWinner());
     }

@@ -127,5 +127,15 @@ public class Board {
         public boolean hasWinner() {
             return false;
         }
+
+        @Override
+        public String toString() {
+            StringBuilder stringify = new StringBuilder("Cell: ");
+            for (Integer cell : cells) {
+                stringify.append(cell);
+                stringify.append(" ");
+            }
+            return stringify.toString();
+        }
     }
 }
