@@ -144,7 +144,7 @@ public class BoardTest {
     }
 
     @Test
-    public void findsAsWinner() {
+    public void findsAWinner() {
         Board board = new Board(3);
         board.addMove(0, playerCross);
         board.addMove(1, playerCross);

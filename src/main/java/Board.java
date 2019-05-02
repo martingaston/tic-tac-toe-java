@@ -46,10 +46,26 @@ public class Board {
     }
 
     private List<Line> diagonals() {
+        List<Integer> diagonalLeft = new LinkedList<>();
+        List<Integer> diagonalRight = new LinkedList<>();
+
+        for (int row = 0; row < this.sideLength; row++) {
+            diagonalLeft.add(leftDiagonalAt(row));
+            diagonalRight.add(rightDiagonalAt(row));
+        }
+
         return Arrays.asList(
-                new Line(Arrays.asList(0, 4, 8)),
-                new Line(Arrays.asList(2, 4, 6))
+                new Line(diagonalLeft),
+                new Line(diagonalRight)
          );
+    }
+
+    private Integer rightDiagonalAt(int row) {
+        return this.sideLength - 1 + (row * this.sideLength) - row;
+    }
+
+    private Integer leftDiagonalAt(int row) {
+        return row + (row * this.sideLength);
     }
 
     private List<Line> columns() {
@@ -109,7 +125,7 @@ public class Board {
         }
 
         public boolean hasWinner() {
-            return cell1.equals(cell2) && cell2.equals(cell3);
+            return false;
         }
     }
 }
