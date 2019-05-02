@@ -4,30 +4,29 @@ import java.util.List;
 
 public class Minimax {
     public static NodeValue optimal(Node<NodeValue> root) {
-        return optimal(root, "maximiser");
+        return optimal(root, "maximiser", 9);
     }
 
-    private static NodeValue optimal(Node<NodeValue> root, String currentPlayer) {
+    private static NodeValue optimal(Node<NodeValue> root, String currentPlayer, int depth) {
         if (root.isLeaf()) {
-            return root.getValue();
+            NodeValue leaf = root.getValue();
+            int depthAdjustedScore = leaf.score() * depth;
+            return new NodeValue(depthAdjustedScore, leaf.position());
         }
 
-        List<NodeValue> optimalChildren = loopChildren(root, currentPlayer);
-
-        if (currentPlayer.equals("maximiser")) {
-            return Collections.max(optimalChildren, new NodeValueSort());
-        } else {
-            return Collections.min(optimalChildren, new NodeValueSort());
-        }
-    }
-
-    private static List<NodeValue> loopChildren(Node<NodeValue> root, String currentPlayer) {
         List<NodeValue> optimalChildren = new ArrayList<>();
         for (int i = 0; i < root.size(); i++) {
-            NodeValue nextOptimal = optimal(root.getChild(i), switchPlayer(currentPlayer));
+            NodeValue nextOptimal = optimal(root.getChild(i), switchPlayer(currentPlayer), depth - 1);
             optimalChildren.add(nextOptimal);
         }
-        return optimalChildren;
+
+        if (currentPlayer.equals("maximiser")) {
+            NodeValue max = Collections.max(optimalChildren, new NodeValueSort());
+            return new NodeValue(max.score(), max.position());
+        } else {
+            NodeValue min = Collections.min(optimalChildren, new NodeValueSort());
+            return new NodeValue(min.score(), min.position());
+        }
     }
 
     private static String switchPlayer(String currentPlayer) {

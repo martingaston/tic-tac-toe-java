@@ -36,6 +36,21 @@ public class TreeTest {
     }
 
     @Test
+    public void minimaxReturnsPositionFiveForDrawState() {
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(1, playerCross);
+        board.addMoveToBoard(2, playerNought);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(6, playerCross);
+        board.addMoveToBoard(7, playerNought);
+        board.addMoveToBoard(8, playerNought);
+
+        Node<NodeValue> node = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(5, Minimax.optimal(node).position());
+    }
+
+    @Test
     public void winStateReturnsNodeWithOneValue() {
         board.addMoveToBoard(0, playerCross);
         board.addMoveToBoard(1, playerNought);
@@ -51,6 +66,21 @@ public class TreeTest {
     }
 
     @Test
+    public void minimaxReturnsPositionEightForWinState() {
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerNought);
+        board.addMoveToBoard(5, playerCross);
+        board.addMoveToBoard(6, playerNought);
+        board.addMoveToBoard(7, playerCross);
+
+        Node<NodeValue> node = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(8, Minimax.optimal(node).position());
+    }
+
+    @Test
     public void losingStateReturnsNodeWithMinusOneValue() {
         board.addMoveToBoard(0, playerCross);
         board.addMoveToBoard(1, playerNought);
@@ -63,6 +93,22 @@ public class TreeTest {
 
         Node<NodeValue> node = Tree.makeNode(board, rules, playerNought, players);
         assertEquals(-1, node.getValue().score());
+    }
+
+    @Test
+    public void minimaxReturnsPositionEightForLossState() {
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerNought);
+        board.addMoveToBoard(5, playerCross);
+        board.addMoveToBoard(6, playerNought);
+        board.addMoveToBoard(7, playerCross);
+        players.nextTurn();
+
+        Node<NodeValue> node = Tree.makeNode(board, rules, playerCross, players);
+        assertEquals(8, Minimax.optimal(node).position());
     }
 
     @Test
@@ -294,5 +340,59 @@ public class TreeTest {
         Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
         assertTrue(boardTree.getChild(2).isLeaf());
         assertEquals(1, boardTree.getChild(2).getValue().score());
+    }
+
+    @Test
+    public void TwoRowsFilledBoardMinimaxReturnsOne() {
+        board.addMoveToBoard(0, playerNought);
+        board.addMoveToBoard(1, playerNought);
+        board.addMoveToBoard(2, playerCross);
+        board.addMoveToBoard(3, playerNought);
+        board.addMoveToBoard(4, playerCross);
+        board.addMoveToBoard(5, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        NodeValue optimal = Minimax.optimal(boardTree);
+        assertEquals(1, optimal.score());
+    }
+
+    @Test
+    public void MinimaxTakesWinningDiagonalMoveIfAvailable() {
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(8, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        NodeValue optimal = Minimax.optimal(boardTree);
+        assertEquals(4, optimal.position());
+    }
+
+    @Test
+    public void MinimaxTakesWinningHorizontalMoveIfAvailable() {
+        board.addMoveToBoard(0, playerCross);
+        board.addMoveToBoard(1, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        NodeValue optimal = Minimax.optimal(boardTree);
+        assertEquals(2, optimal.position());
+    }
+
+    @Test
+    public void MinimaxTakesWinningVerticalMoveIfAvailable() {
+        board.addMoveToBoard(1, playerCross);
+        board.addMoveToBoard(4, playerCross);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        NodeValue optimal = Minimax.optimal(boardTree);
+        assertEquals(7, optimal.position());
+    }
+
+    @Test
+    public void MinimaxPlaysToBlock() {
+        board.addMoveToBoard(2, playerNought);
+        board.addMoveToBoard(5, playerNought);
+
+        Node<NodeValue> boardTree = Tree.makeNode(board, rules, playerCross, players);
+        NodeValue optimal = Minimax.optimal(boardTree);
+        assertEquals(8, optimal.position());
     }
 }

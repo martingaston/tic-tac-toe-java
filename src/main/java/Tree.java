@@ -27,7 +27,6 @@ public class Tree {
             }
         }
 
-        //TODO this is creating extra root nodes :(
         Node<NodeValue> root = new Node<>(new NodeValue(Integer.MIN_VALUE, Integer.MIN_VALUE));
 
         for ( int move : availableMoves) {
@@ -40,7 +39,12 @@ public class Tree {
             } else if (maximisingPlayer != currentPlayer && rules.hasWinningMove(currentPlayer)) {
                 root.addChild(new Node<>(new NodeValue(-1, move)));
             } else {
-                Node<NodeValue> nextChildNode = new Node<>(new NodeValue(0, move));
+                Node<NodeValue> nextChildNode;
+                if (maximisingPlayer == currentPlayer) {
+                    nextChildNode = new Node<>(new NodeValue(Integer.MIN_VALUE, move));
+                } else {
+                    nextChildNode = new Node<>(new NodeValue(Integer.MAX_VALUE, move));
+                }
                 players.nextTurn();
                 makeNewChildNode(board, nextChildNode, rules, maximisingPlayer, players);
                 root.addChild(nextChildNode);
@@ -67,7 +71,12 @@ public class Tree {
             } else if (rules.gameIsOver()) {
                 node.addChild(new Node<>(new NodeValue(0, move)));
             } else {
-                Node<NodeValue> nextChildNode = new Node<>(new NodeValue(0, move));
+                Node<NodeValue> nextChildNode;
+                if (maximisingPlayer == currentPlayer) {
+                    nextChildNode = new Node<>(new NodeValue(Integer.MIN_VALUE, move));
+                } else {
+                    nextChildNode = new Node<>(new NodeValue(Integer.MAX_VALUE, move));
+                }
                 players.nextTurn();
                 makeNewChildNode(board, nextChildNode, rules, maximisingPlayer, players);
                 node.addChild(nextChildNode);
