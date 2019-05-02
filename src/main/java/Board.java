@@ -118,13 +118,16 @@ public class Board {
     }
 
     public boolean isGameOver() {
+        return hasWinner() || isBoardFull();
+    }
+
+    private boolean isBoardFull() {
         for (int i = 0; i < this.totalCells; i++) {
             if(board.get(i).isNotOccupied()) {
-                return false;
+                return true;
             }
         }
-
-        return true;
+        return false;
     }
 
     public static class Line {
