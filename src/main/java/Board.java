@@ -48,4 +48,11 @@ public class Board {
             requestedCell.mark(player);
         }
     }
+
+    public void remove(int position) {
+        Cell requestedCell = board.get(position);
+        if (requestedCell.isOccupied()) {
+            requestedCell.unmark();
+        }
+    }
 }

@@ -152,4 +152,11 @@ public class BoardTest {
         List<Integer> expected = new ArrayList<>(Arrays.asList(5,6,7,8));
         assertEquals(expected, result);
     }
+
+    @Test
+    public void boardCanBeUnmarked() {
+        board.addMove(0, playerCross);
+        board.remove(0);
+        assertEquals(9, board.available().size());
+    }
 }

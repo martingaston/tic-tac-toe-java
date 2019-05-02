@@ -1,3 +1,5 @@
+import java.util.Collections;
+
 public class Minimax {
     private Player maximizer;
     private Player minimizer;
@@ -40,6 +42,12 @@ public class Minimax {
 
         if(isMax) {
             int best = Integer.MIN_VALUE;
+
+            for (int index : board.available()) {
+                board.addMove(index, maximizer);
+                best = Integer.max(best,
+                        minimax(depth + 1, !isMax));
+            }
 
             return best;
 
