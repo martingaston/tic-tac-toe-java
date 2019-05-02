@@ -1,5 +1,3 @@
-import java.util.Collections;
-
 public class Minimax {
     private Player maximizer;
     private Player minimizer;
@@ -46,16 +44,41 @@ public class Minimax {
             for (int index : board.available()) {
                 board.addMove(index, maximizer);
                 best = Integer.max(best,
-                        minimax(depth + 1, !isMax));
+                        minimax(depth + 1, false));
+                board.remove(index);
             }
 
             return best;
-
         } else {
             int best = Integer.MAX_VALUE;
 
+            for (int index : board.available()) {
+                board.addMove(index, minimizer);
+                best = Integer.min(best,
+                        minimax(depth + 1, true));
+                board.remove(index);
+            }
+
             return best;
         }
+    }
+
+    public Integer optimal() {
+        int bestValue = Integer.MIN_VALUE;
+        int bestIndex = Integer.MIN_VALUE;
+
+        for (int index : board.available()) {
+            board.addMove(index, maximizer);
+            int moveValue = minimax(0, false);
+            board.remove(index);
+
+            if (moveValue > bestValue) {
+                bestValue = moveValue;
+                bestIndex = index;
+            }
+        }
+
+        return bestIndex;
     }
 
     private boolean noMovesLeft() {

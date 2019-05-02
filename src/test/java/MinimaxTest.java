@@ -4,11 +4,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MinimaxTest {
-    Board board;
-    Rules rules;
-    Player playerMaxi;
-    Player playerMini;
-    Minimax minimax;
+    private Board board;
+    private Rules rules;
+    private Player playerMaxi;
+    private Player playerMini;
+    private Minimax minimax;
 
     @Before
     public void setUp() throws Exception {
@@ -50,5 +50,33 @@ public class MinimaxTest {
         board.addMove(8, playerMaxi);
         int result = minimax.minimax(0, false);
         assertEquals(0, result);
+    }
+
+    @Test
+    public void minimaxPlaysForWin() {
+        board.addMove(0, playerMaxi);
+        board.addMove(1, playerMaxi);
+        int result = minimax.optimal();
+        assertEquals(2, result);
+    }
+
+    @Test
+    public void minimaxBlocksOpponentWin() {
+        board.addMove(3, playerMini);
+        board.addMove(4, playerMini);
+        int result = minimax.optimal();
+        assertEquals(5, result);
+    }
+
+    @Test
+    public void minimaxGoesForEarliestWin() {
+        board.addMove(0, playerMini);
+        board.addMove(1, playerMini);
+        board.addMove(2, playerMaxi);
+        board.addMove(3, playerMini);
+        board.addMove(4, playerMaxi);
+        board.addMove(5, playerMaxi);
+        int result = minimax.optimal();
+        assertEquals(6, result);
     }
 }
