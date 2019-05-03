@@ -42,7 +42,7 @@ public class Board {
 
     int getSideLength() { return this.sideLength; }
 
-    public void addMove(int position, Player player) {
+    public void add(int position, Player player) {
         Cell requestedCell = board.get(position);
         if (requestedCell.isNotOccupied()) {
             requestedCell.mark(player);

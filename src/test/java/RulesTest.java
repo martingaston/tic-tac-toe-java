@@ -45,125 +45,125 @@ public class RulesTest {
 
     @Test
     public void testOccupiedCellIsInvalidMove() {
-        board.addMove(4, playerCross);
+        board.add(4, playerCross);
         assertTrue(rules.isNotValidMove(4));
     }
 
     @Test
     public void checkHorizontalTopIsValidWinCondition() {
-        board.addMove(0, playerCross);
-        board.addMove(1, playerCross);
-        board.addMove(2, playerCross);
+        board.add(0, playerCross);
+        board.add(1, playerCross);
+        board.add(2, playerCross);
         assertTrue(rules.hasWinningMove(playerCross));
 
     }
 
     @Test
     public void checkHorizontalMiddleIsValidWinCondition() {
-        board.addMove(3, playerCross);
-        board.addMove(4, playerCross);
-        board.addMove(5, playerCross);
+        board.add(3, playerCross);
+        board.add(4, playerCross);
+        board.add(5, playerCross);
         assertTrue(rules.hasWinningMove(playerCross));
 
     }
 
     @Test
     public void checkHorizontalBottomIsValidWinCondition() {
-        board.addMove(6, playerCross);
-        board.addMove(7, playerCross);
-        board.addMove(8, playerCross);
+        board.add(6, playerCross);
+        board.add(7, playerCross);
+        board.add(8, playerCross);
         assertTrue(rules.hasWinningMove(playerCross));
 
     }
 
     @Test
     public void checkVerticalLeftIsValidWinCondition() {
-        board.addMove(0, playerCross);
-        board.addMove(3, playerCross);
-        board.addMove(6, playerCross);
+        board.add(0, playerCross);
+        board.add(3, playerCross);
+        board.add(6, playerCross);
         assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
     public void checkVerticalMiddleIsValidWinCondition() {
-        board.addMove(1, playerCross);
-        board.addMove(4, playerCross);
-        board.addMove(7, playerCross);
+        board.add(1, playerCross);
+        board.add(4, playerCross);
+        board.add(7, playerCross);
         assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
     public void checkVerticalRightIsValidWinCondition() {
-        board.addMove(2, playerCross);
-        board.addMove(5, playerCross);
-        board.addMove(8, playerCross);
+        board.add(2, playerCross);
+        board.add(5, playerCross);
+        board.add(8, playerCross);
         assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
     public void checkLeftDiagonalIsValidWinCondition() {
-        board.addMove(0, playerCross);
-        board.addMove(4, playerCross);
-        board.addMove(8, playerCross);
+        board.add(0, playerCross);
+        board.add(4, playerCross);
+        board.add(8, playerCross);
         assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
     public void checkRightDiagonalIsValidWinCondition() {
-        board.addMove(2, playerCross);
-        board.addMove(4, playerCross);
-        board.addMove(6, playerCross);
+        board.add(2, playerCross);
+        board.add(4, playerCross);
+        board.add(6, playerCross);
         assertTrue(rules.hasWinningMove(playerCross));
     }
 
     @Test
     public void checkNoWinningHorizontalMoveReturnsFalse() {
-        board.addMove(0, playerNought);
-        board.addMove(2, playerNought);
-        board.addMove(3, playerCross);
-        board.addMove(4, playerCross);
-        board.addMove(5, playerNought);
-        board.addMove(6, playerNought);
-        board.addMove(7, playerNought);
-        board.addMove(8, playerCross);
+        board.add(0, playerNought);
+        board.add(2, playerNought);
+        board.add(3, playerCross);
+        board.add(4, playerCross);
+        board.add(5, playerNought);
+        board.add(6, playerNought);
+        board.add(7, playerNought);
+        board.add(8, playerCross);
 
         assertFalse(rules.hasWinningMove(playerCross));
     }
 
     @Test
     public void checkThatWinningMovesIsFalseIfOtherPlayerShouldWin() {
-        board.addMove(0, playerNought);
-        board.addMove(1, playerNought);
-        board.addMove(2, playerNought);
+        board.add(0, playerNought);
+        board.add(1, playerNought);
+        board.add(2, playerNought);
 
         assertFalse(rules.hasWinningMove(playerCross));
     }
 
     @Test
     public void checkFullBoardReturnsGameOver() {
-        board.addMove(0, playerNought);
-        board.addMove(1, playerCross);
-        board.addMove(2, playerNought);
-        board.addMove(3, playerCross);
-        board.addMove(4, playerCross);
-        board.addMove(5, playerNought);
-        board.addMove(6, playerNought);
-        board.addMove(7, playerNought);
-        board.addMove(8, playerCross);
+        board.add(0, playerNought);
+        board.add(1, playerCross);
+        board.add(2, playerNought);
+        board.add(3, playerCross);
+        board.add(4, playerCross);
+        board.add(5, playerNought);
+        board.add(6, playerNought);
+        board.add(7, playerNought);
+        board.add(8, playerCross);
 
         assertTrue(rules.gameIsOver());
     }
 
     @Test
     public void checkNotFullBoardDoesNotReturnGameOver() {
-        board.addMove(0, playerNought);
-        board.addMove(1, playerCross);
-        board.addMove(3, playerCross);
-        board.addMove(4, playerCross);
-        board.addMove(5, playerNought);
-        board.addMove(6, playerNought);
-        board.addMove(7, playerNought);
-        board.addMove(8, playerCross);
+        board.add(0, playerNought);
+        board.add(1, playerCross);
+        board.add(3, playerCross);
+        board.add(4, playerCross);
+        board.add(5, playerNought);
+        board.add(6, playerNought);
+        board.add(7, playerNought);
+        board.add(8, playerCross);
 
         assertFalse(rules.gameIsOver());
     }
