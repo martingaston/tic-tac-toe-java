@@ -24,6 +24,10 @@ public class Minimax {
     }
 
     public Integer minimax(int depth, boolean isMax) {
+        return minimax(depth, isMax, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private Integer minimax(int depth, boolean isMax, int alpha, int beta) {
         int score = evaluateBoard();
 
         if (score == 10) {
@@ -44,8 +48,13 @@ public class Minimax {
             for (int index : board.available()) {
                 board.addMove(index, maximizer);
                 best = Integer.max(best,
-                        minimax(depth + 1, false));
+                        minimax(depth + 1, false, alpha, beta));
                 board.remove(index);
+
+                int updatedAlpha = Integer.max(alpha, best);
+                if (beta <= updatedAlpha) {
+                    break;
+                }
             }
 
             return best;
@@ -55,8 +64,13 @@ public class Minimax {
             for (int index : board.available()) {
                 board.addMove(index, minimizer);
                 best = Integer.min(best,
-                        minimax(depth + 1, true));
+                        minimax(depth + 1, true, alpha, beta));
                 board.remove(index);
+
+                int updatedBeta = Integer.min(beta, best);
+                if (updatedBeta <= alpha) {
+                    break;
+                }
             }
 
             return best;
@@ -69,7 +83,7 @@ public class Minimax {
 
         for (int index : board.available()) {
             board.addMove(index, maximizer);
-            int moveValue = minimax(0, false);
+            int moveValue = minimax(0, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
             board.remove(index);
 
             if (moveValue > bestValue) {
