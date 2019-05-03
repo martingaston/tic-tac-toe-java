@@ -15,11 +15,11 @@ public class Players {
                 break;
             case 2:
                 this.playerCross = new PlayerHuman("X", rules);
-                this.playerNought = new PlayerCPU("O", rules, board);
+                this.playerNought = new PlayerCPU("O", board);
                 break;
             case 3:
-                this.playerCross = new PlayerCPU("X", rules, board);
-                this.playerNought = new PlayerCPU("O", rules, board);
+                this.playerCross = new PlayerCPU("X", board);
+                this.playerNought = new PlayerCPU("O", board);
                 break;
             case 4:
                 this.playerCross = new PlayerHuman("X", rules);

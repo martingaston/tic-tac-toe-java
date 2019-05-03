@@ -1,12 +1,12 @@
+import java.util.List;
+
 public class PlayerCPU implements Player {
     private String symbol;
-    private Rules rules;
-    private int totalCells;
+    private Board board;
 
-    PlayerCPU(String symbol, Rules rules, Board board) {
+    PlayerCPU(String symbol, Board board) {
         this.symbol = symbol;
-        this.rules = rules;
-        this.totalCells = board.getTotalCells();
+        this.board = board;
     }
 
     @Override
@@ -16,17 +16,14 @@ public class PlayerCPU implements Player {
 
     @Override
     public int getNextMove() {
-        int desiredCell;
-        do {
-            desiredCell = pickRandomCell();
-        } while (rules.isNotValidMove(desiredCell));
-
         oneSecondSleep();
-        return desiredCell;
+        return pickRandomCell();
     }
 
     private int pickRandomCell() {
-        return (int)Math.floor(Math.random() * totalCells);
+        List<Integer> available = board.available();
+        int cellIndex = (int)Math.floor(Math.random() * available.size());
+        return available.get(cellIndex);
     }
 
     private void oneSecondSleep() {
