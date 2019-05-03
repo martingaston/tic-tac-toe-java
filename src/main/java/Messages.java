@@ -11,7 +11,7 @@ public class Messages {
 
         standardMessage.put("gameOverDraw", "Bad luck! It's a draw!");
         standardMessage.put("invalidMove", "Sorry, that move is invalid.\nPlease choose an unoccupied square.");
-        standardMessage.put("setup", "Select a game mode:\n1. Human v Human\n2. Human v CPU\n3. CPU v CPU\n");
+        standardMessage.put("setup", "Select a game mode:\n1. Human v Human\n2. Human v CPU (EASY)\n3. Human v CPU (HARD)\n4. CPU v CPU");
         standardMessage.put("boardSize", "Select a board size:\n1. 3x3 (default)\n2. 4x4");
 
         formatMessage.put("gameInstructions", "Input numbers between 1-%s on alternative turns to place your mark in the %s grid.");

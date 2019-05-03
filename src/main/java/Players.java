@@ -10,6 +10,7 @@ public class Players {
         int modeNumber = input.nextInt();
         switch(modeNumber) {
             case 1:
+            default:
                 this.playerCross = new PlayerHuman("X", rules);
                 this.playerNought = new PlayerHuman("O", rules);
                 break;
@@ -18,12 +19,13 @@ public class Players {
                 this.playerNought = new PlayerCPU("O", board);
                 break;
             case 3:
+                this.playerCross = new PlayerHuman("X", rules);
+                this.playerNought = new PlayerMinimax("O", rules, board, playerCross);
+                break;
+            case 4:
                 this.playerCross = new PlayerCPU("X", board);
                 this.playerNought = new PlayerCPU("O", board);
                 break;
-            case 4:
-                this.playerCross = new PlayerHuman("X", rules);
-                this.playerNought = new PlayerMinimax("O", rules, board, playerCross);
         }
         this.currentPlayer = playerCross;
     }
