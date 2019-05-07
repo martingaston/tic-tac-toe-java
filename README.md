@@ -24,7 +24,37 @@ Compiling from sources requires an installation of the JDK - my personal prefere
 2. run `javac *.java`
 3. run `java main`
 
-## User Stories in this Sprint
+## Sprint 5 (07/05-10/05)
+
+- Pass arguments to CLI
+- Add E2E tests
+- Save/Resume Functionality
+- Add Minimax CPU v Minimax CPU option
+
+## Sprint 4 (29/04-03/05)
+
+- Fix Messages class to display proper input information on 3X3 and 4X4 grids
+- Refactor functions that require specific order
+- Add unbeatable computer
+- Pass arguments to CLI
+- Add E2E tests
+- Save/Resume Functionality
+
+## Sprint 3 (23/04-26/04)
+
+- Add 4X4 board
+- Add menu for the size of the board
+- Add Computer V Computer to the menu
+- Pass arguments to CLI
+
+## Sprint 2 (15/04-18/04)
+
+- Refactor the board from Java primitive array to another data structure
+- Add a CPU opponent
+- Add a menu to select from 2P or VS CPU
+- Add error handling for unexpected input cases
+
+## Sprint 1 (08/04-12/04) 
 
 - ✅ Simple instructions for the user should be provided within the application itself
 - ✅ The game is played on a standard 3 X 3 board  
