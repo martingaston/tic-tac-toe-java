@@ -4,11 +4,11 @@
 
 ## What is this?
 
-An 2-player implementation of Tic Tac Toe in Java, the classic 3x3 grid adventure which supposedly ends in a draw if you know what you're doing. Played on the command line, because command lines are cool. 
+An 2-player implementation of Tic Tac Toe in Java, the classic 3x3 grid adventure which supposedly ends in a draw if you know what you're doing. Played on the command line, because command lines are cool.
 
-## How do I play it? 
+## How do I play it?
 
-Compiling from sources requires an installation of the JDK - my personal preference is [OpenJDK](https://openjdk.java.net/), with this code being built on JDK 12. 
+Compiling from sources requires an installation of the JDK - my personal preference is [OpenJDK](https://openjdk.java.net/), with this code being built on JDK 12.
 
 ### Mac
 
@@ -20,20 +20,44 @@ Compiling from sources requires an installation of the JDK - my personal prefere
 
 #### Compile and Run
 
-1. From the project root, `cd` into `src/main/java` 
+1. From the project root, `cd` into `src/main/java`
 2. run `javac *.java`
 3. run `java main`
 
-## User Stories in this Sprint
+## Sprint 5 (07/05-10/05)
+
+- Pass arguments to CLI
+- Add E2E tests
+- Save/Resume Functionality
+- Add Minimax CPU v Minimax CPU option
+
+## Sprint 4 (29/04-03/05)
+
+- ✅ Fix Messages class to display proper input information on 3X3 and 4X4 grids
+- ✅ Refactor functions that require specific order
+- ✅ Add unbeatable computer
+- ❌Pass arguments to CLI
+- ❌Add E2E tests
+- ❌Save/Resume Functionality
+
+## Sprint 3 (23/04-26/04)
+
+- ✅ Add 4X4 board
+- ✅ Add menu for the size of the board
+- ✅ Add Computer V Computer to the menu
+- ✅ Pass arguments to CLI
+
+## Sprint 2 (15/04-18/04)
+
+- ✅ Refactor the board from Java primitive array to another data structure
+- ✅ Add a CPU opponent
+- ✅ Add a menu to select from 2P or VS CPU
+- ✅ Add error handling for unexpected input cases
+
+## Sprint 1 (08/04-12/04)
 
 - ✅ Simple instructions for the user should be provided within the application itself
-- ✅ The game is played on a standard 3 X 3 board  
-- ✅ Players are represented by "X" and "O" markers  
+- ✅ The game is played on a standard 3 X 3 board
+- ✅ Players are represented by "X" and "O" markers
 - ✅ Won or tied games should be identified and game should end
 
-## Opportunities to build upon the code in a future sprint
-
-* The app assumes the happy path - that is to say, it does not check for incorrect input. The app will crash with an `InputMismatchException` if a user enters a non-integer, for instance, and the game will discard a user's turn if they overlap on a cell that's already been played.
-* The presentation could be refined, with lightly coloured numbers in the background of currently unplayed squares - so it's easier for players to know what number to press to select the square they want. 
-* There could be better testing for the main game loop itself.\
-* Natural opportunities to expand the game in various areas - board size, winning line size (e.g 4), additional player support, adding a CPU opponent.
