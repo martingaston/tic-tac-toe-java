@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 public class MessagesTest {
     private Player player;
+
     private boolean isString(String message) {
         return message.getClass() == String.class;
     }

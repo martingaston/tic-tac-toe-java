@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MinimaxTest {
     private Board board;
@@ -16,6 +16,7 @@ public class MinimaxTest {
         playerMini = new PlayerHuman("Mini", board);
         minimax = new Minimax(board, playerMaxi, playerMini);
     }
+
     @Test
     public void minimaxPlaysForWin() {
         board.add(0, playerMaxi);

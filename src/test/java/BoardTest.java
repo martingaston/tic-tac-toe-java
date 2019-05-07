@@ -150,7 +150,7 @@ public class BoardTest {
         board.add(3, playerNought);
         board.add(4, playerCross);
         List<Integer> result = board.available();
-        List<Integer> expected = new ArrayList<>(Arrays.asList(5,6,7,8));
+        List<Integer> expected = new ArrayList<>(Arrays.asList(5, 6, 7, 8));
         assertEquals(expected, result);
     }
 
@@ -178,7 +178,7 @@ public class BoardTest {
         board.add(1, playerNought);
         board.add(2, playerCross);
 
-        List<Integer> expected = new LinkedList<>(Arrays.asList(3,4,5,6,7,8));
+        List<Integer> expected = new LinkedList<>(Arrays.asList(3, 4, 5, 6, 7, 8));
 
         assertEquals(expected, board.available());
     }

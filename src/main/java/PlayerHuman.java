@@ -38,7 +38,6 @@ public class PlayerHuman implements Player {
     }
 
     private void invalidMove() {
-        Messages messages = new Messages();
-        Display.outMessage(messages.invalidMove());
+        Display.outMessage(Messages.invalidMove());
     }
 }

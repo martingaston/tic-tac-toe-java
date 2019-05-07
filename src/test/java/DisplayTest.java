@@ -24,13 +24,13 @@ public class DisplayTest {
     @Test
     public void testEmptyBoardStateOutputPrintsCorrectly() {
         String boardOutput =
-            "+-----------+\n" +
-            "| [38;5;242m1[0m | [38;5;242m2[0m | [38;5;242m3[0m |\n" +
-            "+-----------+\n" +
-            "| [38;5;242m4[0m | [38;5;242m5[0m | [38;5;242m6[0m |\n" +
-            "+-----------+\n" +
-            "| [38;5;242m7[0m | [38;5;242m8[0m | [38;5;242m9[0m |\n" +
-            "+-----------+\n";
+                "+-----------+\n" +
+                        "| [38;5;242m1[0m | [38;5;242m2[0m | [38;5;242m3[0m |\n" +
+                        "+-----------+\n" +
+                        "| [38;5;242m4[0m | [38;5;242m5[0m | [38;5;242m6[0m |\n" +
+                        "+-----------+\n" +
+                        "| [38;5;242m7[0m | [38;5;242m8[0m | [38;5;242m9[0m |\n" +
+                        "+-----------+\n";
 
         Board board = new Board();
         Display display = new Display(board);
@@ -42,13 +42,13 @@ public class DisplayTest {
     public void testFullBoardStateOutputPrintsCorrectly() {
 
         String boardOutput =
-            "+-----------+\n" +
-            "| X | O | X |\n" +
-            "+-----------+\n" +
-            "| O | X | O |\n" +
-            "+-----------+\n" +
-            "| X | O | X |\n" +
-            "+-----------+\n";
+                "+-----------+\n" +
+                        "| X | O | X |\n" +
+                        "+-----------+\n" +
+                        "| O | X | O |\n" +
+                        "+-----------+\n" +
+                        "| X | O | X |\n" +
+                        "+-----------+\n";
 
         Board board = new Board();
         Display display = new Display(board);
