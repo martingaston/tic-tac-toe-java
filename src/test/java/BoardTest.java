@@ -19,7 +19,7 @@ public class BoardTest {
         int totalCells = board.getTotalCells();
         Cell currentCell;
         for (int i = 0; i < totalCells; i++) {
-            currentCell = board.getCell(i);
+            currentCell = board.get(i);
             boardAsArrayList.add(currentCell.getOccupant());
         }
         return boardAsArrayList.toArray(new String[]{});
@@ -46,14 +46,14 @@ public class BoardTest {
 
     @Test
     public void cellZeroShouldBeBlankOnEmptyBoard() {
-        String cellOccupant = board.getCell(0).getOccupant();
+        String cellOccupant = board.get(0).getOccupant();
         assertEquals(" ", cellOccupant);
     }
 
     @Test
     public void cellZeroShouldBeCrossWhenAddedToBoard() {
         board.add(0, playerCross);
-        String cellOccupant = board.getCell(0).getOccupant();
+        String cellOccupant = board.get(0).getOccupant();
         assertEquals("X", cellOccupant);
     }
 

@@ -1,6 +1,6 @@
 public class PlayerMinimax implements Player {
-    private String symbol;
-    private Minimax minimax;
+    private final String symbol;
+    private final Minimax minimax;
 
 
     PlayerMinimax(String symbol, Board board, Player opponent) {
@@ -22,7 +22,7 @@ public class PlayerMinimax implements Player {
     private void oneSecondSleep() {
         try {
             Thread.sleep(1000);
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }

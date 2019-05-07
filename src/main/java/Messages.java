@@ -2,8 +2,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Messages {
-    private Map<String, String> standardMessage = new HashMap<>();
-    private Map<String, String> formatMessage = new HashMap<>();
+    private final Map<String, String> standardMessage = new HashMap<>();
+    private final Map<String, String> formatMessage = new HashMap<>();
 
     public Messages() {
         standardMessage.put("gameTitle", "TIC TAC TOE");
@@ -23,9 +23,13 @@ public class Messages {
         return standardMessage.get("setup");
     }
 
-    String boardSetupInstructions() { return standardMessage.get("boardSize"); }
+    String boardSetupInstructions() {
+        return standardMessage.get("boardSize");
+    }
 
-    String invalidMove() { return standardMessage.get("invalidMove"); }
+    String invalidMove() {
+        return standardMessage.get("invalidMove");
+    }
 
     String playerWin(Player player) {
         String message = formatMessage.get("gameOverWin");

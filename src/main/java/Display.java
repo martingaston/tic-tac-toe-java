@@ -1,6 +1,6 @@
 public class Display {
-    private Board board;
-    private String newline = "\n";
+    private final Board board;
+    private final String newline = "\n";
 
     public Display(Board board) {
         this.board = board;
@@ -11,7 +11,7 @@ public class Display {
     }
 
     private String faded(String message) {
-        String ANSI_RESET ="\033[0m";
+        String ANSI_RESET = "\033[0m";
         String ANSI_DARK_GREY = "\033[38;5;242m";
         return ANSI_DARK_GREY + message + ANSI_RESET;
     }
@@ -33,7 +33,7 @@ public class Display {
     }
 
     private int getLineLength(int cellLength) {
-        return cellLength * board.getSideLength() - 1;
+        return cellLength * board.sideLength() - 1;
     }
 
     private int getCellLength() {
@@ -42,7 +42,7 @@ public class Display {
 
     private String renderRows() {
         int totalCells = board.getTotalCells();
-        int cellsInRow = board.getSideLength();
+        int cellsInRow = board.sideLength();
 
         StringBuilder grid = new StringBuilder(generateDivider());
 
@@ -62,7 +62,7 @@ public class Display {
         for (int i = startIndex; i < endIndex; i++) {
             renderedRowString.append(" ");
 
-            currentBoardCell = board.getCell(i);
+            currentBoardCell = board.get(i);
 
             String output;
             if (currentBoardCell.isNotOccupied()) {
@@ -94,5 +94,7 @@ public class Display {
         return board.getTotalCells() > 9 && occupant.length() == 1;
     }
 
-    private int humanise(int zeroIndexedNumber) { return zeroIndexedNumber + 1; }
+    private int humanise(int zeroIndexedNumber) {
+        return zeroIndexedNumber + 1;
+    }
 }

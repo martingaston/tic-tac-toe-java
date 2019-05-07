@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class Game {
-    private Messages messages = new Messages();
+    private final Messages messages = new Messages();
 
     private Board board;
     private Display display;
@@ -30,7 +30,7 @@ class Game {
     }
 
     private void instructions() {
-        Display.outMessage(messages.getInstructions(board.getSideLength()));
+        Display.outMessage(messages.getInstructions(board.sideLength()));
     }
 
     private void setUpPlayers() {
@@ -42,7 +42,7 @@ class Game {
         Display.outMessage(messages.boardSetupInstructions());
         Scanner input = new Scanner(System.in);
         int modeNumber = input.nextInt();
-        switch(modeNumber) {
+        switch (modeNumber) {
             case 1:
                 board = new Board();
                 break;
@@ -81,7 +81,7 @@ class Game {
 
     private void gameEnd() {
         display.showBoard();
-      
+
         if (aPlayerHasWon()) {
             Display.outMessage(messages.playerWin(currentPlayer()));
         } else {
@@ -89,7 +89,9 @@ class Game {
         }
     }
 
-    private boolean aPlayerHasWon() { return this.gameOver && !this.winner.isEmpty(); }
+    private boolean aPlayerHasWon() {
+        return this.gameOver && !this.winner.isEmpty();
+    }
 
     private boolean isGameOver() {
         return gameOver;

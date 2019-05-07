@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class PlayerHuman implements Player {
-    private String symbol;
-    private Board board;
+    private final String symbol;
+    private final Board board;
 
     public PlayerHuman(String symbol, Board board) {
         this.symbol = symbol;

@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Line {
-    private List<Cell> cells;
+    private final List<Cell> cells;
 
     public Line(List<Cell> cells) {
         this.cells = cells;

@@ -6,7 +6,7 @@ import java.util.List;
 public class Board {
     private int sideLength;
     private int totalCells;
-    private List<Cell> board = new ArrayList<>();
+    private final List<Cell> board = new ArrayList<>();
 
     public Board() {
         this(3);
@@ -24,7 +24,7 @@ public class Board {
         }
     }
 
-    public Cell getCell(int position) {
+    public Cell get(int position) {
         return board.get(position);
     }
 
@@ -32,13 +32,15 @@ public class Board {
         return this.totalCells;
     }
 
-    int getSideLength() { return this.sideLength; }
+    int sideLength() {
+        return this.sideLength;
+    }
 
     public List<Integer> available() {
         List<Integer> moves = new LinkedList<>();
 
         for (int i = 0; i < this.totalCells; i++) {
-            if(board.get(i).isNotOccupied()) {
+            if (get(i).isNotOccupied()) {
                 moves.add(i);
             }
         }
@@ -47,14 +49,14 @@ public class Board {
     }
 
     public void add(int position, Player player) {
-        Cell requestedCell = board.get(position);
+        Cell requestedCell = get(position);
         if (requestedCell.isNotOccupied()) {
             requestedCell.mark(player);
         }
     }
 
     public void remove(int position) {
-        Cell requestedCell = board.get(position);
+        Cell requestedCell = get(position);
         if (requestedCell.isOccupied()) {
             requestedCell.unmark();
         }
@@ -80,15 +82,15 @@ public class Board {
         return Arrays.asList(
                 new Line(diagonalLeft),
                 new Line(diagonalRight)
-         );
+        );
     }
 
     private Cell rightDiagonalAt(int row) {
-        return getCell(this.sideLength - 1 + (row * this.sideLength) - row);
+        return get(this.sideLength - 1 + (row * this.sideLength) - row);
     }
 
     private Cell leftDiagonalAt(int row) {
-        return getCell(row + (row * this.sideLength));
+        return get(row + (row * this.sideLength));
     }
 
     private List<Line> columns() {
@@ -103,8 +105,8 @@ public class Board {
 
     private Line columnAt(int column) {
         List<Cell> populatedColumn = new LinkedList<>();
-        for (int i = 0; i < sideLength;i++) {
-            populatedColumn.add(getCell(column + sideLength * i));
+        for (int i = 0; i < sideLength; i++) {
+            populatedColumn.add(get(column + sideLength * i));
         }
 
         return new Line(populatedColumn);
@@ -125,7 +127,7 @@ public class Board {
 
         List<Cell> populatedRow = new LinkedList<>();
         for (int i = startIndex; i < startIndex + sideLength; i++) {
-            populatedRow.add(getCell(i));
+            populatedRow.add(get(i));
         }
 
         return new Line(populatedRow);
@@ -155,7 +157,7 @@ public class Board {
 
     private boolean isBoardFull() {
         for (int i = 0; i < this.totalCells; i++) {
-            if(board.get(i).isNotOccupied()) {
+            if (get(i).isNotOccupied()) {
                 return false;
             }
         }
