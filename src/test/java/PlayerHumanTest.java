@@ -28,13 +28,11 @@ public class PlayerHumanTest {
 
     @Test
     public void testPlayerInput() {
-        Player player = new PlayerHuman("O", board);
-
         int zeroIndexedResult = 4;
-
         String input = "5";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
+        Player player = new PlayerHuman("O", board);
 
         assertEquals(zeroIndexedResult, player.getNextMove());
 

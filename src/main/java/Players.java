@@ -1,25 +1,22 @@
-import java.util.Scanner;
-
 public class Players {
     private final Player playerCross;
     private final Player playerNought;
     private Player currentPlayer;
 
-    Players(Board board) {
-        Scanner input = new Scanner(System.in);
-        int modeNumber = input.nextInt();
+    Players(Board board, IO io) {
+        int modeNumber = io.nextInt();
         switch (modeNumber) {
             case 1:
             default:
-                this.playerCross = new PlayerHuman("X", board);
-                this.playerNought = new PlayerHuman("O", board);
+                this.playerCross = new PlayerHuman("X", board, io);
+                this.playerNought = new PlayerHuman("O", board, io);
                 break;
             case 2:
-                this.playerCross = new PlayerHuman("X", board);
+                this.playerCross = new PlayerHuman("X", board, io);
                 this.playerNought = new PlayerCPU("O", board);
                 break;
             case 3:
-                this.playerCross = new PlayerHuman("X", board);
+                this.playerCross = new PlayerHuman("X", board, io);
                 this.playerNought = new PlayerMinimax("O", board, playerCross);
                 break;
             case 4:

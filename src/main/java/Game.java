@@ -4,6 +4,7 @@ class Game {
     private Board board;
     private Display display;
     private Players players;
+    private IO io;
 
     void play() {
         intro();
@@ -20,6 +21,7 @@ class Game {
     }
 
     private void setUp() {
+        io = new IO(new Scanner(System.in));
         setUpBoard();
         setUpPlayers();
     }
@@ -30,13 +32,12 @@ class Game {
 
     private void setUpPlayers() {
         Display.outMessage(Messages.setupInstructions());
-        players = new Players(board);
+        players = new Players(board, io);
     }
 
     private void setUpBoard() {
         Display.outMessage(Messages.boardSetupInstructions());
-        Scanner input = new Scanner(System.in);
-        int modeNumber = input.nextInt();
+        int modeNumber = io.nextInt();
         switch (modeNumber) {
             case 1:
                 board = new Board();
