@@ -1,12 +1,11 @@
-import java.util.List;
-
-public class PlayerCPU implements Player {
+public class PlayerMinimax implements Player {
     private String symbol;
-    private Board board;
+    private Minimax minimax;
 
-    PlayerCPU(String symbol, Board board) {
+
+    PlayerMinimax(String symbol, Rules rules, Board board, Player opponent) {
         this.symbol = symbol;
-        this.board = board;
+        minimax = new Minimax(board, rules, this, opponent);
     }
 
     @Override
@@ -17,13 +16,7 @@ public class PlayerCPU implements Player {
     @Override
     public int getNextMove() {
         oneSecondSleep();
-        return pickRandomCell();
-    }
-
-    private int pickRandomCell() {
-        List<Integer> available = board.available();
-        int cellIndex = (int)Math.floor(Math.random() * available.size());
-        return available.get(cellIndex);
+        return minimax.optimal();
     }
 
     private void oneSecondSleep() {

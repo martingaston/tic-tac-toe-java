@@ -13,6 +13,8 @@ public class Cell {
         this.occupant = player;
     }
 
+    void unmark() { this.occupant = null; }
+
     boolean isNotOccupied() {
         return occupant == null;
     }

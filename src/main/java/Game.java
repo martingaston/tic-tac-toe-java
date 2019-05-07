@@ -59,7 +59,7 @@ class Game {
         display.showBoard();
         Display.outMessage(messages.announcePlayerTurn(currentPlayer()));
         int playerInput = currentPlayer().getNextMove();
-        board.addMove(playerInput, currentPlayer());
+        board.add(playerInput, currentPlayer());
     }
 
     private void processTurn() {
