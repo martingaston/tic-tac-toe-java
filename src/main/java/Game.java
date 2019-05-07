@@ -6,8 +6,6 @@ class Game {
     private Board board;
     private Display display;
     private Players players;
-    private boolean gameOver = false;
-    private String winner = "";
 
     void play() {
         intro();
@@ -16,8 +14,7 @@ class Game {
         do {
             newTurn();
             processTurn();
-        } while (!isGameOver());
-        gameEnd();
+        } while (!board.isGameOver());
     }
 
     private void intro() {
@@ -61,18 +58,11 @@ class Game {
     }
 
     private void processTurn() {
-        gameOver = board.isGameOver();
-        boolean hasWon = board.hasWon(currentPlayer());
-        if (hasWon) {
-            winner = currentPlayer().getSymbol();
-            gameOver = true;
-            return;
+        if (board.isGameOver()) {
+            gameEnd();
+        } else {
+            players.nextTurn();
         }
-        switchPlayer();
-    }
-
-    private void switchPlayer() {
-        players.nextTurn();
     }
 
     private Player currentPlayer() {
@@ -82,18 +72,10 @@ class Game {
     private void gameEnd() {
         display.showBoard();
 
-        if (aPlayerHasWon()) {
+        if (board.hasWinner()) {
             Display.outMessage(messages.playerWin(currentPlayer()));
         } else {
             Display.outMessage(messages.playersDraw());
         }
-    }
-
-    private boolean aPlayerHasWon() {
-        return this.gameOver && !this.winner.isEmpty();
-    }
-
-    private boolean isGameOver() {
-        return gameOver;
     }
 }
