@@ -9,6 +9,10 @@ public class Cell {
         return occupant.getSymbol();
     }
 
+    Player occupant() {
+        return this.occupant;
+    }
+
     void mark(Player player) {
         this.occupant = player;
     }

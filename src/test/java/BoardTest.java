@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -158,5 +159,158 @@ public class BoardTest {
         board.add(0, playerCross);
         board.remove(0);
         assertEquals(9, board.available().size());
+    }
+
+    @Test
+    public void availableReturnsSixIfThreeMovesArePlayed() {
+        Board board = new Board(3);
+        board.add(1, playerCross);
+        board.add(2, playerNought);
+        board.add(3, playerCross);
+
+        assertEquals(6, board.available().size());
+    }
+
+    @Test
+    public void availableReturnsArrayOfMoves() {
+        Board board = new Board(3);
+        board.add(0, playerCross);
+        board.add(1, playerNought);
+        board.add(2, playerCross);
+
+        List<Integer> expected = new LinkedList<>(Arrays.asList(3,4,5,6,7,8));
+
+        assertEquals(expected, board.available());
+    }
+
+    @Test
+    public void aBoardKnowsOfItsLines() {
+        Board board = new Board(3);
+        List<Line> lines = board.lines();
+
+        assertEquals(8, lines.size());
+    }
+
+    @Test
+    public void doesNotFindWinnerIfNoWinner() {
+        Board board = new Board(3);
+        board.add(0, playerCross);
+        board.add(1, playerCross);
+
+        assertFalse(board.hasWinner());
+    }
+
+    @Test
+    public void findsTopHorizontalWinner() {
+        Board board = new Board(3);
+        board.add(0, playerCross);
+        board.add(1, playerCross);
+        board.add(2, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsMiddleHorizontalWinner() {
+        Board board = new Board(3);
+        board.add(3, playerCross);
+        board.add(4, playerCross);
+        board.add(5, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsBottomHorizontalWinner() {
+        Board board = new Board(3);
+        board.add(6, playerCross);
+        board.add(7, playerCross);
+        board.add(8, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsLeftVerticalWinner() {
+        Board board = new Board(3);
+        board.add(0, playerCross);
+        board.add(3, playerCross);
+        board.add(6, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsMiddleVerticalWinner() {
+        Board board = new Board(3);
+        board.add(1, playerCross);
+        board.add(4, playerCross);
+        board.add(7, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsRightVerticalWinner() {
+        Board board = new Board(3);
+        board.add(2, playerCross);
+        board.add(5, playerCross);
+        board.add(8, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsLeftDiagonalWinner() {
+        Board board = new Board(3);
+        board.add(0, playerCross);
+        board.add(4, playerCross);
+        board.add(8, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsRightDiagonalWinner() {
+        Board board = new Board(3);
+        board.add(2, playerCross);
+        board.add(4, playerCross);
+        board.add(6, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void gameIsNotOverWithEmptyBoard() {
+        Board board = new Board(3);
+
+        assertFalse(board.isGameOver());
+    }
+
+    @Test
+    public void gameIsNotOverWithHalfFullBoard() {
+        Board board = new Board(3);
+        board.add(0, playerCross);
+        board.add(1, playerNought);
+        board.add(2, playerCross);
+        board.add(3, playerNought);
+
+        assertFalse(board.isGameOver());
+    }
+
+    @Test
+    public void gameIsOverWithFullBoard() {
+        Board board = new Board(3);
+        board.add(0, playerCross);
+        board.add(1, playerCross);
+        board.add(2, playerCross);
+        board.add(3, playerCross);
+        board.add(4, playerCross);
+        board.add(5, playerCross);
+        board.add(6, playerCross);
+        board.add(7, playerCross);
+        board.add(8, playerCross);
+
+        assertTrue(board.isGameOver());
     }
 }
