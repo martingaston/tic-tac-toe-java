@@ -9,6 +9,10 @@ public class Line {
 
     public boolean hasWinner() {
         Player occupant = cells.get(0).occupant();
+        return hasWinner(occupant);
+    }
+
+    public boolean hasWinner(Player occupant) {
         for (Cell cell : cells) {
             if (cell.occupant() == null || cell.occupant() != occupant) {
                 return false;

@@ -20,7 +20,7 @@ public class Players {
                 break;
             case 3:
                 this.playerCross = new PlayerHuman("X", rules);
-                this.playerNought = new PlayerMinimax("O", rules, board, playerCross);
+                this.playerNought = new PlayerMinimax("O", board, playerCross);
                 break;
             case 4:
                 this.playerCross = new PlayerCPU("X", board);

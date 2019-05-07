@@ -3,9 +3,9 @@ public class PlayerMinimax implements Player {
     private Minimax minimax;
 
 
-    PlayerMinimax(String symbol, Rules rules, Board board, Player opponent) {
+    PlayerMinimax(String symbol, Board board, Player opponent) {
         this.symbol = symbol;
-        minimax = new Minimax(board, rules, this, opponent);
+        minimax = new Minimax(board, this, opponent);
     }
 
     @Override

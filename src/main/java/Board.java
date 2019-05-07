@@ -140,6 +140,15 @@ public class Board {
         return false;
     }
 
+    public boolean hasWon(Player player) {
+        for (Line line : lines()) {
+            if (line.hasWinner(player)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isGameOver() {
         return isBoardFull() || hasWinner();
     }

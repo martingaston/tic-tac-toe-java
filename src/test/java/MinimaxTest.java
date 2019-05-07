@@ -16,7 +16,7 @@ public class MinimaxTest {
         rules = new Rules(board);
         playerMaxi = new PlayerHuman("Maxi");
         playerMini = new PlayerHuman("Mini");
-        minimax = new Minimax(board, rules, playerMaxi, playerMini);
+        minimax = new Minimax(board, playerMaxi, playerMini);
     }
     @Test
     public void minimaxPlaysForWin() {
