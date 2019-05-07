@@ -4,7 +4,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MessagesTest {
-    private Messages messages;
     private Player player;
     private boolean isString(String message) {
         return message.getClass() == String.class;
@@ -13,59 +12,58 @@ public class MessagesTest {
     @Before
     public void setUp() {
         Board board = new Board();
-        messages = new Messages();
         player = new PlayerHuman("X", board);
     }
 
     @Test
     public void playerWinsIsFormattedBasedOnPlayerClass() {
         String expectedResult = "Player X wins!";
-        String message = messages.playerWin(player);
+        String message = Messages.playerWin(player);
         assertEquals(expectedResult, message);
     }
 
     @Test
     public void announcePlayerTurnIsFormattedBasedOnPlayerClass() {
         String expectedResult = "Player X's turn";
-        String message = messages.announcePlayerTurn(player);
+        String message = Messages.announcePlayerTurn(player);
         assertEquals(expectedResult, message);
     }
 
     @Test
     public void playersDrawReturnsString() {
-        String message = messages.playersDraw();
+        String message = Messages.playersDraw();
         assertTrue(isString(message));
     }
 
     @Test
     public void playersDrawStringIsNotEmpty() {
-        String message = messages.playersDraw();
+        String message = Messages.playersDraw();
         assertFalse(message.isEmpty());
     }
 
     @Test
     public void getIntroReturnsString() {
-        String message = messages.getIntro();
+        String message = Messages.getIntro();
         assertTrue(isString(message));
     }
 
     @Test
     public void getIntroStringIsNotEmpty() {
-        String message = messages.getIntro();
+        String message = Messages.getIntro();
         assertFalse(message.isEmpty());
     }
 
     @Test
     public void getInstructionsReturnsString() {
         int boardSize = 9;
-        String message = messages.getInstructions(boardSize);
+        String message = Messages.getInstructions(boardSize);
         assertTrue(isString(message));
     }
 
     @Test
     public void getInstructionsStringIsNotEmpty() {
         int boardSize = 9;
-        String message = messages.getInstructions(boardSize);
+        String message = Messages.getInstructions(boardSize);
         assertFalse(message.isEmpty());
     }
 }

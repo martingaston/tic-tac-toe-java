@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
 class Game {
-    private final Messages messages = new Messages();
-
     private Board board;
     private Display display;
     private Players players;
@@ -18,7 +16,7 @@ class Game {
     }
 
     private void intro() {
-        Display.outMessage(messages.getIntro());
+        Display.outMessage(Messages.getIntro());
     }
 
     private void setUp() {
@@ -27,16 +25,16 @@ class Game {
     }
 
     private void instructions() {
-        Display.outMessage(messages.getInstructions(board.sideLength()));
+        Display.outMessage(Messages.getInstructions(board.sideLength()));
     }
 
     private void setUpPlayers() {
-        Display.outMessage(messages.setupInstructions());
+        Display.outMessage(Messages.setupInstructions());
         players = new Players(board);
     }
 
     private void setUpBoard() {
-        Display.outMessage(messages.boardSetupInstructions());
+        Display.outMessage(Messages.boardSetupInstructions());
         Scanner input = new Scanner(System.in);
         int modeNumber = input.nextInt();
         switch (modeNumber) {
@@ -52,7 +50,7 @@ class Game {
 
     private void newTurn() {
         display.showBoard();
-        Display.outMessage(messages.announcePlayerTurn(currentPlayer()));
+        Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
         int playerInput = currentPlayer().getNextMove();
         board.add(playerInput, currentPlayer());
     }
@@ -73,9 +71,9 @@ class Game {
         display.showBoard();
 
         if (board.hasWinner()) {
-            Display.outMessage(messages.playerWin(currentPlayer()));
+            Display.outMessage(Messages.playerWin(currentPlayer()));
         } else {
-            Display.outMessage(messages.playersDraw());
+            Display.outMessage(Messages.playersDraw());
         }
     }
 }
