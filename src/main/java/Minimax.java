@@ -38,7 +38,7 @@ public class Minimax {
             return 0;
         }
 
-        if(isMax) {
+        if (isMax) {
             int best = Integer.MIN_VALUE;
 
             for (int index : board.available()) {
