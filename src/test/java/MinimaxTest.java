@@ -18,40 +18,6 @@ public class MinimaxTest {
         playerMini = new PlayerHuman("Mini");
         minimax = new Minimax(board, rules, playerMaxi, playerMini);
     }
-
-    @Test
-    public void WinStateReturns10() {
-        board.add(0, playerMaxi);
-        board.add(1, playerMaxi);
-        board.add(2, playerMaxi);
-        int result = minimax.minimax(0, false);
-        assertEquals(10, result);
-    }
-
-    @Test
-    public void LossStateReturnsMinus10() {
-        board.add(0, playerMini);
-        board.add(1, playerMini);
-        board.add(2, playerMini);
-        int result = minimax.minimax(0, false);
-        assertEquals(-10, result);
-    }
-
-    @Test
-    public void DrawReturnsZero() {
-        board.add(0, playerMini);
-        board.add(1, playerMaxi);
-        board.add(2, playerMini);
-        board.add(3, playerMaxi);
-        board.add(4, playerMaxi);
-        board.add(5, playerMini);
-        board.add(6, playerMaxi);
-        board.add(7, playerMini);
-        board.add(8, playerMaxi);
-        int result = minimax.minimax(0, false);
-        assertEquals(0, result);
-    }
-
     @Test
     public void minimaxPlaysForWin() {
         board.add(0, playerMaxi);

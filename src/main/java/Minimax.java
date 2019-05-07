@@ -12,22 +12,22 @@ public class Minimax {
     }
 
     private Integer evaluateBoard(int depth) {
+        final int WINNING_SCORE = 10;
+        final int LOSING_SCORE = -10;
+        final int DRAW_SCORE = 0;
+
         if (rules.hasWinningMove(maximizer)) {
-            return 10 - depth;
+            return WINNING_SCORE - depth;
         }
 
         if (rules.hasWinningMove(minimizer)) {
-            return -10 + depth;
+            return LOSING_SCORE + depth;
         }
 
-        return 0;
+        return DRAW_SCORE;
     }
 
-    public Integer minimax(int depth, boolean isMax) {
-        return minimax(depth, isMax, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    }
-
-    private Integer minimax(int depth, boolean isMax, int alpha, int beta) {
+    private Integer minimax(int depth, boolean isMax) {
         int score = evaluateBoard(depth);
 
         if (score != 0) {
@@ -44,13 +44,8 @@ public class Minimax {
             for (int index : board.available()) {
                 board.add(index, maximizer);
                 best = Integer.max(best,
-                        minimax(depth + 1, false, alpha, beta));
+                        minimax(depth + 1, false));
                 board.remove(index);
-
-                int updatedAlpha = Integer.max(alpha, best);
-                if (beta <= updatedAlpha) {
-                    break;
-                }
             }
 
             return best;
@@ -60,13 +55,8 @@ public class Minimax {
             for (int index : board.available()) {
                 board.add(index, minimizer);
                 best = Integer.min(best,
-                        minimax(depth + 1, true, alpha, beta));
+                        minimax(depth + 1, true));
                 board.remove(index);
-
-                int updatedBeta = Integer.min(beta, best);
-                if (updatedBeta <= alpha) {
-                    break;
-                }
             }
 
             return best;
@@ -79,7 +69,7 @@ public class Minimax {
 
         for (int index : board.available()) {
             board.add(index, maximizer);
-            int moveValue = minimax(0, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            int moveValue = minimax(0, false);
             board.remove(index);
 
             if (moveValue > bestValue) {
