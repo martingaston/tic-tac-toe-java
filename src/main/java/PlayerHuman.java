@@ -2,15 +2,11 @@ import java.util.Scanner;
 
 public class PlayerHuman implements Player {
     private String symbol;
-    private Rules rules;
+    private Board board;
 
-    public PlayerHuman(String symbol, Rules rules) {
+    public PlayerHuman(String symbol, Board board) {
         this.symbol = symbol;
-        this.rules = rules;
-    }
-
-    public PlayerHuman(String symbol) {
-        this.symbol = symbol;
+        this.board = board;
     }
 
     public String getSymbol() {
@@ -21,7 +17,7 @@ public class PlayerHuman implements Player {
         Scanner input = new Scanner(System.in);
         int desiredCell = getAnInteger(input);
 
-        while (rules.isNotValidMove(desiredCell)) {
+        while (!board.available().contains(desiredCell)) {
             invalidMove();
             desiredCell = getAnInteger(input);
         }

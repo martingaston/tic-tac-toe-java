@@ -5,21 +5,21 @@ public class Players {
     private Player playerNought;
     private Player currentPlayer;
 
-    Players(Rules rules, Board board) {
+    Players(Board board) {
         Scanner input = new Scanner(System.in);
         int modeNumber = input.nextInt();
         switch(modeNumber) {
             case 1:
             default:
-                this.playerCross = new PlayerHuman("X", rules);
-                this.playerNought = new PlayerHuman("O", rules);
+                this.playerCross = new PlayerHuman("X", board);
+                this.playerNought = new PlayerHuman("O", board);
                 break;
             case 2:
-                this.playerCross = new PlayerHuman("X", rules);
+                this.playerCross = new PlayerHuman("X", board);
                 this.playerNought = new PlayerCPU("O", board);
                 break;
             case 3:
-                this.playerCross = new PlayerHuman("X", rules);
+                this.playerCross = new PlayerHuman("X", board);
                 this.playerNought = new PlayerMinimax("O", board, playerCross);
                 break;
             case 4:

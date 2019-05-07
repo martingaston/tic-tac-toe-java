@@ -4,7 +4,6 @@ class Game {
     private Messages messages = new Messages();
 
     private Board board;
-    private Rules rules;
     private Display display;
     private Players players;
     private boolean gameOver = false;
@@ -36,7 +35,7 @@ class Game {
 
     private void setUpPlayers() {
         Display.outMessage(messages.setupInstructions());
-        players = new Players(rules, board);
+        players = new Players(board);
     }
 
     private void setUpBoard() {
@@ -51,7 +50,6 @@ class Game {
                 board = new Board(4);
                 break;
         }
-        rules = new Rules(board);
         display = new Display(board);
     }
 
@@ -63,8 +61,8 @@ class Game {
     }
 
     private void processTurn() {
-        gameOver = rules.gameIsOver();
-        boolean hasWon = rules.hasWinningMove(currentPlayer());
+        gameOver = board.isGameOver();
+        boolean hasWon = board.hasWon(currentPlayer());
         if (hasWon) {
             winner = currentPlayer().getSymbol();
             gameOver = true;

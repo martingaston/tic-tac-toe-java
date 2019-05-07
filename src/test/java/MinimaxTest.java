@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 
 public class MinimaxTest {
     private Board board;
-    private Rules rules;
     private Player playerMaxi;
     private Player playerMini;
     private Minimax minimax;
@@ -13,9 +12,8 @@ public class MinimaxTest {
     @Before
     public void setUp() throws Exception {
         board = new Board();
-        rules = new Rules(board);
-        playerMaxi = new PlayerHuman("Maxi");
-        playerMini = new PlayerHuman("Mini");
+        playerMaxi = new PlayerHuman("Maxi", board);
+        playerMini = new PlayerHuman("Mini", board);
         minimax = new Minimax(board, playerMaxi, playerMini);
     }
     @Test

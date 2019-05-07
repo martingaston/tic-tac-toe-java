@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DisplayTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -52,8 +52,8 @@ public class DisplayTest {
 
         Board board = new Board();
         Display display = new Display(board);
-        Player playerCross = new PlayerHuman("X");
-        Player playerNought = new PlayerHuman("O");
+        Player playerCross = new PlayerHuman("X", board);
+        Player playerNought = new PlayerHuman("O", board);
         board.add(0, playerCross);
         board.add(2, playerCross);
         board.add(4, playerCross);

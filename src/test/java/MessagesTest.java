@@ -12,8 +12,9 @@ public class MessagesTest {
 
     @Before
     public void setUp() {
+        Board board = new Board();
         messages = new Messages();
-        player = new PlayerHuman("X");
+        player = new PlayerHuman("X", board);
     }
 
     @Test
