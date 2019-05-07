@@ -24,6 +24,7 @@ public class Board {
         }
     }
 
+    //TODO we are leaking Cell out of our class - its occupant can be changed
     public Cell get(int position) {
         return board.get(position);
     }
@@ -46,6 +47,18 @@ public class Board {
         }
 
         return moves;
+    }
+
+    public Board copy() {
+        Board newBoard = new Board();
+        int totalCells = getTotalCells();
+
+        for (int i = 0; i < totalCells; i++) {
+            Player cellOccupant = board.get(i).occupant();
+            newBoard.add(i, cellOccupant);
+        }
+
+        return newBoard;
     }
 
     public void add(int position, Player player) {

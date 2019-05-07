@@ -313,4 +313,32 @@ public class BoardTest {
 
         assertTrue(board.isGameOver());
     }
+
+    @Test
+    public void boardCanProduceANewCopy() {
+        Board board = new Board();
+        board.add(4, playerCross);
+        Board newBoard = board.copy();
+
+        int expectedAvailableCells = 8;
+        assertEquals(expectedAvailableCells, newBoard.available().size());
+    }
+
+    @Test
+    public void boardCannotAccessNewCopy() {
+        Board board = new Board();
+        Board newBoard = board.copy();
+        board.add(4, playerCross);
+
+        int expectedAvailableCells = 9;
+        assertEquals(expectedAvailableCells, newBoard.available().size());
+    }
+
+    @Test
+    public void boardCopyDoesNotEqualOriginal() {
+        Board board = new Board();
+        Board newBoard = board.copy();
+
+        assertNotEquals(board, newBoard);
+    }
 }
