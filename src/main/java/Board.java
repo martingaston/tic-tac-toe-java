@@ -50,7 +50,7 @@ public class Board {
     }
 
     public Board copy() {
-        Board newBoard = new Board();
+        Board newBoard = new Board(this.sideLength);
         int totalCells = getTotalCells();
 
         for (int i = 0; i < totalCells; i++) {
@@ -81,6 +81,12 @@ public class Board {
         lines.addAll(columns());
         lines.addAll(diagonals());
         return lines;
+
+        return new LinkedList<Line>(Arrays.asList(
+                rows(),
+                columns(),
+                diagonals()
+        ));
     }
 
     private List<Line> diagonals() {

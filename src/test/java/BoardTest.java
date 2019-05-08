@@ -315,12 +315,21 @@ public class BoardTest {
     }
 
     @Test
-    public void boardCanProduceANewCopy() {
-        Board board = new Board();
+    public void boardCanProduceANewThreeByThreeCopy() {
+        Board board = new Board(3);
         board.add(4, playerCross);
         Board newBoard = board.copy();
 
         int expectedAvailableCells = 8;
+        assertEquals(expectedAvailableCells, newBoard.available().size());
+    }
+
+    @Test
+    public void boardCanProduceANewFourByFourCopy() {
+        Board board = new Board(4);
+        Board newBoard = board.copy();
+
+        int expectedAvailableCells = 16;
         assertEquals(expectedAvailableCells, newBoard.available().size());
     }
 
