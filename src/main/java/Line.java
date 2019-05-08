@@ -13,13 +13,7 @@ public class Line {
     }
 
     public boolean hasWinner(Player occupant) {
-        for (Cell cell : cells) {
-            if (cell.occupant() == null || cell.occupant() != occupant) {
-                return false;
-            }
-        }
-
-        return true;
+        return cells.stream().allMatch(cell -> cell.occupant() == occupant && cell.occupant() != null);
     }
 
     @Override

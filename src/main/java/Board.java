@@ -24,7 +24,6 @@ public class Board {
         }
     }
 
-    //TODO we are leaking Cell out of our class - its occupant can be changed
     public Cell get(int position) {
         return board.get(position);
     }
@@ -147,21 +146,11 @@ public class Board {
     }
 
     public boolean hasWinner() {
-        for (Line line : lines()) {
-            if (line.hasWinner()) {
-                return true;
-            }
-        }
-        return false;
+        return lines().stream().anyMatch(Line::hasWinner);
     }
 
     public boolean hasWon(Player player) {
-        for (Line line : lines()) {
-            if (line.hasWinner(player)) {
-                return true;
-            }
-        }
-        return false;
+        return lines().stream().anyMatch(line -> line.hasWinner(player));
     }
 
     public boolean isGameOver() {
@@ -169,11 +158,6 @@ public class Board {
     }
 
     private boolean isBoardFull() {
-        for (int i = 0; i < this.totalCells; i++) {
-            if (!get(i).isOccupied()) {
-                return false;
-            }
-        }
-        return true;
+        return this.board.stream().allMatch(Cell::isOccupied);
     }
 }
