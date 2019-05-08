@@ -1,27 +1,18 @@
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 class Game {
     private Board board;
     private Display display;
     private Players players;
+    private Player playerCross;
+    private Player playerNought;
     private IO io;
 
-    public Game(Board board, Display display, Players players, IO io) {
-        this.board = board;
-        this.display = display;
-        this.players = players;
-        this.io = io;
-    }
-
-    public Game() {
-        //TODO update constructors
-    }
-
-    void play() {
+    void play(String[] args) {
         intro();
+        setUp(args);
         instructions();
         do {
             newTurn();
@@ -34,14 +25,60 @@ class Game {
     }
 
     public void setUp(String[] args) {
-        Map<String, String> parsedArgs = parseArgs(args);
         io = new IO(new Scanner(System.in));
-        setUpBoard();
-        setUpPlayers();
+        Map<String, String> parsedArgs = parseArgs(args);
+        processArgs(parsedArgs);
+    }
+
+    private void processArgs(Map<String, String> parsedArgs) {
+        if(parsedArgs.containsKey("board")) {
+            switch (parsedArgs.get("board")) {
+                case "3x3":
+                    board = new Board();
+                    break;
+                case "4x4":
+                    board = new Board(4);
+                    break;
+                default:
+                    setUpBoard();
+                    break;
+            }
+        } else {
+            setUpBoard();
+        }
+
+        if(parsedArgs.containsKey("mode")) {
+            switch (parsedArgs.get("mode")) {
+                case "hvh":
+                    this.playerCross = new PlayerHuman("X", board, io);
+                    this.playerNought = new PlayerHuman("O", board, io);
+                    break;
+                case "hvc-easy":
+                    this.playerCross = new PlayerHuman("X", board, io);
+                    this.playerNought = new PlayerCPU("O", board);
+                    break;
+                case "hvc-hard":
+                    this.playerCross = new PlayerHuman("X", board, io);
+                    this.playerNought = new PlayerMinimax("O", board, playerCross);
+                    break;
+                case "cvc-easy":
+                    this.playerCross = new PlayerCPU("X", board);
+                    this.playerNought = new PlayerCPU("O", board);
+                    break;
+                default:
+                    setUpPlayers();
+                    break;
+            }
+        } else {
+            setUpPlayers();
+        }
+
+        display = new Display(board);
+        players = new Players(playerCross, playerNought);
     }
 
     public Map<String,String> parseArgs(String[] args) {
-        Pattern argStructure = Pattern.compile("^--(\\w+)=(\\w+)$");
+        Pattern argStructure = Pattern.compile("^--(\\w+)=([\\w|-]+)$");
         Map<String, String> argMap = new HashMap<>();
 
         for ( String arg : args) {
@@ -60,7 +97,26 @@ class Game {
 
     private void setUpPlayers() {
         Display.outMessage(Messages.setupInstructions());
-        players = new Players(board, io);
+        int modeNumber = io.nextInt();
+        switch (modeNumber) {
+            case 1:
+            default:
+                this.playerCross = new PlayerHuman("X", board, io);
+                this.playerNought = new PlayerHuman("O", board, io);
+                break;
+            case 2:
+                this.playerCross = new PlayerHuman("X", board, io);
+                this.playerNought = new PlayerCPU("O", board);
+                break;
+            case 3:
+                this.playerCross = new PlayerHuman("X", board, io);
+                this.playerNought = new PlayerMinimax("O", board, playerCross);
+                break;
+            case 4:
+                this.playerCross = new PlayerCPU("X", board);
+                this.playerNought = new PlayerCPU("O", board);
+                break;
+        }
     }
 
     private void setUpBoard() {
@@ -74,7 +130,6 @@ class Game {
                 board = new Board(4);
                 break;
         }
-        display = new Display(board);
     }
 
     private void newTurn() {

@@ -15,8 +15,8 @@ public class GameTest {
 
     @Test
     public void parseArgsParsesValidModeArg() {
-        Map<String, String> expectedArgs = new HashMap<>(Map.of("mode", "hvc"));
-        assertEquals(expectedArgs, game.parseArgs(new String[] {"--mode=hvc"}));
+        Map<String, String> expectedArgs = new HashMap<>(Map.of("mode", "hvc-hard"));
+        assertEquals(expectedArgs, game.parseArgs(new String[] {"--mode=hvc-hard"}));
     }
 
     @Test
