@@ -41,7 +41,7 @@ public class Board {
         List<Integer> moves = new LinkedList<>();
 
         for (int i = 0; i < this.totalCells; i++) {
-            if (get(i).isNotOccupied()) {
+            if (!get(i).isOccupied()) {
                 moves.add(i);
             }
         }
@@ -63,7 +63,7 @@ public class Board {
 
     public void add(int position, Player player) {
         Cell requestedCell = get(position);
-        if (requestedCell.isNotOccupied()) {
+        if (!requestedCell.isOccupied()) {
             requestedCell.mark(player);
         }
     }
@@ -81,12 +81,6 @@ public class Board {
         lines.addAll(columns());
         lines.addAll(diagonals());
         return lines;
-
-        return new LinkedList<Line>(Arrays.asList(
-                rows(),
-                columns(),
-                diagonals()
-        ));
     }
 
     private List<Line> diagonals() {
@@ -176,7 +170,7 @@ public class Board {
 
     private boolean isBoardFull() {
         for (int i = 0; i < this.totalCells; i++) {
-            if (get(i).isNotOccupied()) {
+            if (!get(i).isOccupied()) {
                 return false;
             }
         }

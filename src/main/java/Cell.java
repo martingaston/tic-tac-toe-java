@@ -2,7 +2,7 @@ public class Cell {
     private Player occupant;
 
     String getOccupant() {
-        if (isNotOccupied()) {
+        if (!isOccupied()) {
             return " ";
         }
 
@@ -19,10 +19,6 @@ public class Cell {
 
     void unmark() {
         this.occupant = null;
-    }
-
-    boolean isNotOccupied() {
-        return occupant == null;
     }
 
     boolean isOccupied() {

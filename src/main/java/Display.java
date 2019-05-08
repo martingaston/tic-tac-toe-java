@@ -65,7 +65,7 @@ public class Display {
             currentBoardCell = board.get(i);
 
             String output;
-            if (currentBoardCell.isNotOccupied()) {
+            if (!currentBoardCell.isOccupied()) {
                 int boardNumber = humanise(i);
                 output = faded(renderOccupant(Integer.toString(boardNumber)));
             } else {
