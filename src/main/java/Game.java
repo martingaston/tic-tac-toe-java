@@ -1,4 +1,7 @@
-import java.util.Scanner;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 class Game {
     private Board board;
@@ -6,9 +9,19 @@ class Game {
     private Players players;
     private IO io;
 
+    public Game(Board board, Display display, Players players, IO io) {
+        this.board = board;
+        this.display = display;
+        this.players = players;
+        this.io = io;
+    }
+
+    public Game() {
+        //TODO update constructors
+    }
+
     void play() {
         intro();
-        setUp();
         instructions();
         do {
             newTurn();
@@ -20,10 +33,25 @@ class Game {
         Display.outMessage(Messages.getIntro());
     }
 
-    private void setUp() {
+    public void setUp(String[] args) {
+        Map<String, String> parsedArgs = parseArgs(args);
         io = new IO(new Scanner(System.in));
         setUpBoard();
         setUpPlayers();
+    }
+
+    public Map<String,String> parseArgs(String[] args) {
+        Pattern argStructure = Pattern.compile("^--(\\w+)=(\\w+)$");
+        Map<String, String> argMap = new HashMap<>();
+
+        for ( String arg : args) {
+            Matcher matchedArg = argStructure.matcher(arg);
+            if (matchedArg.matches()) {
+                argMap.put(matchedArg.group(1), matchedArg.group(2));
+            }
+        }
+
+        return argMap;
     }
 
     private void instructions() {
