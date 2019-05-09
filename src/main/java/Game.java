@@ -8,6 +8,14 @@ class Game {
     private static Players players;
     private static IO io;
 
+    private static final int BOARD_3X3 = 1;
+    private static final int BOARD_4X4 = 2;
+
+    private static final int MODE_HVH = 1;
+    private static final int MODE_HVC_EASY = 2;
+    private static final int MODE_HVC_HARD = 3;
+    private static final int MODE_CVC_EASY = 4;
+
     static void play(String[] args) {
         intro();
         setUp(args);
@@ -31,30 +39,9 @@ class Game {
     private static void processArgs(Map<String, String> parsedArgs) {
         Player playerCross;
         Player playerNought;
-        int boardNumber;
 
-        final int BOARD_3X3 = 1;
-        final int BOARD_4X4 = 2;
-
-        final int MODE_HVH = 1;
-        final int MODE_HVC_EASY = 2;
-        final int MODE_HVC_HARD = 3;
-        final int MODE_CVC_EASY = 4;
-
-        if(parsedArgs.containsKey("board")) {
-           switch(parsedArgs.get("board")) {
-               case "3x3":
-               default:
-                   boardNumber = BOARD_3X3;
-                   break;
-               case "4x4":
-                   boardNumber = BOARD_4X4;
-                   break;
-           }
-        } else {
-            Display.outMessage(Messages.boardSetupInstructions());
-            boardNumber = io.nextInt();
-        }
+        String boardArg = parsedArgs.getOrDefault("board", "");
+        int boardNumber = getBoardNumber(boardArg);
 
         switch (boardNumber) {
             case BOARD_3X3:
@@ -66,28 +53,8 @@ class Game {
                 break;
         }
 
-        int modeNumber;
-
-        if(parsedArgs.containsKey("mode")) {
-            switch(parsedArgs.get("mode")) {
-                case "hvh":
-                default:
-                    modeNumber = MODE_HVH;
-                    break;
-                case "hvc-easy":
-                    modeNumber = MODE_HVC_EASY;
-                    break;
-                case "hvc-hard":
-                    modeNumber = MODE_HVC_HARD;
-                    break;
-                case "cvc-easy":
-                    modeNumber = MODE_CVC_EASY;
-                    break;
-            }
-        } else {
-            Display.outMessage(Messages.setupInstructions());
-            modeNumber = io.nextInt();
-        }
+        String modeArg = parsedArgs.getOrDefault("mode", "");
+        int modeNumber = getModeNumber(modeArg);
 
         switch (modeNumber) {
             case MODE_HVH:
@@ -111,6 +78,47 @@ class Game {
 
         display = new Display(board);
         players = new Players(playerCross, playerNought);
+    }
+
+    private static int getModeNumber(String modeArg) {
+        int modeNumber;
+        switch(modeArg) {
+            case "hvh":
+                modeNumber = MODE_HVH;
+                break;
+            case "hvc-easy":
+                modeNumber = MODE_HVC_EASY;
+                break;
+            case "hvc-hard":
+                modeNumber = MODE_HVC_HARD;
+                break;
+            case "cvc-easy":
+                modeNumber = MODE_CVC_EASY;
+                break;
+            default:
+                Display.outMessage(Messages.setupInstructions());
+                modeNumber = io.nextInt();
+        }
+        return modeNumber;
+    }
+
+    private static int getBoardNumber(String boardArg) {
+        int boardNumber;
+
+           switch(boardArg) {
+               case "3x3":
+                   boardNumber = BOARD_3X3;
+                   break;
+               case "4x4":
+                   boardNumber = BOARD_4X4;
+                   break;
+               default:
+                   Display.outMessage(Messages.boardSetupInstructions());
+                   boardNumber = io.nextInt();
+                   break;
+           }
+
+        return boardNumber;
     }
 
     public static Map<String,String> parseArgs(String[] args) {
