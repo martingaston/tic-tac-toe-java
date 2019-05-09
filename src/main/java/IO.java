@@ -2,6 +2,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class IO {
@@ -21,6 +25,18 @@ public class IO {
 
     public boolean hasNextInt() {
         return in.hasNextInt();
+    }
+
+    public static List<String> gameIn() {
+        String content = "";
+
+        try {
+            content = new String (Files.readAllBytes(Paths.get("game.txt")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return Arrays.asList(content.split(","));
     }
 
     public static void gameOut(String contents) throws IOException {
