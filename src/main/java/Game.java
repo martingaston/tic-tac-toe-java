@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +19,7 @@ class Game {
 
     private static final List<String> gameSettings = new LinkedList<>();
 
-    static void play(String[] args) {
+    static void play(String[] args) throws IOException {
         intro();
         setUp(args);
         instructions();
@@ -153,12 +154,13 @@ class Game {
 
     }
 
-    private static void processTurn() {
+    private static void processTurn() throws IOException {
         List<String> boardState = new LinkedList<>(gameSettings);
         boardState.addAll(board.toList());
         String boardCSV = String.join(",", boardState);
-
+        IO.gameOut(boardCSV);
         if (board.isGameOver()) {
+            IO.closeGame();
             gameEnd();
         } else {
             players.nextTurn();
