@@ -3,14 +3,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Game {
-    private Board board;
-    private Display display;
-    private Players players;
-    private Player playerCross;
-    private Player playerNought;
-    private IO io;
+    private static Board board;
+    private static Display display;
+    private static Players players;
+    private static IO io;
+    private static Player playerCross;
+    private static Player playerNought;
 
-    void play(String[] args) {
+    static void play(String[] args) {
         intro();
         setUp(args);
         instructions();
@@ -20,17 +20,17 @@ class Game {
         } while (!board.isGameOver());
     }
 
-    private void intro() {
+    private static void intro() {
         Display.outMessage(Messages.getIntro());
     }
 
-    public void setUp(String[] args) {
+    public static void setUp(String[] args) {
         io = new IO(new Scanner(System.in));
         Map<String, String> parsedArgs = parseArgs(args);
         processArgs(parsedArgs);
     }
 
-    private void processArgs(Map<String, String> parsedArgs) {
+    private static void processArgs(Map<String, String> parsedArgs) {
         if(parsedArgs.containsKey("board")) {
             switch (parsedArgs.get("board")) {
                 case "3x3":
@@ -50,20 +50,20 @@ class Game {
         if(parsedArgs.containsKey("mode")) {
             switch (parsedArgs.get("mode")) {
                 case "hvh":
-                    this.playerCross = new PlayerHuman("X", board, io);
-                    this.playerNought = new PlayerHuman("O", board, io);
+                    playerCross = new PlayerHuman("X", board, io);
+                    playerNought = new PlayerHuman("O", board, io);
                     break;
                 case "hvc-easy":
-                    this.playerCross = new PlayerHuman("X", board, io);
-                    this.playerNought = new PlayerCPU("O", board);
+                    playerCross = new PlayerHuman("X", board, io);
+                    playerNought = new PlayerCPU("O", board);
                     break;
                 case "hvc-hard":
-                    this.playerCross = new PlayerHuman("X", board, io);
-                    this.playerNought = new PlayerMinimax("O", board, playerCross);
+                    playerCross = new PlayerHuman("X", board, io);
+                    playerNought = new PlayerMinimax("O", board, playerCross);
                     break;
                 case "cvc-easy":
-                    this.playerCross = new PlayerCPU("X", board);
-                    this.playerNought = new PlayerCPU("O", board);
+                    playerCross = new PlayerCPU("X", board);
+                    playerNought = new PlayerCPU("O", board);
                     break;
                 default:
                     setUpPlayers();
@@ -77,7 +77,7 @@ class Game {
         players = new Players(playerCross, playerNought);
     }
 
-    public Map<String,String> parseArgs(String[] args) {
+    public static Map<String,String> parseArgs(String[] args) {
         Pattern argStructure = Pattern.compile("^--(\\w+)=([\\w|-]+)$");
         Map<String, String> argMap = new HashMap<>();
 
@@ -91,35 +91,35 @@ class Game {
         return argMap;
     }
 
-    private void instructions() {
+    private static void instructions() {
         Display.outMessage(Messages.getInstructions(board.sideLength()));
     }
 
-    private void setUpPlayers() {
+    private static void setUpPlayers() {
         Display.outMessage(Messages.setupInstructions());
         int modeNumber = io.nextInt();
         switch (modeNumber) {
             case 1:
             default:
-                this.playerCross = new PlayerHuman("X", board, io);
-                this.playerNought = new PlayerHuman("O", board, io);
+                playerCross = new PlayerHuman("X", board, io);
+                playerNought = new PlayerHuman("O", board, io);
                 break;
             case 2:
-                this.playerCross = new PlayerHuman("X", board, io);
-                this.playerNought = new PlayerCPU("O", board);
+                playerCross = new PlayerHuman("X", board, io);
+                playerNought = new PlayerCPU("O", board);
                 break;
             case 3:
-                this.playerCross = new PlayerHuman("X", board, io);
-                this.playerNought = new PlayerMinimax("O", board, playerCross);
+                playerCross = new PlayerHuman("X", board, io);
+                playerNought = new PlayerMinimax("O", board, playerCross);
                 break;
             case 4:
-                this.playerCross = new PlayerCPU("X", board);
-                this.playerNought = new PlayerCPU("O", board);
+                playerCross = new PlayerCPU("X", board);
+                playerNought = new PlayerCPU("O", board);
                 break;
         }
     }
 
-    private void setUpBoard() {
+    private static void setUpBoard() {
         Display.outMessage(Messages.boardSetupInstructions());
         int modeNumber = io.nextInt();
         switch (modeNumber) {
@@ -132,14 +132,14 @@ class Game {
         }
     }
 
-    private void newTurn() {
+    private static void newTurn() {
         display.showBoard();
         Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
         int playerInput = currentPlayer().getNextMove();
         board.add(playerInput, currentPlayer());
     }
 
-    private void processTurn() {
+    private static void processTurn() {
         if (board.isGameOver()) {
             gameEnd();
         } else {
@@ -147,11 +147,11 @@ class Game {
         }
     }
 
-    private Player currentPlayer() {
+    private static Player currentPlayer() {
         return players.getCurrentPlayer();
     }
 
-    private void gameEnd() {
+    private static void gameEnd() {
         display.showBoard();
 
         if (board.hasWinner()) {
