@@ -31,46 +31,74 @@ class Game {
     }
 
     private static void processArgs(Map<String, String> parsedArgs) {
+        int boardNumber;
+
         if(parsedArgs.containsKey("board")) {
-            switch (parsedArgs.get("board")) {
-                case "3x3":
-                    board = new Board();
-                    break;
-                case "4x4":
-                    board = new Board(4);
-                    break;
-                default:
-                    setUpBoard();
-                    break;
-            }
+           switch(parsedArgs.get("board")) {
+               case "3x3":
+               default:
+                   boardNumber = 1;
+                   break;
+               case "4x4":
+                   boardNumber = 2;
+                   break;
+           }
         } else {
-            setUpBoard();
+            Display.outMessage(Messages.boardSetupInstructions());
+            boardNumber = io.nextInt();
         }
 
+        switch (boardNumber) {
+            case 1:
+            default:
+                board = new Board();
+                break;
+            case 2:
+                board = new Board(4);
+                break;
+        }
+
+        int modeNumber;
+
         if(parsedArgs.containsKey("mode")) {
-            switch (parsedArgs.get("mode")) {
+            switch(parsedArgs.get("mode")) {
                 case "hvh":
-                    playerCross = new PlayerHuman("X", board, io);
-                    playerNought = new PlayerHuman("O", board, io);
+                default:
+                    modeNumber = 1;
                     break;
                 case "hvc-easy":
-                    playerCross = new PlayerHuman("X", board, io);
-                    playerNought = new PlayerCPU("O", board);
+                    modeNumber = 2;
                     break;
                 case "hvc-hard":
-                    playerCross = new PlayerHuman("X", board, io);
-                    playerNought = new PlayerMinimax("O", board, playerCross);
+                    modeNumber = 3;
                     break;
                 case "cvc-easy":
-                    playerCross = new PlayerCPU("X", board);
-                    playerNought = new PlayerCPU("O", board);
-                    break;
-                default:
-                    setUpPlayers();
+                    modeNumber = 4;
                     break;
             }
         } else {
-            setUpPlayers();
+            Display.outMessage(Messages.setupInstructions());
+            modeNumber = io.nextInt();
+        }
+
+        switch (modeNumber) {
+            case 1:
+            default:
+                playerCross = new PlayerHuman("X", board, io);
+                playerNought = new PlayerHuman("O", board, io);
+                break;
+            case 2:
+                playerCross = new PlayerHuman("X", board, io);
+                playerNought = new PlayerCPU("O", board);
+                break;
+            case 3:
+                playerCross = new PlayerHuman("X", board, io);
+                playerNought = new PlayerMinimax("O", board, playerCross);
+                break;
+            case 4:
+                playerCross = new PlayerCPU("X", board);
+                playerNought = new PlayerCPU("O", board);
+                break;
         }
 
         display = new Display(board);
@@ -93,43 +121,6 @@ class Game {
 
     private static void instructions() {
         Display.outMessage(Messages.getInstructions(board.sideLength()));
-    }
-
-    private static void setUpPlayers() {
-        Display.outMessage(Messages.setupInstructions());
-        int modeNumber = io.nextInt();
-        switch (modeNumber) {
-            case 1:
-            default:
-                playerCross = new PlayerHuman("X", board, io);
-                playerNought = new PlayerHuman("O", board, io);
-                break;
-            case 2:
-                playerCross = new PlayerHuman("X", board, io);
-                playerNought = new PlayerCPU("O", board);
-                break;
-            case 3:
-                playerCross = new PlayerHuman("X", board, io);
-                playerNought = new PlayerMinimax("O", board, playerCross);
-                break;
-            case 4:
-                playerCross = new PlayerCPU("X", board);
-                playerNought = new PlayerCPU("O", board);
-                break;
-        }
-    }
-
-    private static void setUpBoard() {
-        Display.outMessage(Messages.boardSetupInstructions());
-        int modeNumber = io.nextInt();
-        switch (modeNumber) {
-            case 1:
-                board = new Board();
-                break;
-            case 2:
-                board = new Board(4);
-                break;
-        }
     }
 
     private static void newTurn() {
