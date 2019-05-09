@@ -5,7 +5,7 @@ public class Main {
         Runtime runtime = Runtime.getRuntime();
         runtime.addShutdownHook(new Shutdown());
 
-        Game.play(args);
-        System.exit(0);
+        Settings settings = new Settings(args);
+        Game.play(settings);
     }
 }
