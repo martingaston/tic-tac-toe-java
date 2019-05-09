@@ -350,4 +350,45 @@ public class BoardTest {
 
         assertNotEquals(board, newBoard);
     }
+
+    @Test
+    public void boardToListReturnsNineEmptyPositionsOnEmpty3x3Board() {
+        Board board = new Board();
+        List<String> expectedBoard = Arrays.asList(
+                " ", " ", " ",
+                " ", " ", " ",
+                " ", " ", " "
+        );
+
+        assertEquals(expectedBoard, board.toList());
+    }
+
+    @Test
+    public void boardToListReturnsCrossDiagonalOn3x3Board() {
+        Board board = new Board();
+        board.add(0, playerCross);
+        board.add(4, playerCross);
+        board.add(8, playerCross);
+
+        List<String> expectedBoard = Arrays.asList(
+                "X", " ", " ",
+                " ", "X", " ",
+                " ", " ", "X"
+        );
+
+        assertEquals(expectedBoard, board.toList());
+    }
+
+    @Test
+    public void boardToListReturnsSixteenEmptyPositionsOnEmpty4x4Board() {
+        Board board = new Board(4);
+        List<String> expectedBoard = Arrays.asList(
+                " ", " ", " ", " ",
+                " ", " ", " ", " ",
+                " ", " ", " ", " ",
+                " ", " ", " ", " "
+        );
+
+        assertEquals(expectedBoard, board.toList());
+    }
 }

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Board {
     private int sideLength;
@@ -159,5 +160,11 @@ public class Board {
 
     private boolean isBoardFull() {
         return this.board.stream().allMatch(Cell::isOccupied);
+    }
+
+    public List<String> toList() {
+        return board.stream()
+                .map(Cell::getOccupant)
+                .collect(Collectors.toList());
     }
 }
