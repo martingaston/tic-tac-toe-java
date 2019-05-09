@@ -11,8 +11,6 @@ import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
 
-
-
 public class GameTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -33,8 +31,7 @@ public class GameTest {
         InputStream in = new ByteArrayInputStream(gameInputs.getBytes());
         System.setIn(in);
 
-        Game game = new Game();
-        game.play();
+        Game.play(new String[] {});
 
         String gameOutput = outContent.toString();
 
@@ -49,8 +46,7 @@ public class GameTest {
         InputStream in = new ByteArrayInputStream(gameInputs.getBytes());
         System.setIn(in);
 
-        Game game = new Game();
-        game.play();
+        Game.play(new String[] {});
 
         String gameOutput = outContent.toString();
 
@@ -65,8 +61,7 @@ public class GameTest {
         InputStream in = new ByteArrayInputStream(gameInputs.getBytes());
         System.setIn(in);
 
-        Game game = new Game();
-        game.play();
+        Game.play(new String[] {});
 
         String gameOutput = outContent.toString();
 
