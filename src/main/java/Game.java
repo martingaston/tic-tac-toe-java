@@ -16,6 +16,8 @@ class Game {
     private static final int MODE_HVC_HARD = 3;
     private static final int MODE_CVC_EASY = 4;
 
+    private static final List<String> gameSettings = new LinkedList<>();
+
     static void play(String[] args) {
         intro();
         setUp(args);
@@ -42,6 +44,7 @@ class Game {
 
         String boardArg = parsedArgs.getOrDefault("board", "");
         int boardNumber = getBoardNumber(boardArg);
+        gameSettings.add(Integer.toString(boardNumber));
 
         switch (boardNumber) {
             case BOARD_3X3:
@@ -55,6 +58,7 @@ class Game {
 
         String modeArg = parsedArgs.getOrDefault("mode", "");
         int modeNumber = getModeNumber(modeArg);
+        gameSettings.add(Integer.toString(boardNumber));
 
         switch (modeNumber) {
             case MODE_HVH:
@@ -77,6 +81,8 @@ class Game {
         }
 
         display = new Display(board);
+        gameSettings.add(playerCross.getSymbol());
+        gameSettings.add(playerNought.getSymbol());
         players = new Players(playerCross, playerNought);
     }
 
@@ -144,9 +150,14 @@ class Game {
         Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
         int playerInput = currentPlayer().getNextMove();
         board.add(playerInput, currentPlayer());
+
     }
 
     private static void processTurn() {
+        List<String> boardState = new LinkedList<>(gameSettings);
+        boardState.addAll(board.toList());
+        String boardCSV = String.join(",", boardState);
+
         if (board.isGameOver()) {
             gameEnd();
         } else {
