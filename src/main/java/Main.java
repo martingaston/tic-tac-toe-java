@@ -3,8 +3,7 @@ public class Main {
         Runtime runtime = Runtime.getRuntime();
         runtime.addShutdownHook(new Shutdown());
 
-        Game game = new Game();
-        game.play();
+        Game.play(args);
         System.exit(0);
     }
 }

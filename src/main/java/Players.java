@@ -3,30 +3,6 @@ public class Players {
     private final Player playerNought;
     private Player currentPlayer;
 
-    Players(Board board, IO io) {
-        int modeNumber = io.nextInt();
-        switch (modeNumber) {
-            case 1:
-            default:
-                this.playerCross = new PlayerHuman("X", board, io);
-                this.playerNought = new PlayerHuman("O", board, io);
-                break;
-            case 2:
-                this.playerCross = new PlayerHuman("X", board, io);
-                this.playerNought = new PlayerCPU("O", board);
-                break;
-            case 3:
-                this.playerCross = new PlayerHuman("X", board, io);
-                this.playerNought = new PlayerMinimax("O", board, playerCross);
-                break;
-            case 4:
-                this.playerCross = new PlayerCPU("X", board);
-                this.playerNought = new PlayerCPU("O", board);
-                break;
-        }
-        this.currentPlayer = playerCross;
-    }
-
     public Players(Player playerCross, Player playerNought) {
         this.playerCross = playerCross;
         this.playerNought = playerNought;
