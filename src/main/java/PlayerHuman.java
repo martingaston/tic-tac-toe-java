@@ -1,16 +1,18 @@
 import java.util.Scanner;
 
 public class PlayerHuman implements Player {
-    private String symbol;
-    private Rules rules;
+    private final String symbol;
+    private final Board board;
+    private final IO io;
 
-    public PlayerHuman(String symbol, Rules rules) {
+    public PlayerHuman(String symbol, Board board, IO io) {
         this.symbol = symbol;
-        this.rules = rules;
+        this.board = board;
+        this.io = io;
     }
 
-    public PlayerHuman(String symbol) {
-        this.symbol = symbol;
+    public PlayerHuman(String symbol, Board board) {
+        this(symbol, board, new IO(new Scanner(System.in)));
     }
 
     public String getSymbol() {
@@ -18,23 +20,22 @@ public class PlayerHuman implements Player {
     }
 
     public int getNextMove() {
-        Scanner input = new Scanner(System.in);
-        int desiredCell = getAnInteger(input);
+        int desiredCell = getAnInteger();
 
-        while (rules.isNotValidMove(desiredCell)) {
+        while (!board.available().contains(desiredCell)) {
             invalidMove();
-            desiredCell = getAnInteger(input);
+            desiredCell = getAnInteger();
         }
 
         return desiredCell;
     }
 
-    private int getAnInteger(Scanner scanner) {
-        while (!scanner.hasNextInt()) {
+    private int getAnInteger() {
+        while (!io.hasNextInt()) {
             invalidMove();
-            scanner.next();
+            io.next();
         }
-        return computerise(scanner.nextInt());
+        return computerise(io.nextInt());
     }
 
     private int computerise(int oneIndexedNumber) {
@@ -42,7 +43,6 @@ public class PlayerHuman implements Player {
     }
 
     private void invalidMove() {
-        Messages messages = new Messages();
-        Display.outMessage(messages.invalidMove());
+        Display.outMessage(Messages.invalidMove());
     }
 }

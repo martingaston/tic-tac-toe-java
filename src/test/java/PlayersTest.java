@@ -1,15 +1,16 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PlayersTest {
     private Players players;
 
     @Before
     public void setUp() {
-        Player playerCross = new PlayerHuman("X");
-        Player playerNought = new PlayerHuman("O");
+        Board board = new Board();
+        Player playerCross = new PlayerHuman("X", board);
+        Player playerNought = new PlayerHuman("O", board);
         players = new Players(playerCross, playerNought);
     }
 

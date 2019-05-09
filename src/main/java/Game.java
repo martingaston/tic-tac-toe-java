@@ -1,14 +1,10 @@
 import java.util.Scanner;
 
 class Game {
-    private Messages messages = new Messages();
-
     private Board board;
-    private Rules rules;
     private Display display;
     private Players players;
-    private boolean gameOver = false;
-    private String winner = "";
+    private IO io;
 
     void play() {
         intro();
@@ -17,33 +13,32 @@ class Game {
         do {
             newTurn();
             processTurn();
-        } while (!isGameOver());
-        gameEnd();
+        } while (!board.isGameOver());
     }
 
     private void intro() {
-        Display.outMessage(messages.getIntro());
+        Display.outMessage(Messages.getIntro());
     }
 
     private void setUp() {
+        io = new IO(new Scanner(System.in));
         setUpBoard();
         setUpPlayers();
     }
 
     private void instructions() {
-        Display.outMessage(messages.getInstructions(board.getSideLength()));
+        Display.outMessage(Messages.getInstructions(board.sideLength()));
     }
 
     private void setUpPlayers() {
-        Display.outMessage(messages.setupInstructions());
-        players = new Players(rules, board);
+        Display.outMessage(Messages.setupInstructions());
+        players = new Players(board, io);
     }
 
     private void setUpBoard() {
-        Display.outMessage(messages.boardSetupInstructions());
-        Scanner input = new Scanner(System.in);
-        int modeNumber = input.nextInt();
-        switch(modeNumber) {
+        Display.outMessage(Messages.boardSetupInstructions());
+        int modeNumber = io.nextInt();
+        switch (modeNumber) {
             case 1:
                 board = new Board();
                 break;
@@ -51,30 +46,22 @@ class Game {
                 board = new Board(4);
                 break;
         }
-        rules = new Rules(board);
         display = new Display(board);
     }
 
     private void newTurn() {
         display.showBoard();
-        Display.outMessage(messages.announcePlayerTurn(currentPlayer()));
+        Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
         int playerInput = currentPlayer().getNextMove();
         board.add(playerInput, currentPlayer());
     }
 
     private void processTurn() {
-        gameOver = rules.gameIsOver();
-        boolean hasWon = rules.hasWinningMove(currentPlayer());
-        if (hasWon) {
-            winner = currentPlayer().getSymbol();
-            gameOver = true;
-            return;
+        if (board.isGameOver()) {
+            gameEnd();
+        } else {
+            players.nextTurn();
         }
-        switchPlayer();
-    }
-
-    private void switchPlayer() {
-        players.nextTurn();
     }
 
     private Player currentPlayer() {
@@ -83,17 +70,11 @@ class Game {
 
     private void gameEnd() {
         display.showBoard();
-      
-        if (aPlayerHasWon()) {
-            Display.outMessage(messages.playerWin(currentPlayer()));
+
+        if (board.hasWinner()) {
+            Display.outMessage(Messages.playerWin(currentPlayer()));
         } else {
-            Display.outMessage(messages.playersDraw());
+            Display.outMessage(Messages.playersDraw());
         }
-    }
-
-    private boolean aPlayerHasWon() { return this.gameOver && !this.winner.isEmpty(); }
-
-    private boolean isGameOver() {
-        return gameOver;
     }
 }

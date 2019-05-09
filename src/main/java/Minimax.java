@@ -1,12 +1,10 @@
 public class Minimax {
-    private Player maximizer;
-    private Player minimizer;
-    private Board board;
-    private Rules rules;
+    private final Player maximizer;
+    private final Player minimizer;
+    private final Board board;
 
-    public Minimax(Board board, Rules rules, Player maximizer, Player minimizer) {
+    public Minimax(Board board, Player maximizer, Player minimizer) {
         this.board = board;
-        this.rules = rules;
         this.maximizer = maximizer;
         this.minimizer = minimizer;
     }
@@ -16,11 +14,11 @@ public class Minimax {
         final int LOSING_SCORE = -10;
         final int DRAW_SCORE = 0;
 
-        if (rules.hasWinningMove(maximizer)) {
+        if (board.hasWon(this.maximizer)) {
             return WINNING_SCORE - depth;
         }
 
-        if (rules.hasWinningMove(minimizer)) {
+        if (board.hasWon(this.minimizer)) {
             return LOSING_SCORE + depth;
         }
 
@@ -82,6 +80,6 @@ public class Minimax {
     }
 
     private boolean noMovesLeft() {
-        return rules.gameIsOver();
+        return board.isGameOver();
     }
 }

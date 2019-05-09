@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CellTest {
     private Player playerCross;
@@ -10,8 +10,9 @@ public class CellTest {
 
     @Before
     public void setUp() {
-        playerCross = new PlayerHuman("X");
-        playerNought = new PlayerHuman("O");
+        Board board = new Board();
+        playerCross = new PlayerHuman("X", board);
+        playerNought = new PlayerHuman("O", board);
         cell = new Cell();
     }
 

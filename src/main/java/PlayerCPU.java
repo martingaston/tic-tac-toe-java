@@ -1,8 +1,8 @@
 import java.util.List;
 
 public class PlayerCPU implements Player {
-    private String symbol;
-    private Board board;
+    private final String symbol;
+    private final Board board;
 
     PlayerCPU(String symbol, Board board) {
         this.symbol = symbol;
@@ -22,14 +22,14 @@ public class PlayerCPU implements Player {
 
     private int pickRandomCell() {
         List<Integer> available = board.available();
-        int cellIndex = (int)Math.floor(Math.random() * available.size());
+        int cellIndex = (int) Math.floor(Math.random() * available.size());
         return available.get(cellIndex);
     }
 
     private void oneSecondSleep() {
         try {
             Thread.sleep(1000);
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
