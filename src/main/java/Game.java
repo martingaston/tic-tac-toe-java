@@ -7,8 +7,6 @@ class Game {
     private static Display display;
     private static Players players;
     private static IO io;
-    private static Player playerCross;
-    private static Player playerNought;
 
     static void play(String[] args) {
         intro();
@@ -31,16 +29,26 @@ class Game {
     }
 
     private static void processArgs(Map<String, String> parsedArgs) {
+        Player playerCross;
+        Player playerNought;
         int boardNumber;
+
+        final int BOARD_3X3 = 1;
+        final int BOARD_4X4 = 2;
+
+        final int MODE_HVH = 1;
+        final int MODE_HVC_EASY = 2;
+        final int MODE_HVC_HARD = 3;
+        final int MODE_CVC_EASY = 4;
 
         if(parsedArgs.containsKey("board")) {
            switch(parsedArgs.get("board")) {
                case "3x3":
                default:
-                   boardNumber = 1;
+                   boardNumber = BOARD_3X3;
                    break;
                case "4x4":
-                   boardNumber = 2;
+                   boardNumber = BOARD_4X4;
                    break;
            }
         } else {
@@ -49,11 +57,11 @@ class Game {
         }
 
         switch (boardNumber) {
-            case 1:
+            case BOARD_3X3:
             default:
                 board = new Board();
                 break;
-            case 2:
+            case BOARD_4X4:
                 board = new Board(4);
                 break;
         }
@@ -64,16 +72,16 @@ class Game {
             switch(parsedArgs.get("mode")) {
                 case "hvh":
                 default:
-                    modeNumber = 1;
+                    modeNumber = MODE_HVH;
                     break;
                 case "hvc-easy":
-                    modeNumber = 2;
+                    modeNumber = MODE_HVC_EASY;
                     break;
                 case "hvc-hard":
-                    modeNumber = 3;
+                    modeNumber = MODE_HVC_HARD;
                     break;
                 case "cvc-easy":
-                    modeNumber = 4;
+                    modeNumber = MODE_CVC_EASY;
                     break;
             }
         } else {
@@ -82,20 +90,20 @@ class Game {
         }
 
         switch (modeNumber) {
-            case 1:
+            case MODE_HVH:
             default:
                 playerCross = new PlayerHuman("X", board, io);
                 playerNought = new PlayerHuman("O", board, io);
                 break;
-            case 2:
+            case MODE_HVC_EASY:
                 playerCross = new PlayerHuman("X", board, io);
                 playerNought = new PlayerCPU("O", board);
                 break;
-            case 3:
+            case MODE_HVC_HARD:
                 playerCross = new PlayerHuman("X", board, io);
                 playerNought = new PlayerMinimax("O", board, playerCross);
                 break;
-            case 4:
+            case MODE_CVC_EASY:
                 playerCross = new PlayerCPU("X", board);
                 playerNought = new PlayerCPU("O", board);
                 break;
