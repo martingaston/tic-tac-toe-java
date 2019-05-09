@@ -391,4 +391,101 @@ public class BoardTest {
 
         assertEquals(expectedBoard, board.toList());
     }
+
+    @Test
+    public void boardFromListCreatesEmpty3x3Board() {
+        List<String> boardList = Arrays.asList("", "", "", "", "", "", "", "", "");
+        Board board = Board.fromList(boardList, playerCross, playerNought);
+        String[] updatedBoard = createStringArrayFromBoard(board);
+        String[] expectedBoard = {
+                " ", " ", " ",
+                " ", " ", " ",
+                " ", " ", " "
+        };
+
+        assertArrayEquals(expectedBoard, updatedBoard);
+    }
+
+    @Test
+    public void boardFromListCreatesHorizontalPopulated3x3Board() {
+        List<String> boardList = Arrays.asList("X", "X", "X", "", "", "", "", "", "");
+        Board board = Board.fromList(boardList, playerCross, playerNought);
+        String[] updatedBoard = createStringArrayFromBoard(board);
+        String[] expectedBoard = {
+                "X", "X", "X",
+                " ", " ", " ",
+                " ", " ", " "
+        };
+
+        assertArrayEquals(expectedBoard, updatedBoard);
+    }
+
+    @Test
+    public void boardFromListCreatesVerticalPopulated3x3Board() {
+        List<String> boardList = Arrays.asList("O", "", "", "O", "", "", "O", "", "");
+        Board board = Board.fromList(boardList, playerCross, playerNought);
+        String[] updatedBoard = createStringArrayFromBoard(board);
+        String[] expectedBoard = {
+                "O", " ", " ",
+                "O", " ", " ",
+                "O", " ", " "
+        };
+
+        assertArrayEquals(expectedBoard, updatedBoard);
+    }
+
+    @Test
+    public void boardFromListDoesNotPlaceNonMatchingSymbols() {
+        List<String> boardList = Arrays.asList("Q", "Q", "Q", "", "", "", "", "", "");
+        Board board = Board.fromList(boardList, playerCross, playerNought);
+        String[] updatedBoard = createStringArrayFromBoard(board);
+        String[] expectedBoard = {
+                " ", " ", " ",
+                " ", " ", " ",
+                " ", " ", " "
+        };
+
+        assertArrayEquals(expectedBoard, updatedBoard);
+    }
+
+    @Test
+    public void boardFromListCreates4x4Board() {
+        List<String> boardList = Arrays.asList(
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "", ""
+        );
+
+        Board board = Board.fromList(boardList, playerCross, playerNought);
+        String[] updatedBoard = createStringArrayFromBoard(board);
+        String[] expectedBoard = {
+                " ", " ", " ", " ",
+                " ", " ", " ", " ",
+                " ", " ", " ", " ",
+                " ", " ", " ", " "
+        };
+
+        assertArrayEquals(expectedBoard, updatedBoard);
+    }
+
+    @Test
+    public void ListsNotNineOrSixteenLengthWillReturnEmpty3x3Board() {
+        List<String> boardList = Arrays.asList(
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "X"
+        );
+
+        Board board = Board.fromList(boardList, playerCross, playerNought);
+        String[] updatedBoard = createStringArrayFromBoard(board);
+        String[] expectedBoard = {
+                " ", " ", " ",
+                " ", " ", " ",
+                " ", " ", " "
+        };
+
+        assertArrayEquals(expectedBoard, updatedBoard);
+    }
 }
