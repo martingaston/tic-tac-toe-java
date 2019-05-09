@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,6 +30,13 @@ public class IO {
 
     public static List<String> gameIn() {
         String content = "";
+
+        File f = new File("game.txt");
+        if (!f.exists()) {
+            return new LinkedList<>();
+        }
+
+        System.out.println("File exists!");
 
         try {
             content = new String (Files.readAllBytes(Paths.get("game.txt")));

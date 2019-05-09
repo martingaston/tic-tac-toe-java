@@ -43,9 +43,13 @@ class Game {
         Player playerCross;
         Player playerNought;
 
+        List<String> prevState = IO.gameIn();
         String boardArg = parsedArgs.getOrDefault("board", "");
         int boardNumber = getBoardNumber(boardArg);
-        gameSettings.add(Integer.toString(boardNumber));
+
+        if (prevState.size() >= 13) {
+            boardNumber = Integer.parseInt(prevState.get(0));
+        }
 
         switch (boardNumber) {
             case BOARD_3X3:
@@ -59,7 +63,10 @@ class Game {
 
         String modeArg = parsedArgs.getOrDefault("mode", "");
         int modeNumber = getModeNumber(modeArg);
-        gameSettings.add(Integer.toString(boardNumber));
+
+        if (!prevState.isEmpty()) {
+            boardNumber = Integer.parseInt(prevState.get(1));
+        }
 
         switch (modeNumber) {
             case MODE_HVH:
@@ -81,10 +88,21 @@ class Game {
                 break;
         }
 
-        display = new Display(board);
+        if (!prevState.isEmpty()) {
+            board = Board.fromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
+        }
+
+        gameSettings.add(Integer.toString(boardNumber));
+        gameSettings.add(Integer.toString(modeNumber));
         gameSettings.add(playerCross.getSymbol());
         gameSettings.add(playerNought.getSymbol());
+
+        display = new Display(board);
         players = new Players(playerCross, playerNought);
+
+        if (!prevState.isEmpty() && prevState.get(4).equals("X")) {
+            players.nextTurn();
+        }
     }
 
     private static int getModeNumber(String modeArg) {
@@ -156,6 +174,7 @@ class Game {
 
     private static void processTurn() throws IOException {
         List<String> boardState = new LinkedList<>(gameSettings);
+        boardState.add(currentPlayer().getSymbol());
         boardState.addAll(board.toList());
         String boardCSV = String.join(",", boardState);
         IO.gameOut(boardCSV);
