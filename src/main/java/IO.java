@@ -24,8 +24,6 @@ class IO {
             return new LinkedList<>();
         }
 
-        System.out.println("File exists!");
-
         try {
             content = new String(Files.readAllBytes(Paths.get("game.txt")));
         } catch (IOException e) {

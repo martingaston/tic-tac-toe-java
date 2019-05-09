@@ -20,34 +20,21 @@ public class Settings {
 
     Settings (String[] args) {
         io = new IO(new Scanner(System.in));
-        processArgs(args);
+        List<String> prevState = IO.gameIn();
+
+        if(!prevState.isEmpty()) {
+            processSavedGame(prevState);
+        } else {
+            processArgs(args);
+        }
     }
 
-    private void processArgs(String[] args) {
-        Map<String, String> parsedArgs = parseArgs(args);
-
-        List<String> prevState = IO.gameIn();
-        String boardArg = parsedArgs.getOrDefault("board", "");
-        int boardNumber = getBoardNumber(boardArg);
-
-        if (prevState.size() >= 13) {
-            boardNumber = Integer.parseInt(prevState.get(0));
-        }
-
-        buildBoard(boardNumber);
-
-        String modeArg = parsedArgs.getOrDefault("mode", "");
-        int modeNumber = getModeNumber(modeArg);
-
-        if (!prevState.isEmpty()) {
-            boardNumber = Integer.parseInt(prevState.get(1));
-        }
-
+    private void processSavedGame(List<String> prevState) {
+        int boardNumber = Integer.parseInt(prevState.get(0));
+        int modeNumber = Integer.parseInt(prevState.get(1));
+        //TODO circular dependencies! Board fromList needs Players, Players needs Board!
+        board = Board.fromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
         buildMode(modeNumber);
-
-        if (!prevState.isEmpty()) {
-            board = Board.fromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
-        }
 
         gameSettings.add(Integer.toString(boardNumber));
         gameSettings.add(Integer.toString(modeNumber));
@@ -57,9 +44,28 @@ public class Settings {
         display = new Display(board);
         players = new Players(playerCross, playerNought);
 
-        if (!prevState.isEmpty() && prevState.get(4).equals("X")) {
+        if (prevState.get(4).equals("X")) {
             players.nextTurn();
         }
+    }
+
+    private void processArgs(String[] args) {
+        Map<String, String> parsedArgs = parseArgs(args);
+        String boardArg = parsedArgs.getOrDefault("board", "");
+        String modeArg = parsedArgs.getOrDefault("mode", "");
+        int boardNumber = getBoardNumber(boardArg);
+        int modeNumber = getModeNumber(modeArg);
+
+        buildBoard(boardNumber);
+        buildMode(modeNumber);
+
+        gameSettings.add(Integer.toString(boardNumber));
+        gameSettings.add(Integer.toString(modeNumber));
+        gameSettings.add(playerCross.getSymbol());
+        gameSettings.add(playerNought.getSymbol());
+
+        display = new Display(board);
+        players = new Players(playerCross, playerNought);
     }
 
     private void buildMode(int modeNumber) {
