@@ -1,4 +1,4 @@
-public class Minimax {
+class Minimax {
     private final Player maximizer;
     private final Player minimizer;
     private final Board board;

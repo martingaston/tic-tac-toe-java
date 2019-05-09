@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Board {
+    private final List<Cell> board = new ArrayList<>();
     private int sideLength;
     private int totalCells;
-    private final List<Cell> board = new ArrayList<>();
 
     public Board() {
         this(3);
@@ -15,6 +15,30 @@ public class Board {
 
     public Board(int sideLength) {
         generate(sideLength);
+    }
+
+    public static Board fromList(List<String> boardList, Player playerCross, Player playerNought) {
+
+        if (boardList.size() != 9 && boardList.size() != 16) {
+            return new Board();
+        }
+
+        int totalCells = boardList.size();
+        int sideLength = (int) Math.sqrt(totalCells);
+        Board newBoard = new Board(sideLength);
+
+        for (int i = 0; i < totalCells; i++) {
+            String currentSymbol = boardList.get(i);
+
+            if (currentSymbol.equals(playerCross.getSymbol())) {
+                newBoard.add(i, playerCross);
+            } else if (currentSymbol.equals(playerNought.getSymbol())) {
+                newBoard.add(i, playerNought);
+            }
+
+        }
+
+        return newBoard;
     }
 
     private void generate(int sideLength) {
@@ -166,29 +190,5 @@ public class Board {
         return board.stream()
                 .map(Cell::getOccupant)
                 .collect(Collectors.toList());
-    }
-
-    public static Board fromList(List<String> boardList, Player playerCross, Player playerNought) {
-
-        if (boardList.size() != 9 && boardList.size() != 16) {
-            return new Board();
-        }
-
-        int totalCells = boardList.size();
-        int sideLength = (int) Math.sqrt(totalCells);
-        Board newBoard = new Board(sideLength);
-
-        for (int i = 0; i < totalCells; i++) {
-            String currentSymbol = boardList.get(i);
-
-            if (currentSymbol.equals(playerCross.getSymbol())) {
-                newBoard.add(i, playerCross);
-            } else if (currentSymbol.equals(playerNought.getSymbol())) {
-                newBoard.add(i, playerNought);
-            }
-
-        }
-
-        return newBoard;
     }
 }

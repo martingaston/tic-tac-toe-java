@@ -1,5 +1,5 @@
-class Shutdown extends Thread{
-    public void run(){
+class Shutdown extends Thread {
+    public void run() {
         System.out.println(Messages.shutdown());
     }
 }

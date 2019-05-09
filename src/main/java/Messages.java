@@ -23,7 +23,9 @@ public class Messages {
         return String.format("Player %s's turn", player.getSymbol());
     }
 
-    static String shutdown() { return "Goodbye!"; }
+    static String shutdown() {
+        return "Goodbye!";
+    }
 
     static String getInstructions(int sideLength) {
         String gridShape = sideLength + "x" + sideLength;

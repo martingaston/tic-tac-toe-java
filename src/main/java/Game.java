@@ -4,20 +4,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Game {
-    private static Board board;
-    private static Display display;
-    private static Players players;
-    private static IO io;
-
     private static final int BOARD_3X3 = 1;
     private static final int BOARD_4X4 = 2;
-
     private static final int MODE_HVH = 1;
     private static final int MODE_HVC_EASY = 2;
     private static final int MODE_HVC_HARD = 3;
     private static final int MODE_CVC_EASY = 4;
-
     private static final List<String> gameSettings = new LinkedList<>();
+    private static Board board;
+    private static Display display;
+    private static Players players;
+    private static IO io;
 
     static void play(String[] args) throws IOException {
         intro();
@@ -107,7 +104,7 @@ class Game {
 
     private static int getModeNumber(String modeArg) {
         int modeNumber;
-        switch(modeArg) {
+        switch (modeArg) {
             case "hvh":
                 modeNumber = MODE_HVH;
                 break;
@@ -130,27 +127,27 @@ class Game {
     private static int getBoardNumber(String boardArg) {
         int boardNumber;
 
-           switch(boardArg) {
-               case "3x3":
-                   boardNumber = BOARD_3X3;
-                   break;
-               case "4x4":
-                   boardNumber = BOARD_4X4;
-                   break;
-               default:
-                   Display.outMessage(Messages.boardSetupInstructions());
-                   boardNumber = io.nextInt();
-                   break;
-           }
+        switch (boardArg) {
+            case "3x3":
+                boardNumber = BOARD_3X3;
+                break;
+            case "4x4":
+                boardNumber = BOARD_4X4;
+                break;
+            default:
+                Display.outMessage(Messages.boardSetupInstructions());
+                boardNumber = io.nextInt();
+                break;
+        }
 
         return boardNumber;
     }
 
-    public static Map<String,String> parseArgs(String[] args) {
+    public static Map<String, String> parseArgs(String[] args) {
         Pattern argStructure = Pattern.compile("^--(\\w+)=([\\w|-]+)$");
         Map<String, String> argMap = new HashMap<>();
 
-        for ( String arg : args) {
+        for (String arg : args) {
             Matcher matchedArg = argStructure.matcher(arg);
             if (matchedArg.matches()) {
                 argMap.put(matchedArg.group(1), matchedArg.group(2));

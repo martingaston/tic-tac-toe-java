@@ -1,4 +1,4 @@
-public class Players {
+class Players {
     private final Player playerCross;
     private final Player playerNought;
     private Player currentPlayer;

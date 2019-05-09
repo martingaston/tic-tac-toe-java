@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Line {
+class Line {
     private final List<Cell> cells;
 
     public Line(List<Cell> cells) {
