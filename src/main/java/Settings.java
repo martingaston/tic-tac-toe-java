@@ -15,6 +15,8 @@ public class Settings {
     private Board board;
     private Display display;
     private Players players;
+    private Player playerCross;
+    private Player playerNought;
 
     Settings (String[] args) {
         io = new IO(new Scanner(System.in));
@@ -22,9 +24,6 @@ public class Settings {
     }
 
     private void processArgs(String[] args) {
-        Player playerCross;
-        Player playerNought;
-
         Map<String, String> parsedArgs = parseArgs(args);
 
         List<String> prevState = IO.gameIn();
@@ -35,15 +34,7 @@ public class Settings {
             boardNumber = Integer.parseInt(prevState.get(0));
         }
 
-        switch (boardNumber) {
-            case BOARD_3X3:
-            default:
-                board = new Board();
-                break;
-            case BOARD_4X4:
-                board = new Board(4);
-                break;
-        }
+        buildBoard(boardNumber);
 
         String modeArg = parsedArgs.getOrDefault("mode", "");
         int modeNumber = getModeNumber(modeArg);
@@ -52,6 +43,26 @@ public class Settings {
             boardNumber = Integer.parseInt(prevState.get(1));
         }
 
+        buildMode(modeNumber);
+
+        if (!prevState.isEmpty()) {
+            board = Board.fromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
+        }
+
+        gameSettings.add(Integer.toString(boardNumber));
+        gameSettings.add(Integer.toString(modeNumber));
+        gameSettings.add(playerCross.getSymbol());
+        gameSettings.add(playerNought.getSymbol());
+
+        display = new Display(board);
+        players = new Players(playerCross, playerNought);
+
+        if (!prevState.isEmpty() && prevState.get(4).equals("X")) {
+            players.nextTurn();
+        }
+    }
+
+    private void buildMode(int modeNumber) {
         switch (modeNumber) {
             case MODE_HVH:
             default:
@@ -71,21 +82,17 @@ public class Settings {
                 playerNought = new PlayerCPU("O", board);
                 break;
         }
+    }
 
-        if (!prevState.isEmpty()) {
-            board = Board.fromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
-        }
-
-        gameSettings.add(Integer.toString(boardNumber));
-        gameSettings.add(Integer.toString(modeNumber));
-        gameSettings.add(playerCross.getSymbol());
-        gameSettings.add(playerNought.getSymbol());
-
-        display = new Display(board);
-        players = new Players(playerCross, playerNought);
-
-        if (!prevState.isEmpty() && prevState.get(4).equals("X")) {
-            players.nextTurn();
+    private void buildBoard(int boardNumber) {
+        switch (boardNumber) {
+            case BOARD_3X3:
+            default:
+                board = new Board();
+                break;
+            case BOARD_4X4:
+                board = new Board(4);
+                break;
         }
     }
 
