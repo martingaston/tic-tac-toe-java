@@ -47,10 +47,10 @@ public class Settings {
         int boardNumber = Integer.parseInt(prevState.get(0));
         int modeNumber = Integer.parseInt(prevState.get(1));
 
-        // We need a board reference for players, which we then overwrite with our updated board
-        board = new Board();
+        buildBoard(boardNumber);
         buildMode(modeNumber);
-        board = Board.fromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
+
+        board.addFromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
 
         gameSettings.add(Integer.toString(boardNumber));
         gameSettings.add(Integer.toString(modeNumber));
