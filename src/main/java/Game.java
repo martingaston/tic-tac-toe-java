@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 
 class Game {
@@ -35,15 +34,10 @@ class Game {
         Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
         int playerInput = currentPlayer().getNextMove();
         board.add(playerInput, currentPlayer());
-
     }
 
     private static void processTurn() throws IOException {
-        List<String> boardState = new LinkedList<>(gameSettings);
-        boardState.add(currentPlayer().getSymbol());
-        boardState.addAll(board.toList());
-        String boardCSV = String.join(",", boardState);
-        IO.gameOut(boardCSV);
+        IO.gameOut(currentPlayer(), board, gameSettings);
         if (board.isGameOver()) {
             IO.closeGame();
             gameEnd();

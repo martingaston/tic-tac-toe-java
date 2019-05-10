@@ -33,9 +33,14 @@ class IO {
         return Arrays.asList(content.split(","));
     }
 
-    public static void gameOut(String contents) throws IOException {
+    public static void gameOut(Player currentPlayer, Board board, List<String> settings) throws IOException {
+        List<String> boardState = new LinkedList<>(settings);
+        boardState.add(currentPlayer.getSymbol());
+        boardState.addAll(board.toList());
+        String boardCSV = String.join(",", boardState);
+
         BufferedWriter writer = new BufferedWriter(new FileWriter("game.txt"));
-        writer.write(contents);
+        writer.write(boardCSV);
         writer.close();
     }
 
