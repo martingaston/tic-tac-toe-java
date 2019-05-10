@@ -18,23 +18,39 @@ public class Settings {
     private Player playerCross;
     private Player playerNought;
 
-    Settings (String[] args) {
+    Settings(String[] args) {
         io = new IO(new Scanner(System.in));
         List<String> prevState = IO.gameIn();
 
-        if(!prevState.isEmpty()) {
+        if (!prevState.isEmpty()) {
             processSavedGame(prevState);
         } else {
             processArgs(args);
         }
     }
 
+    public static Map<String, String> parseArgs(String[] args) {
+        Pattern argStructure = Pattern.compile("^--(\\w+)=([\\w|-]+)$");
+        Map<String, String> argMap = new HashMap<>();
+
+        for (String arg : args) {
+            Matcher matchedArg = argStructure.matcher(arg);
+            if (matchedArg.matches()) {
+                argMap.put(matchedArg.group(1), matchedArg.group(2));
+            }
+        }
+
+        return argMap;
+    }
+
     private void processSavedGame(List<String> prevState) {
         int boardNumber = Integer.parseInt(prevState.get(0));
         int modeNumber = Integer.parseInt(prevState.get(1));
-        //TODO circular dependencies! Board fromList needs Players, Players needs Board!
-        board = Board.fromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
+
+        // We need a board reference for players, which we then overwrite with our updated board
+        board = new Board();
         buildMode(modeNumber);
+        board = Board.fromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
 
         gameSettings.add(Integer.toString(boardNumber));
         gameSettings.add(Integer.toString(modeNumber));
@@ -141,20 +157,6 @@ public class Settings {
         }
 
         return boardNumber;
-    }
-
-    public static Map<String, String> parseArgs(String[] args) {
-        Pattern argStructure = Pattern.compile("^--(\\w+)=([\\w|-]+)$");
-        Map<String, String> argMap = new HashMap<>();
-
-        for (String arg : args) {
-            Matcher matchedArg = argStructure.matcher(arg);
-            if (matchedArg.matches()) {
-                argMap.put(matchedArg.group(1), matchedArg.group(2));
-            }
-        }
-
-        return argMap;
     }
 
     public Board board() {

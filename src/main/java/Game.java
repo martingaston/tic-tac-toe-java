@@ -1,5 +1,6 @@
 import java.io.IOException;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 class Game {
     private static Board board;
