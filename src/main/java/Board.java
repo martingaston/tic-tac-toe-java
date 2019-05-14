@@ -33,30 +33,6 @@ public class Board {
         }
     }
 
-    public static Board fromList(List<String> boardList, Player playerCross, Player playerNought) {
-
-        if (boardList.size() != 9 && boardList.size() != 16) {
-            return new Board();
-        }
-
-        int totalCells = boardList.size();
-        int sideLength = (int) Math.sqrt(totalCells);
-        Board newBoard = new Board(sideLength);
-
-        for (int i = 0; i < totalCells; i++) {
-            String currentSymbol = boardList.get(i);
-
-            if (currentSymbol.equals(playerCross.getSymbol())) {
-                newBoard.add(i, playerCross);
-            } else if (currentSymbol.equals(playerNought.getSymbol())) {
-                newBoard.add(i, playerNought);
-            }
-
-        }
-
-        return newBoard;
-    }
-
     private void generate(int sideLength) {
         this.sideLength = sideLength;
         this.totalCells = sideLength * sideLength;

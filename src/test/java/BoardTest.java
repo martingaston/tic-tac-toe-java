@@ -395,7 +395,8 @@ public class BoardTest {
     @Test
     public void boardFromListCreatesEmpty3x3Board() {
         List<String> boardList = Arrays.asList("", "", "", "", "", "", "", "", "");
-        Board board = Board.fromList(boardList, playerCross, playerNought);
+        Board board = new Board();
+        board.addFromList(boardList, playerCross, playerNought);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",
@@ -409,7 +410,8 @@ public class BoardTest {
     @Test
     public void boardFromListCreatesHorizontalPopulated3x3Board() {
         List<String> boardList = Arrays.asList("X", "X", "X", "", "", "", "", "", "");
-        Board board = Board.fromList(boardList, playerCross, playerNought);
+        Board board = new Board();
+        board.addFromList(boardList, playerCross, playerNought);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "X", "X", "X",
@@ -423,7 +425,8 @@ public class BoardTest {
     @Test
     public void boardFromListCreatesVerticalPopulated3x3Board() {
         List<String> boardList = Arrays.asList("O", "", "", "O", "", "", "O", "", "");
-        Board board = Board.fromList(boardList, playerCross, playerNought);
+        Board board = new Board();
+        board.addFromList(boardList, playerCross, playerNought);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "O", " ", " ",
@@ -437,7 +440,8 @@ public class BoardTest {
     @Test
     public void boardFromListDoesNotPlaceNonMatchingSymbols() {
         List<String> boardList = Arrays.asList("Q", "Q", "Q", "", "", "", "", "", "");
-        Board board = Board.fromList(boardList, playerCross, playerNought);
+        Board board = new Board();
+        board.addFromList(boardList, playerCross, playerNought);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",
@@ -457,7 +461,8 @@ public class BoardTest {
                 "", "", "", ""
         );
 
-        Board board = Board.fromList(boardList, playerCross, playerNought);
+        Board board = new Board(4);
+        board.addFromList(boardList, playerCross, playerNought);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ", " ",
@@ -478,7 +483,8 @@ public class BoardTest {
                 "", "", "X"
         );
 
-        Board board = Board.fromList(boardList, playerCross, playerNought);
+        Board board = new Board();
+        board.addFromList(boardList, playerCross, playerNought);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",
