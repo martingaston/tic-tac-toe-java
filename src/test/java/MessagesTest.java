@@ -13,7 +13,7 @@ public class MessagesTest {
     @Before
     public void setUp() {
         Board board = new Board();
-        player = new PlayerHuman("X", board);
+        player = new PlayerHuman("X");
     }
 
     @Test

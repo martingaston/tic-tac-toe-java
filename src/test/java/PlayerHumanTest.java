@@ -16,13 +16,13 @@ public class PlayerHumanTest {
 
     @Test
     public void testPlayerSymbolCross() {
-        Player player = new PlayerHuman("X", board);
+        Player player = new PlayerHuman("X");
         assertEquals("X", player.getSymbol());
     }
 
     @Test
     public void testPlayerSymbolNought() {
-        Player player = new PlayerHuman("O", board);
+        Player player = new PlayerHuman("O");
         assertEquals("O", player.getSymbol());
     }
 
@@ -32,9 +32,9 @@ public class PlayerHumanTest {
         String input = "5";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        Player player = new PlayerHuman("O", board);
+        Player player = new PlayerHuman("O");
 
-        assertEquals(zeroIndexedResult, player.getNextMove());
+        assertEquals(zeroIndexedResult, player.getNextMove(board));
 
     }
 

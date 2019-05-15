@@ -2,11 +2,9 @@ import java.util.List;
 
 public class PlayerCPU implements Player {
     private final String symbol;
-    private final Board board;
 
-    PlayerCPU(String symbol, Board board) {
+    PlayerCPU(String symbol) {
         this.symbol = symbol;
-        this.board = board;
     }
 
     @Override
@@ -15,13 +13,12 @@ public class PlayerCPU implements Player {
     }
 
     @Override
-    public int getNextMove() {
+    public int getNextMove(Board board) {
         oneSecondSleep();
-        return pickRandomCell();
+        return pickRandomCell(board.available());
     }
 
-    private int pickRandomCell() {
-        List<Integer> available = board.available();
+    private int pickRandomCell(List<Integer> available) {
         int cellIndex = (int) Math.floor(Math.random() * available.size());
         return available.get(cellIndex);
     }

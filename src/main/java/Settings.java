@@ -92,20 +92,20 @@ public class Settings {
         switch (modeNumber) {
             case MODE_HVH:
             default:
-                playerCross = new PlayerHuman("X", board, io);
-                playerNought = new PlayerHuman("O", board, io);
+                playerCross = new PlayerHuman("X", io);
+                playerNought = new PlayerHuman("O", io);
                 break;
             case MODE_HVC_EASY:
-                playerCross = new PlayerHuman("X", board, io);
-                playerNought = new PlayerCPU("O", board);
+                playerCross = new PlayerHuman("X", io);
+                playerNought = new PlayerCPU("O");
                 break;
             case MODE_HVC_HARD:
-                playerCross = new PlayerHuman("X", board, io);
-                playerNought = new PlayerMinimax("O", board, playerCross);
+                playerCross = new PlayerHuman("X", io);
+                playerNought = new PlayerMinimax("O", playerCross);
                 break;
             case MODE_CVC_EASY:
-                playerCross = new PlayerCPU("X", board);
-                playerNought = new PlayerCPU("O", board);
+                playerCross = new PlayerCPU("X");
+                playerNought = new PlayerCPU("O");
                 break;
         }
     }

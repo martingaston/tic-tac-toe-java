@@ -1,11 +1,11 @@
 public class PlayerMinimax implements Player {
     private final String symbol;
-    private final Minimax minimax;
+    private final Player opponent;
 
 
-    PlayerMinimax(String symbol, Board board, Player opponent) {
+    PlayerMinimax(String symbol, Player opponent) {
         this.symbol = symbol;
-        minimax = new Minimax(board, this, opponent);
+        this.opponent = opponent;
     }
 
     @Override
@@ -14,9 +14,9 @@ public class PlayerMinimax implements Player {
     }
 
     @Override
-    public int getNextMove() {
+    public int getNextMove(Board board) {
         oneSecondSleep();
-        return minimax.optimal();
+        return new Minimax(board, this, opponent).optimal();
     }
 
     private void oneSecondSleep() {

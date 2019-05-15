@@ -11,8 +11,8 @@ public class CellTest {
     @Before
     public void setUp() {
         Board board = new Board();
-        playerCross = new PlayerHuman("X", board);
-        playerNought = new PlayerHuman("O", board);
+        playerCross = new PlayerHuman("X");
+        playerNought = new PlayerHuman("O");
         cell = new Cell();
     }
 

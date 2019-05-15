@@ -32,7 +32,7 @@ class Game {
     private static void newTurn() {
         display.showBoard();
         Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
-        int playerInput = currentPlayer().getNextMove();
+        int playerInput = currentPlayer().getNextMove(board);
         board.add(playerInput, currentPlayer());
     }
 

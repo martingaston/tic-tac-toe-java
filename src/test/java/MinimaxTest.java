@@ -12,8 +12,8 @@ public class MinimaxTest {
     @Before
     public void setUp() {
         board = new Board();
-        playerMaxi = new PlayerHuman("Maxi", board);
-        playerMini = new PlayerHuman("Mini", board);
+        playerMaxi = new PlayerHuman("Maxi");
+        playerMini = new PlayerHuman("Mini");
         minimax = new Minimax(board, playerMaxi, playerMini);
     }
 

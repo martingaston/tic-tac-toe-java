@@ -52,8 +52,8 @@ public class DisplayTest {
 
         Board board = new Board();
         Display display = new Display(board);
-        Player playerCross = new PlayerHuman("X", board);
-        Player playerNought = new PlayerHuman("O", board);
+        Player playerCross = new PlayerHuman("X");
+        Player playerNought = new PlayerHuman("O");
         board.add(0, playerCross);
         board.add(2, playerCross);
         board.add(4, playerCross);

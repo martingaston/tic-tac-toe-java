@@ -9,8 +9,8 @@ public class PlayersTest {
     @Before
     public void setUp() {
         Board board = new Board();
-        Player playerCross = new PlayerHuman("X", board);
-        Player playerNought = new PlayerHuman("O", board);
+        Player playerCross = new PlayerHuman("X");
+        Player playerNought = new PlayerHuman("O");
         players = new Players(playerCross, playerNought);
     }
 

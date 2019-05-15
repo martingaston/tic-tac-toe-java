@@ -2,24 +2,22 @@ import java.util.Scanner;
 
 public class PlayerHuman implements Player {
     private final String symbol;
-    private final Board board;
     private final IO io;
 
-    public PlayerHuman(String symbol, Board board, IO io) {
+    public PlayerHuman(String symbol, IO io) {
         this.symbol = symbol;
-        this.board = board;
         this.io = io;
     }
 
-    public PlayerHuman(String symbol, Board board) {
-        this(symbol, board, new IO(new Scanner(System.in)));
+    public PlayerHuman(String symbol) {
+        this(symbol, new IO(new Scanner(System.in)));
     }
 
     public String getSymbol() {
         return symbol;
     }
 
-    public int getNextMove() {
+    public int getNextMove(Board board) {
         int desiredCell = getAnInteger();
 
         while (!board.available().contains(desiredCell)) {

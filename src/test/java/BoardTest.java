@@ -29,8 +29,8 @@ public class BoardTest {
     @Before
     public void setUp() {
         board = new Board();
-        playerCross = new PlayerHuman("X", board);
-        playerNought = new PlayerHuman("O", board);
+        playerCross = new PlayerHuman("X");
+        playerNought = new PlayerHuman("O");
     }
 
     @Test
