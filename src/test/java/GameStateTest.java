@@ -15,7 +15,7 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "");
         GameState gameState = new GameState(stateVariables);
-        assertEquals(GameConstants.MODE_HVH, gameState.mode());
+        assertEquals(GameModes.MODE_HVH, gameState.mode());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "");
         GameState gameState = new GameState(stateVariables);
-        assertEquals(GameConstants.MODE_HVC_HARD, gameState.mode());
+        assertEquals(GameModes.MODE_HVC_HARD, gameState.mode());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "");
         GameState gameState = new GameState(stateVariables);
-        assertEquals(GameConstants.MODE_HVH, gameState.mode());
+        assertEquals(GameModes.MODE_HVH, gameState.mode());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "");
         GameState gameState = new GameState(stateVariables);
-        assertEquals(GameConstants.BOARD_3X3, gameState.board());
+        assertEquals(BoardModes.BOARD_3X3, gameState.board());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "");
         GameState gameState = new GameState(stateVariables);
-        assertEquals(GameConstants.BOARD_4X4, gameState.board());
+        assertEquals(BoardModes.BOARD_4X4, gameState.board());
     }
 
     @Test
@@ -70,6 +70,6 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "");
         GameState gameState = new GameState(stateVariables);
-        assertEquals(GameConstants.BOARD_3X3, gameState.board());
+        assertEquals(BoardModes.BOARD_3X3, gameState.board());
     }
 }

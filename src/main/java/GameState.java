@@ -1,11 +1,9 @@
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class GameState {
-    private GameConstants mode;
-    private GameConstants board;
+    private GameModes mode;
+    private BoardModes board;
     private List<String> contents;
     private Players players;
 
@@ -14,26 +12,13 @@ public class GameState {
     }
 
     public GameState(List<String> variables, IO io) {
-        Map<Integer, GameConstants> modeMap = new HashMap<>(Map.of(
-                1, GameConstants.MODE_HVH,
-                2, GameConstants.MODE_HVC_EASY,
-                3, GameConstants.MODE_HVC_HARD,
-                4, GameConstants.MODE_CVC_EASY
-        ));
-
-        Map<Integer, GameConstants> boardMap = new HashMap<>(Map.of(
-                1, GameConstants.BOARD_3X3,
-                2, GameConstants.BOARD_4X4
-        ));
-
-        board = boardMap.getOrDefault(Integer.parseInt(variables.get(0)), GameConstants.BOARD_3X3);
-        mode = modeMap.getOrDefault(Integer.parseInt(variables.get(1)), GameConstants.MODE_HVH);
+        board = BoardModes.nameOf(Integer.parseInt(variables.get(0)));
+        mode = GameModes.nameOf(Integer.parseInt(variables.get(1)));
         contents = variables.subList(5, variables.size());
         players = Players.create(mode, io);
-
     }
 
-    public GameConstants mode() {
+    public GameModes mode() {
         return mode;
     }
 
@@ -45,7 +30,7 @@ public class GameState {
         return players;
     }
 
-    public GameConstants board() {
+    public BoardModes board() {
         return board;
     }
 

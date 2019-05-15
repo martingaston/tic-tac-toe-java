@@ -3,7 +3,7 @@ class Players {
     private final Player playerNought;
     private Player currentPlayer;
 
-    public static Players create(GameConstants mode, IO io) {
+    public static Players create(GameModes mode, IO io) {
         Player playerCross;
         Player playerNought;
         switch (mode) {
