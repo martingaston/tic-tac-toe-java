@@ -43,6 +43,10 @@ class Players {
         }
     }
 
+    public Player playerCross() { return playerCross; }
+
+    public Player playerNought() { return playerNought; }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }

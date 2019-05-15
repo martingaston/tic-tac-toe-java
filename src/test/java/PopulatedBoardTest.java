@@ -1,16 +1,11 @@
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class PopulatedBoardTest {
-    private Player playerCross;
-    private Player playerNought;
-
     private String[] createStringArrayFromBoard(Board board) {
         ArrayList<String> boardAsArrayList = new ArrayList<>();
         int totalCells = board.getTotalCells();
@@ -22,16 +17,15 @@ public class PopulatedBoardTest {
         return boardAsArrayList.toArray(new String[]{});
     }
 
-    @Before
-    public void setUp() {
-        playerCross = new PlayerHuman("X");
-        playerNought = new PlayerHuman("O");
-    }
-
     @Test
     public void boardFromListCreatesEmpty3x3Board() {
-        List<String> boardList = Arrays.asList("", "", "", "", "", "", "", "", "");
-        Board board = PopulatedBoard.from(boardList, playerCross, playerNought);
+        GameState state = new GameState(Arrays.asList(
+                "1", "1", "X", "O", "O",
+                "", "", "",
+                "", "", "",
+                "", "", ""
+        ));
+        Board board = PopulatedBoard.from(state);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",
@@ -44,8 +38,13 @@ public class PopulatedBoardTest {
 
     @Test
     public void boardFromListCreatesHorizontalPopulated3x3Board() {
-        List<String> boardList = Arrays.asList("X", "X", "X", "", "", "", "", "", "");
-        Board board = PopulatedBoard.from(boardList, playerCross, playerNought);
+        GameState state = new GameState(Arrays.asList(
+                "1", "1", "X", "O", "O",
+                "X", "X", "X",
+                "", "", "",
+                "", "", ""
+        ));
+        Board board = PopulatedBoard.from(state);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "X", "X", "X",
@@ -58,8 +57,13 @@ public class PopulatedBoardTest {
 
     @Test
     public void boardFromListCreatesVerticalPopulated3x3Board() {
-        List<String> boardList = Arrays.asList("O", "", "", "O", "", "", "O", "", "");
-        Board board = PopulatedBoard.from(boardList, playerCross, playerNought);
+        GameState state = new GameState(Arrays.asList(
+                "1", "1", "X", "O", "O",
+                "O", "", "",
+                "O", "", "",
+                "O", "", ""
+        ));
+        Board board = PopulatedBoard.from(state);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "O", " ", " ",
@@ -72,8 +76,13 @@ public class PopulatedBoardTest {
 
     @Test
     public void boardFromListDoesNotPlaceNonMatchingSymbols() {
-        List<String> boardList = Arrays.asList("Q", "Q", "Q", "", "", "", "", "", "");
-        Board board = PopulatedBoard.from(boardList, playerCross, playerNought);
+        GameState state = new GameState(Arrays.asList(
+                "1", "1", "X", "O", "O",
+                "Q", "Q", "Q",
+                "", "", "",
+                "", "", ""
+        ));
+        Board board = PopulatedBoard.from(state);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",
@@ -86,14 +95,15 @@ public class PopulatedBoardTest {
 
     @Test
     public void boardFromListCreates4x4Board() {
-        List<String> boardList = Arrays.asList(
+        GameState state = new GameState(Arrays.asList(
+                "1", "1", "X", "O", "O",
                 "", "", "", "",
                 "", "", "", "",
                 "", "", "", "",
                 "", "", "", ""
-        );
+        ));
 
-        Board board = PopulatedBoard.from(boardList, playerCross, playerNought);
+        Board board = PopulatedBoard.from(state);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ", " ",
@@ -107,14 +117,14 @@ public class PopulatedBoardTest {
 
     @Test
     public void ListsNotNineOrSixteenLengthWillReturnEmpty3x3Board() {
-        List<String> boardList = Arrays.asList(
-                "", "", "", "",
-                "", "", "", "",
-                "", "", "", "",
-                "", "", "X"
-        );
+        GameState state = new GameState(Arrays.asList(
+                "1", "1", "X", "O", "O",
+                "X", "X", "X",
+                "", "", "",
+                "", "", "", ""
+        ));
 
-        Board board = PopulatedBoard.from(boardList, playerCross, playerNought);
+        Board board = PopulatedBoard.from(state);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",
