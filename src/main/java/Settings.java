@@ -47,15 +47,11 @@ public class Settings {
         int boardNumber = Integer.parseInt(prevState.get(0));
         int modeNumber = Integer.parseInt(prevState.get(1));
 
-        buildBoard(boardNumber);
-        buildMode(modeNumber);
+        build(boardNumber, modeNumber);
 
         board.addFromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
 
-        gameSettings.add(Integer.toString(boardNumber));
-        gameSettings.add(Integer.toString(modeNumber));
-        gameSettings.add(playerCross.getSymbol());
-        gameSettings.add(playerNought.getSymbol());
+        createSettings(boardNumber, modeNumber);
 
         display = new Display(board);
         players = new Players(playerCross, playerNought);
@@ -65,6 +61,18 @@ public class Settings {
         }
     }
 
+    private void createSettings(int boardNumber, int modeNumber) {
+        gameSettings.add(Integer.toString(boardNumber));
+        gameSettings.add(Integer.toString(modeNumber));
+        gameSettings.add(playerCross.getSymbol());
+        gameSettings.add(playerNought.getSymbol());
+    }
+
+    private void build(int boardNumber, int modeNumber) {
+        buildBoard(boardNumber);
+        buildMode(modeNumber);
+    }
+
     private void processArgs(String[] args) {
         Map<String, String> parsedArgs = parseArgs(args);
         String boardArg = parsedArgs.getOrDefault("board", "");
@@ -72,13 +80,9 @@ public class Settings {
         int boardNumber = getBoardNumber(boardArg);
         int modeNumber = getModeNumber(modeArg);
 
-        buildBoard(boardNumber);
-        buildMode(modeNumber);
+        build(boardNumber, modeNumber);
 
-        gameSettings.add(Integer.toString(boardNumber));
-        gameSettings.add(Integer.toString(modeNumber));
-        gameSettings.add(playerCross.getSymbol());
-        gameSettings.add(playerNought.getSymbol());
+        createSettings(boardNumber, modeNumber);
 
         display = new Display(board);
         players = new Players(playerCross, playerNought);
