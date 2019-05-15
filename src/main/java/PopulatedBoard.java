@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class PopulatedBoard {
-    public static Board from(GameState state) {
+    public static Board from(FileState state) {
         if(state.contents().size() != 9 && state.contents().size() != 16) {
             return new Board();
         }

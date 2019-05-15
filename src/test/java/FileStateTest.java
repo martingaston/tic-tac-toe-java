@@ -5,7 +5,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class GameStateTest {
+public class FileStateTest {
 
     @Test
     public void GameStateReturnsModeHVHEnumWithOne() {
@@ -14,8 +14,8 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "",
                 "", "", "");
-        GameState gameState = new GameState(stateVariables);
-        assertEquals(GameModes.MODE_HVH, gameState.mode());
+        FileState fileState = new FileState(stateVariables);
+        assertEquals(GameModes.MODE_HVH, fileState.mode());
     }
 
     @Test
@@ -25,8 +25,8 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "",
                 "", "", "");
-        GameState gameState = new GameState(stateVariables);
-        assertEquals(GameModes.MODE_HVC_HARD, gameState.mode());
+        FileState fileState = new FileState(stateVariables);
+        assertEquals(GameModes.MODE_HVC_HARD, fileState.mode());
     }
 
     @Test
@@ -36,8 +36,8 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "",
                 "", "", "");
-        GameState gameState = new GameState(stateVariables);
-        assertEquals(GameModes.MODE_HVH, gameState.mode());
+        FileState fileState = new FileState(stateVariables);
+        assertEquals(GameModes.MODE_HVH, fileState.mode());
     }
 
     @Test
@@ -47,8 +47,8 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "",
                 "", "", "");
-        GameState gameState = new GameState(stateVariables);
-        assertEquals(BoardModes.BOARD_3X3, gameState.board());
+        FileState fileState = new FileState(stateVariables);
+        assertEquals(BoardModes.BOARD_3X3, fileState.board());
     }
 
     @Test
@@ -58,8 +58,8 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "",
                 "", "", "");
-        GameState gameState = new GameState(stateVariables);
-        assertEquals(BoardModes.BOARD_4X4, gameState.board());
+        FileState fileState = new FileState(stateVariables);
+        assertEquals(BoardModes.BOARD_4X4, fileState.board());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class GameStateTest {
                 "", "", "",
                 "", "", "",
                 "", "", "");
-        GameState gameState = new GameState(stateVariables);
-        assertEquals(BoardModes.BOARD_3X3, gameState.board());
+        FileState fileState = new FileState(stateVariables);
+        assertEquals(BoardModes.BOARD_3X3, fileState.board());
     }
 }
