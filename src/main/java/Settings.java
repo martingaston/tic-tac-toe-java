@@ -47,9 +47,8 @@ public class Settings {
         int boardNumber = Integer.parseInt(prevState.get(0));
         int modeNumber = Integer.parseInt(prevState.get(1));
 
-        build(boardNumber, modeNumber);
-
-        board.addFromList(prevState.subList(5, prevState.size()), playerCross, playerNought);
+        buildMode(modeNumber);
+        board = PopulatedBoard.from(prevState.subList(5, prevState.size()), playerCross, playerNought);
 
         createSettings(boardNumber, modeNumber);
 
@@ -68,11 +67,6 @@ public class Settings {
         gameSettings.add(playerNought.getSymbol());
     }
 
-    private void build(int boardNumber, int modeNumber) {
-        buildBoard(boardNumber);
-        buildMode(modeNumber);
-    }
-
     private void processArgs(String[] args) {
         Map<String, String> parsedArgs = parseArgs(args);
         String boardArg = parsedArgs.getOrDefault("board", "");
@@ -80,7 +74,8 @@ public class Settings {
         int boardNumber = getBoardNumber(boardArg);
         int modeNumber = getModeNumber(modeArg);
 
-        build(boardNumber, modeNumber);
+        buildBoard(boardNumber);
+        buildMode(modeNumber);
 
         createSettings(boardNumber, modeNumber);
 
