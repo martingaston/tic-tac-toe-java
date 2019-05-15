@@ -54,7 +54,7 @@ public class Settings {
         playerNought = gameState.players().playerNought();
         display = new Display(board);
 
-        if (gameState.players().getCurrentPlayer().getSymbol().equals("X")) {
+        if (prevState.get(4).equals("X")) {
             players.nextTurn();
         }
 
@@ -107,7 +107,8 @@ public class Settings {
     }
 
     private void buildBoard(int boardNumber) {
-        switch (boardNumber) {
+        BoardModes boardMode = BoardModes.nameOf(boardNumber);
+        switch (boardMode) {
             case BOARD_3X3:
             default:
                 board = new Board();
