@@ -49,11 +49,8 @@ public class GameState {
         return board;
     }
 
-    // board = 0
-    // mode = 1
     // playerX = 2
     // playerO = 3
     // lastPlayer = 4
-    // board = 5+
     // need a test for what happens if person quits game on FIRST turn 
 }

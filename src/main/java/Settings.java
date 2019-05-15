@@ -47,17 +47,18 @@ public class Settings {
         int boardNumber = Integer.parseInt(prevState.get(0));
         int modeNumber = Integer.parseInt(prevState.get(1));
 
-        buildMode(modeNumber);
-        board = PopulatedBoard.from(prevState.subList(5, prevState.size()), playerCross, playerNought);
-
-        createSettings(boardNumber, modeNumber);
-
+        GameState gameState = new GameState(prevState);
+        board = PopulatedBoard.from(gameState);
+        players = gameState.players();
+        playerCross = gameState.players().playerCross();
+        playerNought = gameState.players().playerNought();
         display = new Display(board);
-        players = new Players(playerCross, playerNought);
 
-        if (prevState.get(4).equals("X")) {
+        if (gameState.players().getCurrentPlayer().getSymbol().equals("X")) {
             players.nextTurn();
         }
+
+        createSettings(boardNumber, modeNumber); //TODO: this shouldn't be needed when final
     }
 
     private void createSettings(int boardNumber, int modeNumber) {
