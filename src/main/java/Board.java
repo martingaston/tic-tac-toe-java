@@ -17,22 +17,6 @@ public class Board {
         generate(sideLength);
     }
 
-    public void addFromList(List<String> boardList, Player playerCross, Player playerNought) {
-        if (boardList.size() != this.totalCells) {
-            return;
-        }
-
-        for (int i = 0; i < totalCells; i++) {
-            remove(i);
-            String currentSymbol = boardList.get(i);
-            if (currentSymbol.equals(playerCross.getSymbol())) {
-                add(i, playerCross);
-            } else if (currentSymbol.equals(playerNought.getSymbol())) {
-                add(i, playerNought);
-            }
-        }
-    }
-
     private void generate(int sideLength) {
         this.sideLength = sideLength;
         this.totalCells = sideLength * sideLength;
