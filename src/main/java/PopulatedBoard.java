@@ -9,9 +9,9 @@ public class PopulatedBoard {
 
         for (int i = 0; i < state.contents().size(); i++) {
             String currentSymbol = state.contents().get(i);
-            if (currentSymbol.equals(state.players().playerCross().getSymbol())) {
+            if (currentSymbol.equals(state.players().playerCross().symbol().toString())) {
                 newBoard.add(i, state.players().playerCross());
-            } else if (currentSymbol.equals(state.players().playerNought().getSymbol())) {
+            } else if (currentSymbol.equals(state.players().playerNought().symbol().toString())) {
                 newBoard.add(i, state.players().playerNought());
             }
         }

@@ -81,7 +81,7 @@ class Display {
     }
 
     private static String renderOccupant(Cell cell, Board board) {
-        return renderOccupant(cell.getOccupant(), board);
+        return renderOccupant(cell.getOccupant().toString(), board);
     }
 
     private static String renderOccupant(String occupant, Board board) {

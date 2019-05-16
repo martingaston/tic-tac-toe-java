@@ -17,13 +17,13 @@ public class PlayerHumanTest {
     @Test
     public void testPlayerSymbolCross() {
         Player player = new PlayerHuman("X");
-        assertEquals("X", player.getSymbol());
+        assertEquals("X", player.symbol().toString());
     }
 
     @Test
     public void testPlayerSymbolNought() {
         Player player = new PlayerHuman("O");
-        assertEquals("O", player.getSymbol());
+        assertEquals("O", player.symbol().toString());
     }
 
     @Test

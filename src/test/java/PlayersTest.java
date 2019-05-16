@@ -17,7 +17,7 @@ public class PlayersTest {
     @Test
     public void getCurrentPlayerReturnsCrossOnFirstTurn() {
         Player currentPlayer = players.getCurrentPlayer();
-        String currentPlayerSymbol = currentPlayer.getSymbol();
+        String currentPlayerSymbol = currentPlayer.symbol().toString();
         assertEquals("X", currentPlayerSymbol);
     }
 
@@ -25,7 +25,7 @@ public class PlayersTest {
     public void getCurrentPlayerReturnsNoughtAfterTurnChanges() {
         players.nextTurn();
         Player currentPlayer = players.getCurrentPlayer();
-        String currentPlayerSymbol = currentPlayer.getSymbol();
+        String currentPlayerSymbol = currentPlayer.symbol().toString();
         assertEquals("O", currentPlayerSymbol);
     }
 
@@ -34,7 +34,7 @@ public class PlayersTest {
         players.nextTurn();
         players.nextTurn();
         Player currentPlayer = players.getCurrentPlayer();
-        String currentPlayerSymbol = currentPlayer.getSymbol();
+        String currentPlayerSymbol = currentPlayer.symbol().toString();
         assertEquals("X", currentPlayerSymbol);
     }
 }

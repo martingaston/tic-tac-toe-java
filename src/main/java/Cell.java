@@ -1,12 +1,12 @@
 public class Cell {
     private Player occupant;
 
-    String getOccupant() {
+    Symbol getOccupant() {
         if (!isOccupied()) {
-            return " ";
+            return new Symbol(" ");
         }
 
-        return occupant.getSymbol();
+        return occupant.symbol();
     }
 
     Player occupant() {

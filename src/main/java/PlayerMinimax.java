@@ -1,15 +1,15 @@
 public class PlayerMinimax implements Player {
-    private final String symbol;
+    private final Symbol symbol;
     private final Player opponent;
 
 
     PlayerMinimax(String symbol, Player opponent) {
-        this.symbol = symbol;
+        this.symbol = new Symbol(symbol);
         this.opponent = opponent;
     }
 
     @Override
-    public String getSymbol() {
+    public Symbol symbol() {
         return symbol;
     }
 

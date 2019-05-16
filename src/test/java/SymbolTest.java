@@ -6,13 +6,13 @@ public class SymbolTest {
     @Test
     public void SymbolForCrossReturnsStringCross() {
         Symbol symbol = new Symbol("X");
-        assertEquals("X", symbol.getSymbol());
+        assertEquals("X", symbol.toString());
     }
 
     @Test
     public void SymbolForNoughtReturnsStringNought() {
         Symbol symbol = new Symbol("O");
-        assertEquals("O", symbol.getSymbol());
+        assertEquals("O", symbol.toString());
     }
 
     @Test

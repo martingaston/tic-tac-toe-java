@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class PlayerHuman implements Player {
-    private final String symbol;
+    private final Symbol symbol;
     private final IO io;
 
     public PlayerHuman(String symbol, IO io) {
-        this.symbol = symbol;
+        this.symbol = new Symbol(symbol);
         this.io = io;
     }
 
@@ -13,7 +13,7 @@ public class PlayerHuman implements Player {
         this(symbol, new IO(new Scanner(System.in)));
     }
 
-    public String getSymbol() {
+    public Symbol symbol() {
         return symbol;
     }
 

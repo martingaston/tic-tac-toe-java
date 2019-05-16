@@ -5,7 +5,8 @@ public class Symbol {
         this.symbol = symbol;
     }
 
-    public String getSymbol() {
+    @Override
+    public String toString() {
         return symbol;
     }
 

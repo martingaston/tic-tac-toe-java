@@ -12,7 +12,7 @@ public class Messages {
     }
 
     static String playerWin(Player player) {
-        return String.format("Player %s wins!", player.getSymbol());
+        return String.format("Player %s wins!", player.symbol().toString());
     }
 
     static String playersDraw() {
@@ -20,7 +20,7 @@ public class Messages {
     }
 
     static String announcePlayerTurn(Player player) {
-        return String.format("Player %s's turn", player.getSymbol());
+        return String.format("Player %s's turn", player.symbol().toString());
     }
 
     static String shutdown() {

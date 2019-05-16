@@ -152,7 +152,7 @@ public class Board {
 
     public List<String> toList() {
         return board.stream()
-                .map(Cell::getOccupant)
+                .map(cell -> cell.getOccupant().toString())
                 .collect(Collectors.toList());
     }
 }

@@ -1,14 +1,14 @@
 import java.util.List;
 
 public class PlayerCPU implements Player {
-    private final String symbol;
+    private final Symbol symbol;
 
     PlayerCPU(String symbol) {
-        this.symbol = symbol;
+        this.symbol = new Symbol(symbol);
     }
 
     @Override
-    public String getSymbol() {
+    public Symbol symbol() {
         return symbol;
     }
 

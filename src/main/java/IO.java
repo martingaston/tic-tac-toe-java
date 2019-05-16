@@ -36,9 +36,9 @@ class IO {
     public static void gameOut(State state) throws IOException {
         String boardMode = Integer.toString(BoardModes.id(state.boardMode()));
         String gameMode = Integer.toString(GameModes.id(state.mode()));
-        String playerCrossSymbol = state.players().playerCross().getSymbol();
-        String playerNoughtSymbol = state.players().playerNought().getSymbol();
-        String lastPlayer = state.players().getCurrentPlayer().getSymbol();
+        String playerCrossSymbol = state.players().playerCross().symbol().toString();
+        String playerNoughtSymbol = state.players().playerNought().symbol().toString();
+        String lastPlayer = state.players().getCurrentPlayer().symbol().toString();
         List<String> boardAsList = state.board().toList();
 
         List<String> boardState = new LinkedList<>(Arrays.asList(
