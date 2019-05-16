@@ -49,10 +49,10 @@ public class Board {
         return moves;
     }
     
-    public void add(int position, Player player) {
+    public void add(int position, Symbol symbol) {
         Cell requestedCell = get(position);
         if (!requestedCell.isOccupied()) {
-            requestedCell.mark(player);
+            requestedCell.mark(symbol);
         }
     }
 
@@ -138,8 +138,8 @@ public class Board {
         return lines().stream().anyMatch(Line::hasWinner);
     }
 
-    public boolean hasWon(Player player) {
-        return lines().stream().anyMatch(line -> line.hasWinner(player));
+    public boolean hasWon(Symbol symbol) {
+        return lines().stream().anyMatch(line -> line.hasWinner(symbol));
     }
 
     public boolean isGameOver() {

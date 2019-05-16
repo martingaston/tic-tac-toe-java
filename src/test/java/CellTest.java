@@ -4,15 +4,14 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class CellTest {
-    private Player playerCross;
-    private Player playerNought;
+    private Symbol playerCross;
+    private Symbol playerNought;
     private Cell cell;
 
     @Before
     public void setUp() {
-        Board board = new Board();
-        playerCross = new PlayerHuman("X");
-        playerNought = new PlayerHuman("O");
+        playerCross = new Symbol("X");
+        playerNought = new Symbol("O");
         cell = new Cell();
     }
 

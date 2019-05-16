@@ -8,11 +8,11 @@ class Line {
     }
 
     public boolean hasWinner() {
-        Player occupant = cells.get(0).occupant();
+        Symbol occupant = cells.get(0).occupant();
         return hasWinner(occupant);
     }
 
-    public boolean hasWinner(Player occupant) {
+    public boolean hasWinner(Symbol occupant) {
         return cells.stream().allMatch(cell -> cell.occupant() == occupant && cell.occupant() != null);
     }
 

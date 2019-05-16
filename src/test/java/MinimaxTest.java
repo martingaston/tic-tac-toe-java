@@ -19,28 +19,28 @@ public class MinimaxTest {
 
     @Test
     public void minimaxPlaysForWin() {
-        board.add(0, playerMaxi);
-        board.add(1, playerMaxi);
+        board.add(0, playerMaxi.symbol());
+        board.add(1, playerMaxi.symbol());
         int result = minimax.optimal();
         assertEquals(2, result);
     }
 
     @Test
     public void minimaxBlocksOpponentWin() {
-        board.add(3, playerMini);
-        board.add(4, playerMini);
+        board.add(3, playerMini.symbol());
+        board.add(4, playerMini.symbol());
         int result = minimax.optimal();
         assertEquals(5, result);
     }
 
     @Test
     public void minimaxGoesForEarliestWin() {
-        board.add(0, playerMini);
-        board.add(1, playerMini);
-        board.add(2, playerMaxi);
-        board.add(3, playerMini);
-        board.add(4, playerMaxi);
-        board.add(5, playerMaxi);
+        board.add(0, playerMini.symbol());
+        board.add(1, playerMini.symbol());
+        board.add(2, playerMaxi.symbol());
+        board.add(3, playerMini.symbol());
+        board.add(4, playerMaxi.symbol());
+        board.add(5, playerMaxi.symbol());
         int result = minimax.optimal();
         assertEquals(6, result);
     }

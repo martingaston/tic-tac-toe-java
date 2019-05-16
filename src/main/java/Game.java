@@ -2,7 +2,6 @@ import java.io.IOException;
 
 class Game {
     private static Board board;
-    private static Display display;
     private static Players players;
 
     static void play(State state) throws IOException {
@@ -39,7 +38,7 @@ class Game {
         Display.showBoard(board);
         Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
         int playerInput = currentPlayer().getNextMove(board);
-        board.add(playerInput, currentPlayer());
+        board.add(playerInput, currentPlayer().symbol());
     }
 
     private static Player currentPlayer() {

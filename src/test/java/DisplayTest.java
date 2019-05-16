@@ -50,8 +50,8 @@ public class DisplayTest {
                         "+-----------+\n";
 
         Board board = new Board();
-        Player playerCross = new PlayerHuman("X");
-        Player playerNought = new PlayerHuman("O");
+        Symbol playerCross = new Symbol("X");
+        Symbol playerNought = new Symbol("O");
         board.add(0, playerCross);
         board.add(2, playerCross);
         board.add(4, playerCross);

@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
 public class BoardTest {
 
     private Board board;
-    private Player playerCross;
-    private Player playerNought;
+    private Symbol playerCross;
+    private Symbol playerNought;
 
     private String[] createStringArrayFromBoard(Board board) {
         ArrayList<String> boardAsArrayList = new ArrayList<>();
@@ -29,8 +29,8 @@ public class BoardTest {
     @Before
     public void setUp() {
         board = new Board();
-        playerCross = new PlayerHuman("X");
-        playerNought = new PlayerHuman("O");
+        playerCross = new Symbol("X");
+        playerNought = new Symbol("O");
     }
 
     @Test
