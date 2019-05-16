@@ -1,11 +1,9 @@
 import java.io.IOException;
-import java.util.List;
 
 class Game {
     private static Board board;
     private static Display display;
     private static Players players;
-    private static List<String> gameSettings;
 
     static void play(GameState state) throws IOException {
         board = state.board();
@@ -16,11 +14,11 @@ class Game {
         instructions();
         do {
             newTurn();
-            processTurnState(state);
+            processTurn(state);
         } while (!board.isGameOver());
     }
 
-    private static void processTurnState(GameState state) throws IOException {
+    private static void processTurn(GameState state) throws IOException {
         IO.gameOutState(state);
         if (board.isGameOver()) {
             IO.closeGame();
@@ -28,20 +26,6 @@ class Game {
         } else {
             players.nextTurn();
         }
-    }
-
-    static void play(Settings settings) throws IOException {
-        board = settings.board();
-        display = settings.display();
-        players = settings.players();
-        gameSettings = settings.settingsList();
-
-        intro();
-        instructions();
-        do {
-            newTurn();
-            processTurn();
-        } while (!board.isGameOver());
     }
 
     private static void intro() {
@@ -57,16 +41,6 @@ class Game {
         Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
         int playerInput = currentPlayer().getNextMove(board);
         board.add(playerInput, currentPlayer());
-    }
-
-    private static void processTurn() throws IOException {
-        IO.gameOut(currentPlayer(), board, gameSettings);
-        if (board.isGameOver()) {
-            IO.closeGame();
-            gameEnd();
-        } else {
-            players.nextTurn();
-        }
     }
 
     private static Player currentPlayer() {
