@@ -1,10 +1,9 @@
 class Minimax {
-    private final Player maximizer;
-    private final Player minimizer;
+    private final Symbol maximizer;
+    private final Symbol minimizer;
     private final Board board;
 
-    //TODO take Symbols not Player for maximizer and minimizer
-    public Minimax(Board board, Player maximizer, Player minimizer) {
+    public Minimax(Board board, Symbol maximizer, Symbol minimizer) {
         this.board = board;
         this.maximizer = maximizer;
         this.minimizer = minimizer;
@@ -15,11 +14,11 @@ class Minimax {
         final int LOSING_SCORE = -10;
         final int DRAW_SCORE = 0;
 
-        if (board.hasWon(this.maximizer.symbol())) {
+        if (board.hasWon(this.maximizer)) {
             return WINNING_SCORE - depth;
         }
 
-        if (board.hasWon(this.minimizer.symbol())) {
+        if (board.hasWon(this.minimizer)) {
             return LOSING_SCORE + depth;
         }
 
@@ -41,7 +40,7 @@ class Minimax {
             int best = Integer.MIN_VALUE;
 
             for (int index : board.available()) {
-                board.add(index, maximizer.symbol());
+                board.add(index, maximizer);
                 best = Integer.max(best,
                         minimax(depth + 1, false));
                 board.remove(index);
@@ -52,7 +51,7 @@ class Minimax {
             int best = Integer.MAX_VALUE;
 
             for (int index : board.available()) {
-                board.add(index, minimizer.symbol());
+                board.add(index, minimizer);
                 best = Integer.min(best,
                         minimax(depth + 1, true));
                 board.remove(index);
@@ -67,7 +66,7 @@ class Minimax {
         int bestIndex = Integer.MIN_VALUE;
 
         for (int index : board.available()) {
-            board.add(index, maximizer.symbol());
+            board.add(index, maximizer);
             int moveValue = minimax(0, false);
             board.remove(index);
 

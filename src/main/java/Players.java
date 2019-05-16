@@ -18,7 +18,7 @@ class Players {
                 break;
             case MODE_HVC_HARD:
                 playerCross = new PlayerHuman("X", io);
-                playerNought = new PlayerMinimax("O", playerCross);
+                playerNought = new PlayerMinimax("O", new Symbol("X"));
                 break;
             case MODE_CVC_EASY:
                 playerCross = new PlayerCPU("X");

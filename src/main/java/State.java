@@ -9,6 +9,10 @@ public interface State {
 
     Players players();
 
+    Symbol playerCross();
+
+    Symbol playerNought();
+
     Board board();
 
     String lastMove();

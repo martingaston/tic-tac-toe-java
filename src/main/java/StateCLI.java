@@ -83,4 +83,14 @@ public class StateCLI implements State {
     public String lastMove() {
         return null;
     }
+
+    @Override
+    public Symbol playerCross() {
+        return new Symbol("X");
+    }
+
+    @Override
+    public Symbol playerNought() {
+        return new Symbol("O");
+    }
 }
