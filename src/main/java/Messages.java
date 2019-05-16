@@ -23,10 +23,6 @@ public class Messages {
         return String.format("Player %s's turn", player.symbol().toString());
     }
 
-    static String shutdown() {
-        return "Goodbye!";
-    }
-
     static String getInstructions(int sideLength) {
         String gridShape = sideLength + "x" + sideLength;
         int totalCells = sideLength * sideLength;
