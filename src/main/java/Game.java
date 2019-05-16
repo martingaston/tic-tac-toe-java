@@ -7,7 +7,6 @@ class Game {
 
     static void play(GameState state) throws IOException {
         board = state.board();
-        display = new Display(board);
         players = state.players();
 
         intro();
@@ -37,7 +36,7 @@ class Game {
     }
 
     private static void newTurn() {
-        display.showBoard();
+        Display.showBoard(board);
         Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
         int playerInput = currentPlayer().getNextMove(board);
         board.add(playerInput, currentPlayer());
@@ -48,7 +47,7 @@ class Game {
     }
 
     private static void gameEnd() {
-        display.showBoard();
+        Display.showBoard(board);
 
         if (board.hasWinner()) {
             Display.outMessage(Messages.playerWin(currentPlayer()));

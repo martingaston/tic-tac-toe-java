@@ -33,8 +33,7 @@ public class DisplayTest {
                         "+-----------+\n";
 
         Board board = new Board();
-        Display display = new Display(board);
-        display.showBoard();
+        Display.showBoard(board);
         assertEquals(boardOutput, outContent.toString());
     }
 
@@ -51,7 +50,6 @@ public class DisplayTest {
                         "+-----------+\n";
 
         Board board = new Board();
-        Display display = new Display(board);
         Player playerCross = new PlayerHuman("X");
         Player playerNought = new PlayerHuman("O");
         board.add(0, playerCross);
@@ -63,7 +61,7 @@ public class DisplayTest {
         board.add(3, playerNought);
         board.add(5, playerNought);
         board.add(7, playerNought);
-        display.showBoard();
+        Display.showBoard(board);
         assertEquals(boardOutput, outContent.toString());
     }
 }
