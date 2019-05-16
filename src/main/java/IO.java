@@ -33,7 +33,7 @@ class IO {
         return Arrays.asList(content.split(","));
     }
 
-    public static void gameOutState(GameState state) throws IOException {
+    public static void gameOut(State state) throws IOException {
         String boardMode = Integer.toString(BoardModes.id(state.boardMode()));
         String gameMode = Integer.toString(GameModes.id(state.mode()));
         String playerCrossSymbol = state.players().playerCross().getSymbol();
@@ -51,17 +51,6 @@ class IO {
         boardState.addAll(boardAsList);
 
         String boardCSV = String.join(",", boardState);
-        BufferedWriter writer = new BufferedWriter(new FileWriter("game.txt"));
-        writer.write(boardCSV);
-        writer.close();
-    }
-
-    public static void gameOut(Player currentPlayer, Board board, List<String> settings) throws IOException {
-        List<String> boardState = new LinkedList<>(settings);
-        boardState.add(currentPlayer.getSymbol());
-        boardState.addAll(board.toList());
-        String boardCSV = String.join(",", boardState);
-
         BufferedWriter writer = new BufferedWriter(new FileWriter("game.txt"));
         writer.write(boardCSV);
         writer.close();

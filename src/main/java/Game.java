@@ -5,7 +5,7 @@ class Game {
     private static Display display;
     private static Players players;
 
-    static void play(GameState state) throws IOException {
+    static void play(State state) throws IOException {
         board = state.board();
         players = state.players();
 
@@ -17,8 +17,8 @@ class Game {
         } while (!board.isGameOver());
     }
 
-    private static void processTurn(GameState state) throws IOException {
-        IO.gameOutState(state);
+    private static void processTurn(State state) throws IOException {
+        IO.gameOut(state);
         if (board.isGameOver()) {
             IO.closeGame();
             gameEnd();

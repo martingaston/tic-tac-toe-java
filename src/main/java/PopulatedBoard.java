@@ -1,5 +1,5 @@
 public class PopulatedBoard {
-    public static Board from(GameState state) {
+    public static Board from(State state) {
         if(state.contents().size() != 9 && state.contents().size() != 16) {
             return new Board();
         }

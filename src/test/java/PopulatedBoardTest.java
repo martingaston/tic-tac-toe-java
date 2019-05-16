@@ -19,7 +19,7 @@ public class PopulatedBoardTest {
 
     @Test
     public void boardFromListCreatesEmpty3x3Board() {
-        FileState state = new FileState(Arrays.asList(
+        StateFile state = new StateFile(Arrays.asList(
                 "1", "1", "X", "O", "O",
                 "", "", "",
                 "", "", "",
@@ -38,7 +38,7 @@ public class PopulatedBoardTest {
 
     @Test
     public void boardFromListCreatesHorizontalPopulated3x3Board() {
-        FileState state = new FileState(Arrays.asList(
+        StateFile state = new StateFile(Arrays.asList(
                 "1", "1", "X", "O", "O",
                 "X", "X", "X",
                 "", "", "",
@@ -57,7 +57,7 @@ public class PopulatedBoardTest {
 
     @Test
     public void boardFromListCreatesVerticalPopulated3x3Board() {
-        FileState state = new FileState(Arrays.asList(
+        StateFile state = new StateFile(Arrays.asList(
                 "1", "1", "X", "O", "O",
                 "O", "", "",
                 "O", "", "",
@@ -76,7 +76,7 @@ public class PopulatedBoardTest {
 
     @Test
     public void boardFromListDoesNotPlaceNonMatchingSymbols() {
-        FileState state = new FileState(Arrays.asList(
+        StateFile state = new StateFile(Arrays.asList(
                 "1", "1", "X", "O", "O",
                 "Q", "Q", "Q",
                 "", "", "",
@@ -95,7 +95,7 @@ public class PopulatedBoardTest {
 
     @Test
     public void boardFromListCreates4x4Board() {
-        FileState state = new FileState(Arrays.asList(
+        StateFile state = new StateFile(Arrays.asList(
                 "1", "1", "X", "O", "O",
                 "", "", "", "",
                 "", "", "", "",
@@ -117,7 +117,7 @@ public class PopulatedBoardTest {
 
     @Test
     public void ListsNotNineOrSixteenLengthWillReturnEmpty3x3Board() {
-        FileState state = new FileState(Arrays.asList(
+        StateFile state = new StateFile(Arrays.asList(
                 "1", "1", "X", "O", "O",
                 "X", "X", "X",
                 "", "", "",

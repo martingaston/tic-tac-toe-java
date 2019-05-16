@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ArgState implements GameState {
+public class StateCLI implements State {
 
     private GameModes mode;
     private BoardModes boardMode;
@@ -14,11 +14,11 @@ public class ArgState implements GameState {
     private Players players;
     private String lastMove;
 
-    public ArgState(String[] args) {
+    public StateCLI(String[] args) {
         this(args, new IO(new Scanner(System.in)));
     }
 
-    public ArgState(String[] args, IO io) {
+    public StateCLI(String[] args, IO io) {
         Map<String, String> parsedArgs = parseArgs(args);
 
         String boardArg = parsedArgs.getOrDefault("board", "");

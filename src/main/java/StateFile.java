@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 
-public class FileState implements GameState {
+public class StateFile implements State {
     private GameModes mode;
     private BoardModes boardMode;
     private Board board;
@@ -9,11 +9,11 @@ public class FileState implements GameState {
     private Players players;
     private String lastMove;
 
-    public FileState(List<String> variables) {
+    public StateFile(List<String> variables) {
         this(variables, new IO(new Scanner(System.in)));
     }
 
-    public FileState(List<String> variables, IO io) {
+    public StateFile(List<String> variables, IO io) {
         boardMode = BoardModes.nameOf(Integer.parseInt(variables.get(0)));
         mode = GameModes.nameOf(Integer.parseInt(variables.get(1)));
         contents = variables.subList(5, variables.size());

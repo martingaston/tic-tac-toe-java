@@ -315,43 +315,6 @@ public class BoardTest {
     }
 
     @Test
-    public void boardCanProduceANewThreeByThreeCopy() {
-        Board board = new Board(3);
-        board.add(4, playerCross);
-        Board newBoard = board.copy();
-
-        int expectedAvailableCells = 8;
-        assertEquals(expectedAvailableCells, newBoard.available().size());
-    }
-
-    @Test
-    public void boardCanProduceANewFourByFourCopy() {
-        Board board = new Board(4);
-        Board newBoard = board.copy();
-
-        int expectedAvailableCells = 16;
-        assertEquals(expectedAvailableCells, newBoard.available().size());
-    }
-
-    @Test
-    public void boardCannotAccessNewCopy() {
-        Board board = new Board();
-        Board newBoard = board.copy();
-        board.add(4, playerCross);
-
-        int expectedAvailableCells = 9;
-        assertEquals(expectedAvailableCells, newBoard.available().size());
-    }
-
-    @Test
-    public void boardCopyDoesNotEqualOriginal() {
-        Board board = new Board();
-        Board newBoard = board.copy();
-
-        assertNotEquals(board, newBoard);
-    }
-
-    @Test
     public void boardToListReturnsNineEmptyPositionsOnEmpty3x3Board() {
         Board board = new Board();
         List<String> expectedBoard = Arrays.asList(

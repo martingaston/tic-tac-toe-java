@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class InputState implements GameState {
+public class StateUserSelect implements State {
     private final IO io;
     private GameModes mode;
     private BoardModes boardMode;
@@ -9,7 +9,7 @@ public class InputState implements GameState {
     private Players players;
     private String lastMove;
 
-    public InputState(IO io) {
+    public StateUserSelect(IO io) {
         this.io = io;
         boardMode = getBoardSize();
         mode = getGameMode();

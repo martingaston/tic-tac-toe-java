@@ -48,19 +48,7 @@ public class Board {
 
         return moves;
     }
-
-    public Board copy() {
-        Board newBoard = new Board(this.sideLength);
-        int totalCells = getTotalCells();
-
-        for (int i = 0; i < totalCells; i++) {
-            Player cellOccupant = board.get(i).occupant();
-            newBoard.add(i, cellOccupant);
-        }
-
-        return newBoard;
-    }
-
+    
     public void add(int position, Player player) {
         Cell requestedCell = get(position);
         if (!requestedCell.isOccupied()) {

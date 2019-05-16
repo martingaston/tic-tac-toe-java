@@ -7,13 +7,13 @@ public class Main {
         IO io = new IO(new Scanner(System.in));
         List<String> prevState = IO.gameIn();
 
-        GameState state;
+        State state;
         if (!prevState.isEmpty()) {
-            state = new FileState(prevState, io);
+            state = new StateFile(prevState, io);
         } else if (args.length > 0) {
-            state = new ArgState(args, io);
+            state = new StateCLI(args, io);
         } else {
-            state = new InputState(io);
+            state = new StateUserSelect(io);
         }
 
         Game.play(state);

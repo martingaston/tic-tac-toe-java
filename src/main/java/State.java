@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface GameState {
+public interface State {
     GameModes mode();
 
     BoardModes boardMode();
