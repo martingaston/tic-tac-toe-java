@@ -7,6 +7,29 @@ class Game {
     private static Players players;
     private static List<String> gameSettings;
 
+    static void play(GameState state) throws IOException {
+        board = state.board();
+        display = new Display(board);
+        players = state.players();
+
+        intro();
+        instructions();
+        do {
+            newTurn();
+            processTurnState(state);
+        } while (!board.isGameOver());
+    }
+
+    private static void processTurnState(GameState state) throws IOException {
+        IO.gameOutState(state);
+        if (board.isGameOver()) {
+            IO.closeGame();
+            gameEnd();
+        } else {
+            players.nextTurn();
+        }
+    }
+
     static void play(Settings settings) throws IOException {
         board = settings.board();
         display = settings.display();
