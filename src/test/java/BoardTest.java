@@ -20,7 +20,7 @@ public class BoardTest {
         Cell currentCell;
         for (int i = 0; i < totalCells; i++) {
             currentCell = board.get(i);
-            boardAsArrayList.add(currentCell.getOccupant().toString());
+            boardAsArrayList.add(currentCell.occupant().toString());
         }
         return boardAsArrayList.toArray(new String[]{});
     }
@@ -46,14 +46,14 @@ public class BoardTest {
 
     @Test
     public void cellZeroShouldBeBlankOnEmptyBoard() {
-        String cellOccupant = board.get(0).getOccupant().toString();
+        String cellOccupant = board.get(0).occupant().toString();
         assertEquals(" ", cellOccupant);
     }
 
     @Test
     public void cellZeroShouldBeCrossWhenAddedToBoard() {
         board.add(0, playerCross);
-        String cellOccupant = board.get(0).getOccupant().toString();
+        String cellOccupant = board.get(0).occupant().toString();
         assertEquals("X", cellOccupant);
     }
 
@@ -276,6 +276,17 @@ public class BoardTest {
         board.add(2, playerCross);
         board.add(4, playerCross);
         board.add(6, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void findsWinnerWithTwoSeparateSymbolsWithSameValue() {
+        Symbol playerCrossTwo = new Symbol("X");
+        Board board = new Board(3);
+        board.add(0, playerCross);
+        board.add(4, playerCrossTwo);
+        board.add(8, playerCross);
 
         assertTrue(board.hasWinner());
     }

@@ -12,7 +12,7 @@ public class PopulatedBoardTest {
         Cell currentCell;
         for (int i = 0; i < totalCells; i++) {
             currentCell = board.get(i);
-            boardAsArrayList.add(currentCell.getOccupant().toString());
+            boardAsArrayList.add(currentCell.occupant().toString());
         }
         return boardAsArrayList.toArray(new String[]{});
     }

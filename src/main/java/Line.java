@@ -13,7 +13,11 @@ class Line {
     }
 
     public boolean hasWinner(Symbol occupant) {
-        return cells.stream().allMatch(cell -> cell.occupant() == occupant && cell.occupant() != null);
+        if(occupant.equals(new Symbol(" "))) {
+            return false;
+        }
+
+        return cells.stream().allMatch(cell -> cell.occupant().equals(occupant));
     }
 
     @Override
@@ -22,7 +26,7 @@ class Line {
         for (Cell cell : cells) {
             stringify.append("| isOccupied: ").append(cell.isOccupied());
             if (cell.isOccupied()) {
-                stringify.append(", occupant: ").append(cell.getOccupant());
+                stringify.append(", occupant: ").append(cell.occupant());
             }
             stringify.append(" | ");
         }

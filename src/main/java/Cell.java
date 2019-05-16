@@ -1,16 +1,12 @@
 public class Cell {
     private Symbol occupant;
 
-    Symbol getOccupant() {
+    Symbol occupant() {
         if (!isOccupied()) {
             return new Symbol(" ");
         }
 
         return occupant;
-    }
-
-    Symbol occupant() {
-        return this.occupant;
     }
 
     void mark(Symbol symbol) {

@@ -17,21 +17,21 @@ public class CellTest {
 
     @Test
     public void unoccupiedCellIsABlankSpace() {
-        String unoccupiedCell = cell.getOccupant().toString();
+        String unoccupiedCell = cell.occupant().toString();
         assertEquals(" ", unoccupiedCell);
     }
 
     @Test
     public void cellOccupiedByCrossReturnsCross() {
         cell.mark(playerCross);
-        String crossOccupiedCell = cell.getOccupant().toString();
+        String crossOccupiedCell = cell.occupant().toString();
         assertEquals("X", crossOccupiedCell);
     }
 
     @Test
     public void cellOccupiedByNoughtReturnsNought() {
         cell.mark(playerNought);
-        String noughtOccupiedCell = cell.getOccupant().toString();
+        String noughtOccupiedCell = cell.occupant().toString();
         assertEquals("O", noughtOccupiedCell);
     }
 }
