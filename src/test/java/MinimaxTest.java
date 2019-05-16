@@ -10,7 +10,7 @@ public class MinimaxTest {
     private Minimax minimax;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         board = new Board();
         playerMaxi = new PlayerHuman("Maxi", board);
         playerMini = new PlayerHuman("Mini", board);

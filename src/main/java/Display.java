@@ -1,4 +1,4 @@
-public class Display {
+class Display {
     private final Board board;
     private final String newline = "\n";
 

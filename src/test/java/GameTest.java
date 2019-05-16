@@ -2,10 +2,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,12 +23,12 @@ public class GameTest {
     }
 
     @Test
-    public void testCrossWinsHVHGameOn3x3Board() {
+    public void testCrossWinsHVHGameOn3x3Board() throws IOException {
         String gameInputs = "1\n1\n1\n4\n2\n5\n3";
         InputStream in = new ByteArrayInputStream(gameInputs.getBytes());
         System.setIn(in);
 
-        Game.play(new String[] {});
+        Main.main(new String[] {});
 
         String gameOutput = outContent.toString();
 
@@ -41,12 +38,12 @@ public class GameTest {
     }
 
     @Test
-    public void testDrawStateEndsInDraw() {
+    public void testDrawStateEndsInDraw() throws IOException{
         String gameInputs = "1\n1\n1\n5\n2\n3\n7\n4\n6\n9\n8";
         InputStream in = new ByteArrayInputStream(gameInputs.getBytes());
         System.setIn(in);
 
-        Game.play(new String[] {});
+        Main.main(new String[] {});
 
         String gameOutput = outContent.toString();
 
@@ -56,12 +53,12 @@ public class GameTest {
     }
 
     @Test
-    public void testNoughtWinsHVHGameOn4x4BoardAfterCrossPlaysIncorrectMove() {
+    public void testNoughtWinsHVHGameOn4x4BoardAfterCrossPlaysIncorrectMove() throws IOException {
         String gameInputs = "2\n1\n16\n2\n11\n3\n6\n1\n1\n5\n4";
         InputStream in = new ByteArrayInputStream(gameInputs.getBytes());
         System.setIn(in);
 
-        Game.play(new String[] {});
+        Main.main(new String[] {});
 
         String gameOutput = outContent.toString();
 
