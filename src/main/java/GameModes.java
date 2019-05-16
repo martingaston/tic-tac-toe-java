@@ -2,7 +2,8 @@ public enum GameModes {
     MODE_HVH(1, "hvh"),
     MODE_HVC_EASY(2, "hvc-easy"),
     MODE_HVC_HARD(3, "hvc-hard"),
-    MODE_CVC_EASY(4, "cvc-easy");
+    MODE_CVC_EASY(4, "cvc-easy"),
+    MODE_CVC_HARD(5, "cvc-hard");
 
     private final Integer id;
     private final String arg;

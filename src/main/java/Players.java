@@ -24,6 +24,9 @@ class Players {
                 playerCross = new PlayerCPU("X");
                 playerNought = new PlayerCPU("O");
                 break;
+            case MODE_CVC_HARD:
+                playerCross = new PlayerMinimax("X", new Symbol("O"));
+                playerNought = new PlayerMinimax("O", new Symbol("X"));
         }
 
         return new Players(playerCross, playerNought);

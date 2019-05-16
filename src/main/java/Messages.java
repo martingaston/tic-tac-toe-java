@@ -1,6 +1,6 @@
 public class Messages {
     static String setupInstructions() {
-        return "Select a game mode:\n1. Human v Human\n2. Human v CPU (EASY)\n3. Human v CPU (HARD)\n4. CPU v CPU";
+        return "Select a game mode:\n1. Human v Human\n2. Human v CPU (EASY)\n3. Human v CPU (HARD)\n4. CPU v CPU (EASY)\n5. CPU v CPU (HARD)";
     }
 
     static String boardSetupInstructions() {
