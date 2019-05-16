@@ -31,4 +31,8 @@ public enum GameModes {
 
         return GameModes.MODE_HVH;
     }
+
+    public static int id(GameModes mode) {
+        return mode.id;
+    }
 }

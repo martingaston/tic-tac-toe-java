@@ -25,7 +25,7 @@ public class PopulatedBoardTest {
                 "", "", "",
                 "", "", ""
         ));
-        Board board = PopulatedBoard.from(state);
+        Board board = state.board();
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",
@@ -44,7 +44,7 @@ public class PopulatedBoardTest {
                 "", "", "",
                 "", "", ""
         ));
-        Board board = PopulatedBoard.from(state);
+        Board board = state.board();
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "X", "X", "X",
@@ -63,7 +63,7 @@ public class PopulatedBoardTest {
                 "O", "", "",
                 "O", "", ""
         ));
-        Board board = PopulatedBoard.from(state);
+        Board board = state.board();
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 "O", " ", " ",
@@ -82,7 +82,7 @@ public class PopulatedBoardTest {
                 "", "", "",
                 "", "", ""
         ));
-        Board board = PopulatedBoard.from(state);
+        Board board = state.board();
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",
@@ -103,7 +103,7 @@ public class PopulatedBoardTest {
                 "", "", "", ""
         ));
 
-        Board board = PopulatedBoard.from(state);
+        Board board = state.board();
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ", " ",
@@ -124,7 +124,7 @@ public class PopulatedBoardTest {
                 "", "", "", ""
         ));
 
-        Board board = PopulatedBoard.from(state);
+        Board board = state.board();
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
                 " ", " ", " ",

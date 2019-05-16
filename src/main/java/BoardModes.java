@@ -29,4 +29,8 @@ public enum BoardModes {
 
         return BoardModes.BOARD_3X3;
     }
+
+    public static int id(BoardModes mode) {
+        return mode.id;
+    }
 }

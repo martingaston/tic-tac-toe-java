@@ -48,7 +48,7 @@ public class FileStateTest {
                 "", "", "",
                 "", "", "");
         FileState fileState = new FileState(stateVariables);
-        assertEquals(BoardModes.BOARD_3X3, fileState.board());
+        assertEquals(BoardModes.BOARD_3X3, fileState.boardMode());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class FileStateTest {
                 "", "", "",
                 "", "", "");
         FileState fileState = new FileState(stateVariables);
-        assertEquals(BoardModes.BOARD_4X4, fileState.board());
+        assertEquals(BoardModes.BOARD_4X4, fileState.boardMode());
     }
 
     @Test
@@ -70,6 +70,6 @@ public class FileStateTest {
                 "", "", "",
                 "", "", "");
         FileState fileState = new FileState(stateVariables);
-        assertEquals(BoardModes.BOARD_3X3, fileState.board());
+        assertEquals(BoardModes.BOARD_3X3, fileState.boardMode());
     }
 }

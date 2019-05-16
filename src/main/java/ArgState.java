@@ -1,37 +1,59 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ArgState implements GameState {
+
     private GameModes mode;
-    private BoardModes board;
+    private BoardModes boardMode;
+    private Board board;
     private List<String> contents;
     private Players players;
     private String lastMove;
 
     public ArgState(String[] args) {
+        this(args, new IO(new Scanner(System.in)));
+    }
+
+    public ArgState(String[] args, IO io) {
         Map<String, String> parsedArgs = parseArgs(args);
 
         String boardArg = parsedArgs.getOrDefault("board", "");
         String modeArg = parsedArgs.getOrDefault("mode", "");
-        board = BoardModes.nameOf(boardArg);
+        boardMode = BoardModes.nameOf(boardArg);
+        board = createBoard(boardMode);
         mode = GameModes.nameOf(modeArg);
+        players = Players.create(mode, io);
     }
 
-    public Map<String, String> parseArgs(String[] args) {
-        Pattern argStructure = Pattern.compile("^--(\\w+)=([\\w|-]+)$");
+    private Map<String, String> parseArgs(String[] args) {
+        String argNameEqualValueRegex = "^--(\\w+)=([\\w|-]+)$"; // --name=value
+        Pattern argStructure = Pattern.compile(argNameEqualValueRegex);
         Map<String, String> argMap = new HashMap<>();
 
         for (String arg : args) {
             Matcher matchedArg = argStructure.matcher(arg);
             if (matchedArg.matches()) {
-                argMap.put(matchedArg.group(1), matchedArg.group(2));
+                String argName = matchedArg.group(1);
+                String argValue = matchedArg.group(2);
+                argMap.put(argName, argValue);
             }
         }
 
         return argMap;
+    }
+
+    private Board createBoard(BoardModes boardMode) {
+        switch (boardMode) {
+            case BOARD_3X3:
+            default:
+                return new Board(3);
+            case BOARD_4X4:
+                return new Board(4);
+        }
     }
 
     @Override
@@ -45,12 +67,15 @@ public class ArgState implements GameState {
     }
 
     @Override
+    public BoardModes boardMode() { return boardMode; }
+
+    @Override
     public Players players() {
-        return null;
+        return players;
     }
 
     @Override
-    public BoardModes board() {
+    public Board board() {
         return board;
     }
 

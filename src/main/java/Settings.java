@@ -44,21 +44,15 @@ public class Settings {
     }
 
     private void processSavedGame(List<String> prevState) {
-        FileState fileState = new FileState(prevState);
-        board = PopulatedBoard.from(fileState);
+        GameState fileState = new FileState(prevState);
+        board = fileState.board();
         players = fileState.players();
         playerCross = fileState.players().playerCross();
         playerNought = fileState.players().playerNought();
         display = new Display(board);
 
-        if (fileState.lastMove().equals("X")) {
-            players.nextTurn();
-        }
-
         //TODO: these three lines should not be needed when FileState is fully integrated
-        int boardNumber = Integer.parseInt(prevState.get(0));
-        int modeNumber = Integer.parseInt(prevState.get(1));
-        createSettings(boardNumber, modeNumber);
+        createSettings(BoardModes.id(fileState.boardMode()), GameModes.id(fileState.mode()));
     }
 
     private void createSettings(int boardNumber, int modeNumber) {
@@ -66,6 +60,17 @@ public class Settings {
         gameSettings.add(Integer.toString(modeNumber));
         gameSettings.add(playerCross.getSymbol());
         gameSettings.add(playerNought.getSymbol());
+    }
+
+    private void processArgsFromState(String[] args) {
+        GameState argState = new ArgState(args);
+        board = argState.board();
+        players = argState.players();
+        playerCross = argState.players().playerCross();
+        playerNought = argState.players().playerNought();
+        display = new Display(board);
+
+        createSettings(BoardModes.id(argState.boardMode()), GameModes.id(argState.mode()));
     }
 
     private void processArgs(String[] args) {
