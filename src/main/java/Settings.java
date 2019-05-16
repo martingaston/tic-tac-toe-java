@@ -24,8 +24,10 @@ public class Settings {
 
         if (!prevState.isEmpty()) {
             processSavedGame(prevState);
+        } else if (args.length > 0) {
+            processArgsFromState(args);
         } else {
-            processArgs(args);
+            processInputFromState(io);
         }
     }
 
@@ -71,6 +73,17 @@ public class Settings {
         display = new Display(board);
 
         createSettings(BoardModes.id(argState.boardMode()), GameModes.id(argState.mode()));
+    }
+
+    private void processInputFromState(IO io) {
+        GameState inputState = new InputState(io);
+        board = inputState.board();
+        players = inputState.players();
+        playerCross = inputState.players().playerCross();
+        playerNought = inputState.players().playerNought();
+        display = new Display(board);
+
+        createSettings(BoardModes.id(inputState.boardMode()), GameModes.id(inputState.mode()));
     }
 
     private void processArgs(String[] args) {
