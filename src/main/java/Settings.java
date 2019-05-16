@@ -3,13 +3,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Settings {
-    private static final int BOARD_3X3 = 1;
-    private static final int BOARD_4X4 = 2;
-    private static final int MODE_HVH = 1;
-    private static final int MODE_HVC_EASY = 2;
-    private static final int MODE_HVC_HARD = 3;
-    private static final int MODE_CVC_EASY = 4;
-
     private final List<String> gameSettings = new LinkedList<>();
     private IO io;
     private Board board;
@@ -84,98 +77,6 @@ public class Settings {
         display = new Display(board);
 
         createSettings(BoardModes.id(inputState.boardMode()), GameModes.id(inputState.mode()));
-    }
-
-    private void processArgs(String[] args) {
-        Map<String, String> parsedArgs = parseArgs(args);
-        String boardArg = parsedArgs.getOrDefault("board", "");
-        String modeArg = parsedArgs.getOrDefault("mode", "");
-        int boardNumber = getBoardNumber(boardArg);
-        int modeNumber = getModeNumber(modeArg);
-
-        buildBoard(boardNumber);
-        buildMode(modeNumber);
-
-        createSettings(boardNumber, modeNumber);
-
-        display = new Display(board);
-        players = new Players(playerCross, playerNought);
-    }
-
-    private void buildMode(int modeNumber) {
-        switch (modeNumber) {
-            case MODE_HVH:
-            default:
-                playerCross = new PlayerHuman("X", io);
-                playerNought = new PlayerHuman("O", io);
-                break;
-            case MODE_HVC_EASY:
-                playerCross = new PlayerHuman("X", io);
-                playerNought = new PlayerCPU("O");
-                break;
-            case MODE_HVC_HARD:
-                playerCross = new PlayerHuman("X", io);
-                playerNought = new PlayerMinimax("O", playerCross);
-                break;
-            case MODE_CVC_EASY:
-                playerCross = new PlayerCPU("X");
-                playerNought = new PlayerCPU("O");
-                break;
-        }
-    }
-
-    private void buildBoard(int boardNumber) {
-        BoardModes boardMode = BoardModes.nameOf(boardNumber);
-        switch (boardMode) {
-            case BOARD_3X3:
-            default:
-                board = new Board();
-                break;
-            case BOARD_4X4:
-                board = new Board(4);
-                break;
-        }
-    }
-
-    private int getModeNumber(String modeArg) {
-        int modeNumber;
-        switch (modeArg) {
-            case "hvh":
-                modeNumber = MODE_HVH;
-                break;
-            case "hvc-easy":
-                modeNumber = MODE_HVC_EASY;
-                break;
-            case "hvc-hard":
-                modeNumber = MODE_HVC_HARD;
-                break;
-            case "cvc-easy":
-                modeNumber = MODE_CVC_EASY;
-                break;
-            default:
-                Display.outMessage(Messages.setupInstructions());
-                modeNumber = io.nextInt();
-        }
-        return modeNumber;
-    }
-
-    private int getBoardNumber(String boardArg) {
-        int boardNumber;
-
-        switch (boardArg) {
-            case "3x3":
-                boardNumber = BOARD_3X3;
-                break;
-            case "4x4":
-                boardNumber = BOARD_4X4;
-                break;
-            default:
-                Display.outMessage(Messages.boardSetupInstructions());
-                boardNumber = io.nextInt();
-                break;
-        }
-
-        return boardNumber;
     }
 
     public Board board() {
