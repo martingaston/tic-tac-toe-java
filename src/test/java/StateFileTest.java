@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class StateFileTest {
 
     @Test
-    public void GameStateReturnsModeHVHEnumWithOne() {
+    public void gameStateReturnsModeHVHEnumWithOne() {
         List<String> stateVariables = Arrays.asList(
                 "0", "1", "", "", "",
                 "", "", "",
@@ -19,7 +19,7 @@ public class StateFileTest {
     }
 
     @Test
-    public void GameStateReturnsModeHVCHardEnumWithThree() {
+    public void gameStateReturnsModeHVCHardEnumWithThree() {
         List<String> stateVariables = Arrays.asList(
                 "0", "3", "", "", "",
                 "", "", "",
@@ -30,7 +30,7 @@ public class StateFileTest {
     }
 
     @Test
-    public void GameStateReturnsModeHVHEnumIfInputIsInvalid() {
+    public void gameStateReturnsModeHVHEnumIfInputIsInvalid() {
         List<String> stateVariables = Arrays.asList(
                 "0", "15", "", "", "",
                 "", "", "",
@@ -41,7 +41,7 @@ public class StateFileTest {
     }
 
     @Test
-    public void GameStateReturnsBoard3X3EnumWithOne() {
+    public void gameStateReturnsBoard3X3EnumWithOne() {
         List<String> stateVariables = Arrays.asList(
                 "1", "0", "", "", "",
                 "", "", "",
@@ -52,7 +52,7 @@ public class StateFileTest {
     }
 
     @Test
-    public void GameStateReturnsBoard4X4EnumWithTwo() {
+    public void gameStateReturnsBoard4X4EnumWithTwo() {
         List<String> stateVariables = Arrays.asList(
                 "2", "0", "", "", "",
                 "", "", "",
@@ -63,7 +63,7 @@ public class StateFileTest {
     }
 
     @Test
-    public void GameStateReturnsBoard3X3EnumWithInvalidInput() {
+    public void gameStateReturnsBoard3X3EnumWithInvalidInput() {
         List<String> stateVariables = Arrays.asList(
                 "15", "0", "", "", "",
                 "", "", "",

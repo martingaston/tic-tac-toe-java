@@ -82,7 +82,7 @@ public class BoardTest {
     }
 
     @Test
-    public void UpdatedBoardShouldReturnCorrectBoardStateAfterOneMove() {
+    public void updatedBoardShouldReturnCorrectBoardStateAfterOneMove() {
         board.add(0, playerCross);
         String[] updatedBoard = createStringArrayFromBoard(board);
         String[] expectedBoard = {
@@ -94,7 +94,7 @@ public class BoardTest {
     }
 
     @Test
-    public void UpdatedBoardShouldReturnCorrectBoardStateAfterTwoMoves() {
+    public void updatedBoardShouldReturnCorrectBoardStateAfterTwoMoves() {
         board.add(0, playerCross);
         board.add(4, playerCross);
         String[] updatedBoard = createStringArrayFromBoard(board);
@@ -107,7 +107,7 @@ public class BoardTest {
     }
 
     @Test
-    public void UpdatedBoardShouldNotAllowOverwritingCells() {
+    public void updatedBoardShouldNotAllowOverwritingCells() {
         board.add(1, playerNought);
         board.add(1, playerCross);
         String[] updatedBoard = createStringArrayFromBoard(board);
@@ -120,7 +120,7 @@ public class BoardTest {
     }
 
     @Test
-    public void UpdateBoardShouldBeAbleToRunEntireGame() {
+    public void updateBoardShouldBeAbleToRunEntireGame() {
         board.add(4, playerCross);
         board.add(2, playerNought);
         board.add(3, playerCross);

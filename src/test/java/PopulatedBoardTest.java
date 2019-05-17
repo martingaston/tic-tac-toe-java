@@ -116,7 +116,7 @@ public class PopulatedBoardTest {
     }
 
     @Test
-    public void ListsNotNineOrSixteenLengthWillReturnEmpty3x3Board() {
+    public void listsNotNineOrSixteenLengthWillReturnEmpty3x3Board() {
         StateFile state = new StateFile(Arrays.asList(
                 "1", "1", "X", "O", "O",
                 "X", "X", "X",

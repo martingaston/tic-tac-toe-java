@@ -23,7 +23,7 @@ public class GameTest {
     }
 
     @Test
-    public void testCrossWinsHVHGameOn3x3Board() throws IOException {
+    public void crossWinsHVHGameOn3x3Board() throws IOException {
         String gameInputs = "1\n1\n1\n4\n2\n5\n3";
         InputStream in = new ByteArrayInputStream(gameInputs.getBytes());
         System.setIn(in);
@@ -38,7 +38,7 @@ public class GameTest {
     }
 
     @Test
-    public void testDrawStateEndsInDraw() throws IOException{
+    public void drawStateEndsInDraw() throws IOException{
         String gameInputs = "1\n1\n1\n5\n2\n3\n7\n4\n6\n9\n8";
         InputStream in = new ByteArrayInputStream(gameInputs.getBytes());
         System.setIn(in);
@@ -53,7 +53,7 @@ public class GameTest {
     }
 
     @Test
-    public void testNoughtWinsHVHGameOn4x4BoardAfterCrossPlaysIncorrectMove() throws IOException {
+    public void noughtWinsHVHGameOn4x4BoardAfterCrossPlaysIncorrectMove() throws IOException {
         String gameInputs = "2\n1\n16\n2\n11\n3\n6\n1\n1\n5\n4";
         InputStream in = new ByteArrayInputStream(gameInputs.getBytes());
         System.setIn(in);
