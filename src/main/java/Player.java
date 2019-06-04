@@ -1,5 +1,5 @@
 public interface Player {
-    String getSymbol();
+    Symbol symbol();
 
-    int getNextMove();
+    int getNextMove(Board board);
 }

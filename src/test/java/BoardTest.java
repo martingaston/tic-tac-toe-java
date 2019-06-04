@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
 public class BoardTest {
 
     private Board board;
-    private Player playerCross;
-    private Player playerNought;
+    private Symbol playerCross;
+    private Symbol playerNought;
 
     private String[] createStringArrayFromBoard(Board board) {
         ArrayList<String> boardAsArrayList = new ArrayList<>();
@@ -20,7 +20,7 @@ public class BoardTest {
         Cell currentCell;
         for (int i = 0; i < totalCells; i++) {
             currentCell = board.get(i);
-            boardAsArrayList.add(currentCell.getOccupant());
+            boardAsArrayList.add(currentCell.occupant().toString());
         }
         return boardAsArrayList.toArray(new String[]{});
     }
@@ -29,8 +29,8 @@ public class BoardTest {
     @Before
     public void setUp() {
         board = new Board();
-        playerCross = new PlayerHuman("X", board);
-        playerNought = new PlayerHuman("O", board);
+        playerCross = new Symbol("X");
+        playerNought = new Symbol("O");
     }
 
     @Test
@@ -46,14 +46,14 @@ public class BoardTest {
 
     @Test
     public void cellZeroShouldBeBlankOnEmptyBoard() {
-        String cellOccupant = board.get(0).getOccupant();
+        String cellOccupant = board.get(0).occupant().toString();
         assertEquals(" ", cellOccupant);
     }
 
     @Test
     public void cellZeroShouldBeCrossWhenAddedToBoard() {
         board.add(0, playerCross);
-        String cellOccupant = board.get(0).getOccupant();
+        String cellOccupant = board.get(0).occupant().toString();
         assertEquals("X", cellOccupant);
     }
 
@@ -281,6 +281,17 @@ public class BoardTest {
     }
 
     @Test
+    public void findsWinnerWithTwoSeparateSymbolsWithSameValue() {
+        Symbol playerCrossTwo = new Symbol("X");
+        Board board = new Board(3);
+        board.add(0, playerCross);
+        board.add(4, playerCrossTwo);
+        board.add(8, playerCross);
+
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
     public void gameIsNotOverWithEmptyBoard() {
         Board board = new Board(3);
 
@@ -312,43 +323,6 @@ public class BoardTest {
         board.add(8, playerCross);
 
         assertTrue(board.isGameOver());
-    }
-
-    @Test
-    public void boardCanProduceANewThreeByThreeCopy() {
-        Board board = new Board(3);
-        board.add(4, playerCross);
-        Board newBoard = board.copy();
-
-        int expectedAvailableCells = 8;
-        assertEquals(expectedAvailableCells, newBoard.available().size());
-    }
-
-    @Test
-    public void boardCanProduceANewFourByFourCopy() {
-        Board board = new Board(4);
-        Board newBoard = board.copy();
-
-        int expectedAvailableCells = 16;
-        assertEquals(expectedAvailableCells, newBoard.available().size());
-    }
-
-    @Test
-    public void boardCannotAccessNewCopy() {
-        Board board = new Board();
-        Board newBoard = board.copy();
-        board.add(4, playerCross);
-
-        int expectedAvailableCells = 9;
-        assertEquals(expectedAvailableCells, newBoard.available().size());
-    }
-
-    @Test
-    public void boardCopyDoesNotEqualOriginal() {
-        Board board = new Board();
-        Board newBoard = board.copy();
-
-        assertNotEquals(board, newBoard);
     }
 
     @Test
@@ -390,108 +364,5 @@ public class BoardTest {
         );
 
         assertEquals(expectedBoard, board.toList());
-    }
-
-    @Test
-    public void boardFromListCreatesEmpty3x3Board() {
-        List<String> boardList = Arrays.asList("", "", "", "", "", "", "", "", "");
-        Board board = new Board();
-        board.addFromList(boardList, playerCross, playerNought);
-        String[] updatedBoard = createStringArrayFromBoard(board);
-        String[] expectedBoard = {
-                " ", " ", " ",
-                " ", " ", " ",
-                " ", " ", " "
-        };
-
-        assertArrayEquals(expectedBoard, updatedBoard);
-    }
-
-    @Test
-    public void boardFromListCreatesHorizontalPopulated3x3Board() {
-        List<String> boardList = Arrays.asList("X", "X", "X", "", "", "", "", "", "");
-        Board board = new Board();
-        board.addFromList(boardList, playerCross, playerNought);
-        String[] updatedBoard = createStringArrayFromBoard(board);
-        String[] expectedBoard = {
-                "X", "X", "X",
-                " ", " ", " ",
-                " ", " ", " "
-        };
-
-        assertArrayEquals(expectedBoard, updatedBoard);
-    }
-
-    @Test
-    public void boardFromListCreatesVerticalPopulated3x3Board() {
-        List<String> boardList = Arrays.asList("O", "", "", "O", "", "", "O", "", "");
-        Board board = new Board();
-        board.addFromList(boardList, playerCross, playerNought);
-        String[] updatedBoard = createStringArrayFromBoard(board);
-        String[] expectedBoard = {
-                "O", " ", " ",
-                "O", " ", " ",
-                "O", " ", " "
-        };
-
-        assertArrayEquals(expectedBoard, updatedBoard);
-    }
-
-    @Test
-    public void boardFromListDoesNotPlaceNonMatchingSymbols() {
-        List<String> boardList = Arrays.asList("Q", "Q", "Q", "", "", "", "", "", "");
-        Board board = new Board();
-        board.addFromList(boardList, playerCross, playerNought);
-        String[] updatedBoard = createStringArrayFromBoard(board);
-        String[] expectedBoard = {
-                " ", " ", " ",
-                " ", " ", " ",
-                " ", " ", " "
-        };
-
-        assertArrayEquals(expectedBoard, updatedBoard);
-    }
-
-    @Test
-    public void boardFromListCreates4x4Board() {
-        List<String> boardList = Arrays.asList(
-                "", "", "", "",
-                "", "", "", "",
-                "", "", "", "",
-                "", "", "", ""
-        );
-
-        Board board = new Board(4);
-        board.addFromList(boardList, playerCross, playerNought);
-        String[] updatedBoard = createStringArrayFromBoard(board);
-        String[] expectedBoard = {
-                " ", " ", " ", " ",
-                " ", " ", " ", " ",
-                " ", " ", " ", " ",
-                " ", " ", " ", " "
-        };
-
-        assertArrayEquals(expectedBoard, updatedBoard);
-    }
-
-    @Test
-    public void ListsNotNineOrSixteenLengthWillReturnEmpty3x3Board() {
-        List<String> boardList = Arrays.asList(
-                "", "", "", "",
-                "", "", "", "",
-                "", "", "", "",
-                "", "", "X"
-        );
-
-        Board board = new Board();
-        board.addFromList(boardList, playerCross, playerNought);
-        String[] updatedBoard = createStringArrayFromBoard(board);
-        String[] expectedBoard = {
-                " ", " ", " ",
-                " ", " ", " ",
-                " ", " ", " "
-        };
-
-        assertArrayEquals(expectedBoard, updatedBoard);
     }
 }

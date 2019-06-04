@@ -1,25 +1,23 @@
 import java.util.Scanner;
 
 public class PlayerHuman implements Player {
-    private final String symbol;
-    private final Board board;
+    private final Symbol symbol;
     private final IO io;
 
-    public PlayerHuman(String symbol, Board board, IO io) {
-        this.symbol = symbol;
-        this.board = board;
+    public PlayerHuman(String symbol, IO io) {
+        this.symbol = new Symbol(symbol);
         this.io = io;
     }
 
-    public PlayerHuman(String symbol, Board board) {
-        this(symbol, board, new IO(new Scanner(System.in)));
+    public PlayerHuman(String symbol) {
+        this(symbol, new IO(new Scanner(System.in)));
     }
 
-    public String getSymbol() {
+    public Symbol symbol() {
         return symbol;
     }
 
-    public int getNextMove() {
+    public int getNextMove(Board board) {
         int desiredCell = getAnInteger();
 
         while (!board.available().contains(desiredCell)) {

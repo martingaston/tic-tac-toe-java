@@ -1,20 +1,16 @@
 public class Cell {
-    private Player occupant;
+    private Symbol occupant;
 
-    String getOccupant() {
+    Symbol occupant() {
         if (!isOccupied()) {
-            return " ";
+            return new Symbol(" ");
         }
 
-        return occupant.getSymbol();
+        return occupant;
     }
 
-    Player occupant() {
-        return this.occupant;
-    }
-
-    void mark(Player player) {
-        this.occupant = player;
+    void mark(Symbol symbol) {
+        this.occupant = symbol;
     }
 
     void unmark() {

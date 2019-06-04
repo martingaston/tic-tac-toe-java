@@ -1,6 +1,6 @@
 public class Messages {
     static String setupInstructions() {
-        return "Select a game mode:\n1. Human v Human\n2. Human v CPU (EASY)\n3. Human v CPU (HARD)\n4. CPU v CPU";
+        return "Select a game mode:\n1. Human v Human\n2. Human v CPU (EASY)\n3. Human v CPU (HARD)\n4. CPU v CPU (EASY)\n5. CPU v CPU (HARD)";
     }
 
     static String boardSetupInstructions() {
@@ -12,7 +12,7 @@ public class Messages {
     }
 
     static String playerWin(Player player) {
-        return String.format("Player %s wins!", player.getSymbol());
+        return String.format("Player %s wins!", player.symbol().toString());
     }
 
     static String playersDraw() {
@@ -20,11 +20,7 @@ public class Messages {
     }
 
     static String announcePlayerTurn(Player player) {
-        return String.format("Player %s's turn", player.getSymbol());
-    }
-
-    static String shutdown() {
-        return "Goodbye!";
+        return String.format("Player %s's turn", player.symbol().toString());
     }
 
     static String getInstructions(int sideLength) {

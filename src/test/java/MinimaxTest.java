@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 
 public class MinimaxTest {
     private Board board;
-    private Player playerMaxi;
-    private Player playerMini;
+    private Symbol playerMaxi;
+    private Symbol playerMini;
     private Minimax minimax;
 
     @Before
     public void setUp() {
         board = new Board();
-        playerMaxi = new PlayerHuman("Maxi", board);
-        playerMini = new PlayerHuman("Mini", board);
+        playerMaxi = new Symbol("Maxi");
+        playerMini = new Symbol("Mini");
         minimax = new Minimax(board, playerMaxi, playerMini);
     }
 

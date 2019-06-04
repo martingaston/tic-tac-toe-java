@@ -17,22 +17,6 @@ public class Board {
         generate(sideLength);
     }
 
-    public void addFromList(List<String> boardList, Player playerCross, Player playerNought) {
-        if (boardList.size() != this.totalCells) {
-            return;
-        }
-
-        for (int i = 0; i < totalCells; i++) {
-            remove(i);
-            String currentSymbol = boardList.get(i);
-            if (currentSymbol.equals(playerCross.getSymbol())) {
-                add(i, playerCross);
-            } else if (currentSymbol.equals(playerNought.getSymbol())) {
-                add(i, playerNought);
-            }
-        }
-    }
-
     private void generate(int sideLength) {
         this.sideLength = sideLength;
         this.totalCells = sideLength * sideLength;
@@ -64,23 +48,11 @@ public class Board {
 
         return moves;
     }
-
-    public Board copy() {
-        Board newBoard = new Board(this.sideLength);
-        int totalCells = getTotalCells();
-
-        for (int i = 0; i < totalCells; i++) {
-            Player cellOccupant = board.get(i).occupant();
-            newBoard.add(i, cellOccupant);
-        }
-
-        return newBoard;
-    }
-
-    public void add(int position, Player player) {
+    
+    public void add(int position, Symbol symbol) {
         Cell requestedCell = get(position);
         if (!requestedCell.isOccupied()) {
-            requestedCell.mark(player);
+            requestedCell.mark(symbol);
         }
     }
 
@@ -166,8 +138,8 @@ public class Board {
         return lines().stream().anyMatch(Line::hasWinner);
     }
 
-    public boolean hasWon(Player player) {
-        return lines().stream().anyMatch(line -> line.hasWinner(player));
+    public boolean hasWon(Symbol symbol) {
+        return lines().stream().anyMatch(line -> line.hasWinner(symbol));
     }
 
     public boolean isGameOver() {
@@ -180,7 +152,7 @@ public class Board {
 
     public List<String> toList() {
         return board.stream()
-                .map(Cell::getOccupant)
+                .map(cell -> cell.occupant().toString())
                 .collect(Collectors.toList());
     }
 }

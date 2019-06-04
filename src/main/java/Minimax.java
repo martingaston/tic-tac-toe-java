@@ -1,9 +1,9 @@
 class Minimax {
-    private final Player maximizer;
-    private final Player minimizer;
+    private final Symbol maximizer;
+    private final Symbol minimizer;
     private final Board board;
 
-    public Minimax(Board board, Player maximizer, Player minimizer) {
+    public Minimax(Board board, Symbol maximizer, Symbol minimizer) {
         this.board = board;
         this.maximizer = maximizer;
         this.minimizer = minimizer;

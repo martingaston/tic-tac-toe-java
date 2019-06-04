@@ -9,15 +9,15 @@ public class PlayersTest {
     @Before
     public void setUp() {
         Board board = new Board();
-        Player playerCross = new PlayerHuman("X", board);
-        Player playerNought = new PlayerHuman("O", board);
+        Player playerCross = new PlayerHuman("X");
+        Player playerNought = new PlayerHuman("O");
         players = new Players(playerCross, playerNought);
     }
 
     @Test
     public void getCurrentPlayerReturnsCrossOnFirstTurn() {
         Player currentPlayer = players.getCurrentPlayer();
-        String currentPlayerSymbol = currentPlayer.getSymbol();
+        String currentPlayerSymbol = currentPlayer.symbol().toString();
         assertEquals("X", currentPlayerSymbol);
     }
 
@@ -25,7 +25,7 @@ public class PlayersTest {
     public void getCurrentPlayerReturnsNoughtAfterTurnChanges() {
         players.nextTurn();
         Player currentPlayer = players.getCurrentPlayer();
-        String currentPlayerSymbol = currentPlayer.getSymbol();
+        String currentPlayerSymbol = currentPlayer.symbol().toString();
         assertEquals("O", currentPlayerSymbol);
     }
 
@@ -34,7 +34,7 @@ public class PlayersTest {
         players.nextTurn();
         players.nextTurn();
         Player currentPlayer = players.getCurrentPlayer();
-        String currentPlayerSymbol = currentPlayer.getSymbol();
+        String currentPlayerSymbol = currentPlayer.symbol().toString();
         assertEquals("X", currentPlayerSymbol);
     }
 }

@@ -1,27 +1,24 @@
 import java.util.List;
 
 public class PlayerCPU implements Player {
-    private final String symbol;
-    private final Board board;
+    private final Symbol symbol;
 
-    PlayerCPU(String symbol, Board board) {
-        this.symbol = symbol;
-        this.board = board;
+    PlayerCPU(String symbol) {
+        this.symbol = new Symbol(symbol);
     }
 
     @Override
-    public String getSymbol() {
+    public Symbol symbol() {
         return symbol;
     }
 
     @Override
-    public int getNextMove() {
+    public int getNextMove(Board board) {
         oneSecondSleep();
-        return pickRandomCell();
+        return pickRandomCell(board.available());
     }
 
-    private int pickRandomCell() {
-        List<Integer> available = board.available();
+    private int pickRandomCell(List<Integer> available) {
         int cellIndex = (int) Math.floor(Math.random() * available.size());
         return available.get(cellIndex);
     }

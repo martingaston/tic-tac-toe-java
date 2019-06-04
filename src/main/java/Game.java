@@ -1,24 +1,29 @@
 import java.io.IOException;
-import java.util.List;
 
 class Game {
     private static Board board;
-    private static Display display;
     private static Players players;
-    private static List<String> gameSettings;
 
-    static void play(Settings settings) throws IOException {
-        board = settings.board();
-        display = settings.display();
-        players = settings.players();
-        gameSettings = settings.settingsList();
+    static void play(State state) throws IOException {
+        board = state.board();
+        players = state.players();
 
         intro();
         instructions();
         do {
             newTurn();
-            processTurn();
+            processTurn(state);
         } while (!board.isGameOver());
+    }
+
+    private static void processTurn(State state) throws IOException {
+        IO.gameOut(state);
+        if (board.isGameOver()) {
+            IO.closeGame();
+            gameEnd();
+        } else {
+            players.nextTurn();
+        }
     }
 
     private static void intro() {
@@ -30,20 +35,10 @@ class Game {
     }
 
     private static void newTurn() {
-        display.showBoard();
+        Display.showBoard(board);
         Display.outMessage(Messages.announcePlayerTurn(currentPlayer()));
-        int playerInput = currentPlayer().getNextMove();
-        board.add(playerInput, currentPlayer());
-    }
-
-    private static void processTurn() throws IOException {
-        IO.gameOut(currentPlayer(), board, gameSettings);
-        if (board.isGameOver()) {
-            IO.closeGame();
-            gameEnd();
-        } else {
-            players.nextTurn();
-        }
+        int playerInput = currentPlayer().getNextMove(board);
+        board.add(playerInput, currentPlayer().symbol());
     }
 
     private static Player currentPlayer() {
@@ -51,7 +46,7 @@ class Game {
     }
 
     private static void gameEnd() {
-        display.showBoard();
+        Display.showBoard(board);
 
         if (board.hasWinner()) {
             Display.outMessage(Messages.playerWin(currentPlayer()));
